@@ -3,7 +3,7 @@
     "id": "header.banner.desc",
     "description": "Description in header",
     "defaultMessage": "Pump up the volume",
-    "message": "Plein volulme",
+    "message": "Plein volume",
     "files": [
       "src/components/Header/Header.js"
     ]
