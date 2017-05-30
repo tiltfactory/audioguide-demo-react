@@ -16,7 +16,7 @@ import queryString from 'query-string';
 import { createPath } from 'history/PathUtils';
 import { addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
-import cs from 'react-intl/locale-data/cs';
+import fr from 'react-intl/locale-data/fr';
 import App from './components/App';
 import createFetch from './createFetch';
 import configureStore from './store/configureStore';
@@ -26,7 +26,7 @@ import createApolloClient from './core/createApolloClient';
 
 const apolloClient = createApolloClient();
 
-[en, cs].forEach(addLocaleData);
+[en, fr].forEach(addLocaleData);
 
 /* eslint-disable global-require */
 

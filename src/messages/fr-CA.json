@@ -1,72 +1,72 @@
 [
   {
     "id": "header.banner.desc",
-    "defaultMessage": "Complex web apps made easy",
-    "message": "Komplexní aplikace jednodušše",
     "description": "Description in header",
+    "defaultMessage": "Pump up the volume",
+    "message": "Plein volulme",
     "files": [
       "src/components/Header/Header.js"
     ]
   },
   {
     "id": "header.banner.title",
-    "defaultMessage": "React",
-    "message": "React",
     "description": "Title in page header",
+    "defaultMessage": "Audioguide",
+    "message": "Audioguide",
     "files": [
       "src/components/Header/Header.js"
     ]
   },
   {
     "id": "header.brand",
-    "defaultMessage": "Your Company Brand",
-    "message": "Vaše firma",
     "description": "Brand name displayed in header",
+    "defaultMessage": "Cinematheque",
+    "message": "Cinémathèque",
     "files": [
       "src/components/Header/Header.js"
     ]
   },
   {
     "id": "navigation.about",
-    "defaultMessage": "About",
-    "message": "O nás",
     "description": "About link in header",
+    "defaultMessage": "About",
+    "message": "À Propos",
     "files": [
       "src/components/Navigation/Navigation.js"
     ]
   },
   {
     "id": "navigation.contact",
-    "defaultMessage": "Contact",
-    "message": "Kontakt",
     "description": "Contact link in header",
+    "defaultMessage": "Contact",
+    "message": "Contact",
     "files": [
       "src/components/Navigation/Navigation.js"
     ]
   },
   {
     "id": "navigation.login",
-    "defaultMessage": "Log in",
-    "message": "Přihlásit",
     "description": "Log in link in header",
-    "files": [
-      "src/components/Navigation/Navigation.js"
-    ]
-  },
-  {
-    "id": "navigation.signup",
-    "defaultMessage": "Sign up",
-    "message": "Registrace",
-    "description": "Sign up link in header",
+    "defaultMessage": "Log in",
+    "message": "S'identifier",
     "files": [
       "src/components/Navigation/Navigation.js"
     ]
   },
   {
     "id": "navigation.separator.or",
-    "defaultMessage": "or",
-    "message": "nebo",
     "description": "Last separator in list, lowercase \"or\"",
+    "defaultMessage": "or",
+    "message": "ou",
+    "files": [
+      "src/components/Navigation/Navigation.js"
+    ]
+  },
+  {
+    "id": "navigation.signup",
+    "description": "Sign up link in header",
+    "defaultMessage": "Sign up",
+    "message": "S'enregistrer",
     "files": [
       "src/components/Navigation/Navigation.js"
     ]
