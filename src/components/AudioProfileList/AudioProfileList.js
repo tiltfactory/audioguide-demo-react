@@ -26,7 +26,7 @@ class AudioProfileList extends Page {
             {audioProfileList.data.map(
                             audioProfileItem =>
                                 (<li key={audioProfileItem.attributes.uuid}>
-                                  <Link className={s.link} to={`/?audio_profile=${audioProfileItem.attributes.uuid}`}>
+                                  <Link className={s.link} to={`/audio_list/${audioProfileItem.attributes.uuid}`}>
                                     {audioProfileItem.attributes.name}
                                   </Link>
                                   <div

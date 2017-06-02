@@ -5,9 +5,10 @@ import AudioContentList from '../../components/AudioContentList';
 
 export default {
 
-  path: '/',
+  // Optional parameter (React Router v4)
+  path: '/audio_list/:audio_profile?',
 
-  async action({ locale }) {
+  async action({ locale, params }) {
     // Get the static Markdown content
     const staticContent = await new Promise((resolve) => {
       require.ensure([], (require) => {
@@ -19,11 +20,16 @@ export default {
       }, 'audio_list');
     });
 
+    console.log(params);
+
     // Match Drupal langcode
-    // @todo improve this
+    // @todo improve or avoid this
     const drupalLocale = locale.substring(0, 2);
-    // Fetch the nodes
-    const endpoint = `${REST_HOST_NAME}/jsonapi/node/audio?sort=title&filter[langcode][value]=${drupalLocale}`;
+    // Fetch the nodes, filter by audio profile if parameter is available
+    let endpoint = `${REST_HOST_NAME}/jsonapi/node/audio?sort=title&filter[langcode][value]=${drupalLocale}`;
+    if (params.audio_profile !== undefined) {
+      endpoint = `${REST_HOST_NAME}/jsonapi/node/audio?sort=title&filter[langcode][value]=${drupalLocale}&filter[field_audio_profile.uuid][value]=${params.audio_profile}`;
+    }
     const nodesResponse = await fetch(endpoint).then(response => response.json());
 
     // Wrap static and Drupal content

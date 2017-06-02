@@ -5,7 +5,7 @@ import AudioProfileList from '../../components/AudioProfileList';
 
 export default {
 
-  path: '/audio_profiles',
+  path: '/',
 
   async action({ locale }) {
     // Get the static Markdown content
@@ -20,7 +20,7 @@ export default {
     });
 
     // Match Drupal langcode
-    // @todo improve this
+    // @todo improve or avoid this
     // const drupalLocale = locale.substring(0, 2);
     // Fetch the terms
     // @todo add language, needs to include translations via demo content
