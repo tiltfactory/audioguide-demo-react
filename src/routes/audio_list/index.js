@@ -19,9 +19,6 @@ export default {
         }
       }, 'audio_list');
     });
-
-    console.log(params);
-
     // Match Drupal langcode
     // @todo improve or avoid this
     const drupalLocale = locale.substring(0, 2);

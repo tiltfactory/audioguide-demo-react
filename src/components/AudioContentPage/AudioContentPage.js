@@ -14,14 +14,16 @@ class AudioContentPage extends Page {
   };
 
   render() {
-    const { node, mp3File } = this.props;
+    const { node, mp3File, imageFile } = this.props;
     const mp3URL = `${REST_HOST_NAME}/${mp3File.data.attributes.url}`;
+    const imageURL = `${REST_HOST_NAME}/${imageFile.data.attributes.url}`;
     return (
       <div className={s.root}>
         <div className={s.container}>
           <Link className="button" to="/">List</Link>
           <h1>{ node.data.attributes.field_id }</h1>
           <h2>{ node.data.attributes.title }</h2>
+          <img src={imageURL} />
           <div
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{ __html: node.data.attributes.body.value }}
