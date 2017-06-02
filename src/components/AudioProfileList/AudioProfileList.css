@@ -1,0 +1,16 @@
+@import '../variables.css';
+@import '../Page/Page.css';
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 30px;
+}
+
+.link {
+  padding: 10px;
+  background-color: #ccc;
+}

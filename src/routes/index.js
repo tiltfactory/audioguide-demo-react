@@ -16,6 +16,7 @@ export default {
 
   // Keep in mind, routes are evaluated in order
   children: [
+    require('./audio_profile_list').default,
     require('./audio_list').default,
     require('./audio_page').default,
 
