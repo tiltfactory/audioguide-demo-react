@@ -5,4 +5,4 @@ export const SET_LOCALE_START = 'SET_LOCALE_START';
 export const SET_LOCALE_SUCCESS = 'SET_LOCALE_SUCCESS';
 export const SET_LOCALE_ERROR = 'SET_LOCALE_ERROR';
 
-export const REST_HOST_NAME = 'http://audioguide.dev';
+export const REST_HOST_NAME = 'http://belvue.dev';

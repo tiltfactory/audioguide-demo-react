@@ -20,7 +20,7 @@ import logoUrl2x from './logo-small@2x.png';
 const messages = defineMessages({
   brand: {
     id: 'header.brand',
-    defaultMessage: 'Cinematheque',
+    defaultMessage: 'BELvue museum',
     description: 'Brand name displayed in header',
   },
   bannerTitle: {

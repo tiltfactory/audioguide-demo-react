@@ -15,8 +15,10 @@ import FastClick from 'fastclick';
 import queryString from 'query-string';
 import { createPath } from 'history/PathUtils';
 import { addLocaleData } from 'react-intl';
-import en from 'react-intl/locale-data/en';
 import fr from 'react-intl/locale-data/fr';
+import nl from 'react-intl/locale-data/nl';
+import de from 'react-intl/locale-data/de';
+import en from 'react-intl/locale-data/en';
 import App from './components/App';
 import createFetch from './createFetch';
 import configureStore from './store/configureStore';
@@ -26,7 +28,7 @@ import createApolloClient from './core/createApolloClient';
 
 const apolloClient = createApolloClient();
 
-[en, fr].forEach(addLocaleData);
+[fr, nl, de, en].forEach(addLocaleData);
 
 /* eslint-disable global-require */
 

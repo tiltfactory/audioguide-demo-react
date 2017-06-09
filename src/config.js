@@ -15,7 +15,7 @@ if (process.env.BROWSER) {
 
 module.exports = {
   // default locale is the first one
-  locales: ['en-US', 'fr-CA'],
+  locales: ['fr-BE', 'nl-BE', 'de-BE', 'en-US'],
 
   // Node.js app
   port: process.env.PORT || 3000,

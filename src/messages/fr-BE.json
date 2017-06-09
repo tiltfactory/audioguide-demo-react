@@ -20,8 +20,8 @@
   {
     "id": "header.brand",
     "description": "Brand name displayed in header",
-    "defaultMessage": "Cinematheque",
-    "message": "Cinémathèque",
+    "defaultMessage": "BELvue museum",
+    "message": "Musée BELvue",
     "files": [
       "src/components/Header/Header.js"
     ]
