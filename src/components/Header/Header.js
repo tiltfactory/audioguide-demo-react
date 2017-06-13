@@ -8,32 +8,11 @@
  */
 
 import React from 'react';
-import { defineMessages, FormattedMessage } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Header.css';
 import Link from '../Link';
-import Navigation from '../Navigation';
 import LanguageSwitcher from '../LanguageSwitcher';
-import logoUrl from './logo-small.png';
-import logoUrl2x from './logo-small@2x.png';
-
-const messages = defineMessages({
-  brand: {
-    id: 'header.brand',
-    defaultMessage: 'BELvue museum',
-    description: 'Brand name displayed in header',
-  },
-  bannerTitle: {
-    id: 'header.banner.title',
-    defaultMessage: 'Audioguide',
-    description: 'Title in page header',
-  },
-  bannerDesc: {
-    id: 'header.banner.desc',
-    defaultMessage: 'Pump up the volume',
-    description: 'Description in header',
-  },
-});
+import logoUrl from './logo.svg';
 
 class Header extends React.Component {
   render() {
@@ -41,18 +20,9 @@ class Header extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <Link className={s.brand} to="/">
-            <img src={logoUrl} srcSet={`${logoUrl2x} 2x`} width="38" height="38" alt="React" />
-            <span className={s.brandTxt}>
-              <FormattedMessage {...messages.brand} />
-            </span>
+            <img src={logoUrl} alt="BELvue" />
           </Link>
           <LanguageSwitcher />
-          <div className={s.banner}>
-            <h1 className={s.bannerTitle}>
-              <FormattedMessage {...messages.bannerTitle} />
-            </h1>
-            <FormattedMessage tagName="p" {...messages.bannerDesc} />
-          </div>
         </div>
       </div>
     );

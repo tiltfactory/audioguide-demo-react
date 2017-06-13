@@ -1,32 +1,5 @@
 [
   {
-    "id": "header.banner.desc",
-    "description": "Description in header",
-    "defaultMessage": "Pump up the volume",
-    "message": "Plein volume",
-    "files": [
-      "src/components/Header/Header.js"
-    ]
-  },
-  {
-    "id": "header.banner.title",
-    "description": "Title in page header",
-    "defaultMessage": "Audioguide",
-    "message": "Audioguide",
-    "files": [
-      "src/components/Header/Header.js"
-    ]
-  },
-  {
-    "id": "header.brand",
-    "description": "Brand name displayed in header",
-    "defaultMessage": "BELvue museum",
-    "message": "Musée BELvue",
-    "files": [
-      "src/components/Header/Header.js"
-    ]
-  },
-  {
     "id": "navigation.about",
     "description": "About link in header",
     "defaultMessage": "About",
