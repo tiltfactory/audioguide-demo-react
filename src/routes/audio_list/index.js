@@ -9,16 +9,6 @@ export default {
   path: '/audio_list/:audio_profile?',
 
   async action({ locale, params }) {
-    // Get the static Markdown content
-    const staticContent = await new Promise((resolve) => {
-      require.ensure([], (require) => {
-        try {
-          resolve(require(`./audio_list.${locale}.md`)); // eslint-disable-line import/no-dynamic-require
-        } catch (e) {
-          resolve(require('./audio_list.md'));
-        }
-      }, 'audio_list');
-    });
     // Match Drupal langcode
     // @todo improve or avoid this
     const drupalLocale = locale.substring(0, 2);
@@ -30,10 +20,11 @@ export default {
     const nodesResponse = await fetch(endpoint).then(response => response.json());
 
     // Wrap static and Drupal content
-    const data = { staticContent, audioList: nodesResponse };
+    // @todo handle profile for getting back to the profile list
+    const data = { audioList: nodesResponse };
 
     return {
-      title: staticContent.title,
+      title: '', // @todo set title from the audio profile
       chunk: 'audio_list',
       component: <Layout><AudioContentList {...data} /></Layout>,
     };

@@ -12,16 +12,11 @@ class AudioContentList extends Page {
   };
 
   render() {
-    const { staticContent, audioList } = this.props;
+    const { audioList } = this.props;
 
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <h1>{staticContent.title}</h1>
-          <div
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: staticContent.html }}
-          />
           <ul>
             {audioList.data.map(
                                 audioItem =>
