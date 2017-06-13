@@ -14,8 +14,10 @@ class AudioContentPage extends Page {
   };
 
   render() {
-    const { node, mp3File } = this.props;
-    const mp3URL = `${REST_HOST_NAME}/${mp3File.data.attributes.url}`;
+    const { node } = this.props;
+    // @todo check value
+    const mp3 = node.included.filter(obj => obj.id === node.data.relationships.field_mp3.data.id);
+    const mp3URL = `${REST_HOST_NAME}/${mp3[0].attributes.url}`;
     return (
       <div className={s.root}>
         <div className={s.container}>

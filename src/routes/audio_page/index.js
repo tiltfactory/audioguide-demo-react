@@ -9,14 +9,12 @@ export default {
 
   async action({ params }) {
     // @todo add language
-    const nodeEndpoint = `${REST_HOST_NAME}/jsonapi/node/audio/${params.id}`;
+    // Using include to get all the related entities in one request :
+    // - mp3 file attached to the node : include=field_mp3
+    // - Paragraphs that alos contains mp3 files : include=field_mp3,field_audio_answer.field_mp3
+    const nodeEndpoint = `${REST_HOST_NAME}/jsonapi/node/audio/${params.id}?include=field_mp3,field_audio_answer,field_audio_answer.field_mp3`;
     const nodeResponse = await fetch(nodeEndpoint).then(response => response.json());
-    // @todo condition to previous fetch
-    // @todo generalize
-    const mp3UUID = nodeResponse.data.relationships.field_mp3.data.id;
-    let fileEndpoint = `${REST_HOST_NAME}/jsonapi/file/file/${mp3UUID}`;
-    const mp3Response = await fetch(fileEndpoint).then(response => response.json());
-    const data = { node: nodeResponse, mp3File: mp3Response };
+    const data = { node: nodeResponse };
 
     return {
       title: nodeResponse.data.attributes.title,
