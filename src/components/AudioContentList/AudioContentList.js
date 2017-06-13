@@ -13,6 +13,7 @@ class AudioContentList extends Page {
 
   render() {
     const { audioList } = this.props;
+    console.log(audioList);
 
     return (
       <div className={s.root}>
@@ -22,7 +23,8 @@ class AudioContentList extends Page {
                                 audioItem =>
                                     (<li key={audioItem.attributes.uuid}>
                                       <Link className={s.link} to={`/audio/${audioItem.attributes.uuid}`}>
-                                        {audioItem.attributes.title}
+                                        <span className="id">{audioItem.attributes.field_id}</span>
+                                        <span className="title"> {audioItem.attributes.title}</span>
                                       </Link>
                                     </li>),
                             )}

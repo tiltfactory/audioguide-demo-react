@@ -21,11 +21,10 @@ export default {
 
     // Match Drupal langcode
     // @todo improve or avoid this
-    // const drupalLocale = locale.substring(0, 2);
-    // Fetch the terms
-    // @todo add language, needs to include translations via demo content
-    // &filter[langcode][value]=${drupalLocale}
-    const endpoint = `${REST_HOST_NAME}/jsonapi/taxonomy_term/audio_profile?sort=name`;
+    const drupalLocale = locale.substring(0, 2);
+    // Fetch the localized terms.
+    // Sort by weight is the default value, but we keep this one explicitly.
+    const endpoint = `${REST_HOST_NAME}/jsonapi/taxonomy_term/audio_profile?sort=weight&filter[langcode][value]=${drupalLocale}`;
     const termsResponse = await fetch(endpoint).then(response => response.json());
     // Wrap static and Drupal content
     const data = { staticContent, audioProfileList: termsResponse };
