@@ -14,12 +14,9 @@ export default {
     // @todo condition to previous fetch
     // @todo generalize
     const mp3UUID = nodeResponse.data.relationships.field_mp3.data.id;
-    const imageUUID = nodeResponse.data.relationships.field_image.data.id;
     let fileEndpoint = `${REST_HOST_NAME}/jsonapi/file/file/${mp3UUID}`;
     const mp3Response = await fetch(fileEndpoint).then(response => response.json());
-    fileEndpoint = `${REST_HOST_NAME}/jsonapi/file/file/${imageUUID}`;
-    const imageResponse = await fetch(fileEndpoint).then(response => response.json());
-    const data = { node: nodeResponse, mp3File: mp3Response, imageFile: imageResponse };
+    const data = { node: nodeResponse, mp3File: mp3Response };
 
     return {
       title: nodeResponse.data.attributes.title,
