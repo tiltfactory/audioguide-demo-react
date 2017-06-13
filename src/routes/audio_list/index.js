@@ -13,9 +13,9 @@ export default {
     // @todo improve or avoid this
     const drupalLocale = locale.substring(0, 2);
     // Fetch the nodes, filter by audio profile if parameter is available
-    let endpoint = `${REST_HOST_NAME}/jsonapi/node/audio?sort=field_id&filter[langcode][value]=${drupalLocale}`;
+    let endpoint = `${REST_HOST_NAME}/${drupalLocale}/jsonapi/node/audio?sort=field_id`;
     if (params.audio_profile !== undefined) {
-      endpoint = `${REST_HOST_NAME}/jsonapi/node/audio?sort=field_id&filter[langcode][value]=${drupalLocale}&filter[field_audio_profile.uuid][value]=${params.audio_profile}`;
+      endpoint = `${REST_HOST_NAME}/${drupalLocale}/jsonapi/node/audio?sort=field_id&filter[field_audio_profile.uuid][value]=${params.audio_profile}`;
     }
     const nodesResponse = await fetch(endpoint).then(response => response.json());
 

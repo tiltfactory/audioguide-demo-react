@@ -24,7 +24,7 @@ export default {
     const drupalLocale = locale.substring(0, 2);
     // Fetch the localized terms.
     // Sort by weight is the default value, but we keep this one explicitly.
-    const endpoint = `${REST_HOST_NAME}/jsonapi/taxonomy_term/audio_profile?sort=weight&filter[langcode][value]=${drupalLocale}`;
+    const endpoint = `${REST_HOST_NAME}/${drupalLocale}/jsonapi/taxonomy_term/audio_profile?sort=weight`;
     const termsResponse = await fetch(endpoint).then(response => response.json());
     // Wrap static and Drupal content
     const data = { staticContent, audioProfileList: termsResponse };
