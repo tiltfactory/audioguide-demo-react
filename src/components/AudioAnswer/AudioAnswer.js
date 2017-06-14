@@ -16,7 +16,7 @@ class AudioAnswer extends React.Component {
 
     return (
       <div>
-        <h2>@todo ID</h2>
+        <h2>{answer.title}</h2>
         <div
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{ __html: answer.text }}

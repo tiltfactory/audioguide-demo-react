@@ -38,6 +38,7 @@ class AudioContentPage extends Page {
         const answerMp3URL = `${REST_HOST_NAME}/${answerMp3[0].attributes.url}`;
         // Prepare the wrapper and store in the list.
         const answer = {
+          title: answerParagraphItem[0].attributes.field_title,
           text: answerParagraphItem[0].attributes.field_text.value,
           mp3URL: answerMp3URL,
           uuid: answerParagraphItem[0].attributes.uuid,
