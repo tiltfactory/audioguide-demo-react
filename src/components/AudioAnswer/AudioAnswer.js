@@ -16,14 +16,14 @@ class AudioAnswer extends React.Component {
 
     return (
       <div>
-        <h2>{answer.title}</h2>
-        <div
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: answer.text }}
-        />
+        <h3><span className={s.answerTitle}>{answer.title}</span></h3>
         <ReactAudioPlayer
-            src={answer.mp3URL}
-            controls
+          src={answer.mp3URL}
+          controls
+        />
+        <div
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: answer.text }}
         />
       </div>
     );

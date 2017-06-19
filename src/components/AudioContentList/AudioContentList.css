@@ -10,7 +10,16 @@ li {
   margin-bottom: 30px;
 }
 
-.link {
+input {
   padding: 10px;
-  background-color: #ccc;
+}
+
+.audioId {
+  background: #333;
+  color: #fff;
+  padding: 8px;
+}
+
+.audioTitle {
+
 }

@@ -14,7 +14,7 @@
 }
 
 .root {
-  background: #373277;
+  background: #333;
   color: #fff;
 }
 
@@ -33,10 +33,6 @@
 
 .brandTxt {
   margin-left: 10px;
-}
-
-.banner {
-
 }
 
 .bannerTitle {

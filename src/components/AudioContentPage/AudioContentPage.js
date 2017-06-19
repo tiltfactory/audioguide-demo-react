@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactAudioPlayer from 'react-audio-player';
+import Collapsible from 'react-collapsible';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { REST_HOST_NAME } from '../../constants';
 import Page from '../Page';
@@ -15,7 +16,7 @@ class AudioContentPage extends Page {
   };
 
   render() {
-    const { node } = this.props;
+    const { node, previousId, nextId } = this.props;
     // @todo check values
     // Get the (single) mp3 file URL from the main audio item.
     const mp3Id = node.data.relationships.field_mp3.data.id;
@@ -47,23 +48,31 @@ class AudioContentPage extends Page {
       }
     }
 
-    // @todo AudioQuiz should be displayed at the end of the main audio play
-
     return (
       <div className={s.root}>
+        <div className={s.navigation}>
+          <Link className={s.link} to="/audio_list/2320e7ce-f5c4-445c-963e-c907709a59bb">&lt; &lt; Audioguide jeunes</Link>
+          <span className={s.spacer}> | </span>
+          <Link className={s.link} to="/audio/0cb1cdd2-4bee-4fd8-82a8-7a2d08d7ea7e">&lt;</Link>
+          <span className={s.spacer}> | </span>
+          <Link className={s.link} to="/audio/0cb1cdd2-4bee-4fd8-82a8-7a2d08d7ea7e">&gt;</Link>
+        </div>
         <div className={s.container}>
-          <Link className="button" to="/">List</Link>
-          <h1>{ node.data.attributes.field_id }</h1>
-          <h2>{ node.data.attributes.title }</h2>
-          <div
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: node.data.attributes.body.value }}
-          />
+          <h1>
+            <span className={s.audioId}>{ node.data.attributes.field_id }</span>
+            <span className={s.audioTitle}>{ node.data.attributes.title }</span>
+          </h1>
           <ReactAudioPlayer
             src={mp3URL}
             autoPlay
             controls
           />
+          <Collapsible trigger="Texte">
+            <div
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: node.data.attributes.body.value }}
+            />
+          </Collapsible>
           <AudioQuiz answersList={answersList} />
         </div>
       </div>

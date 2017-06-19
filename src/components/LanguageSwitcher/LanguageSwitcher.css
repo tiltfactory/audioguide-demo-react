@@ -1,0 +1,10 @@
+@import '../variables.css';
+
+.root {
+  padding-top: 10px;
+}
+
+.link {
+  color: #0093fa;
+  text-decoration: none;
+}

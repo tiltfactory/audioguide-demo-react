@@ -1,2 +1,17 @@
 @import '../variables.css';
 @import '../Page/Page.css';
+
+.audioId {
+    background: #333;
+    color: #fff;
+    padding: 8px;
+}
+
+.audioTitle {
+    padding-left: 8px;
+}
+
+.Collapsible__trigger {
+    background: #333;
+    color: #fff;
+}

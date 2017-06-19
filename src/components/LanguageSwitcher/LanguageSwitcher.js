@@ -4,18 +4,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setLocale } from '../../actions/intl';
+import s from './LanguageSwitcher.css';
 
 function LanguageSwitcher({ currentLocale, availableLocales, setLocale }) {
   const isSelected = locale => locale === currentLocale;
   const localeDict = {
-    'fr-BE': 'Français',
-    'nl-BE': 'Nederlands',
-    'de-BE': 'Deutsch',
-    'en-US': 'English',
+    'fr-BE': 'FR',
+    'nl-BE': 'NL',
+    'de-BE': 'DE',
+    'en-US': 'EN',
   };
   const localeName = locale => localeDict[locale] || locale;
   return (
-    <div>
+    <div className={s.root}>
       {availableLocales.map(locale => (
         <span key={locale}>
           {isSelected(locale) ? (
@@ -24,6 +25,7 @@ function LanguageSwitcher({ currentLocale, availableLocales, setLocale }) {
             // github.com/yannickcr/eslint-plugin-react/issues/945
             // eslint-disable-next-line react/jsx-indent
             <a
+              className={s.link}
               href={`?lang=${locale}`}
               onClick={(e) => {
                 setLocale({ locale });

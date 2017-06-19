@@ -19,6 +19,7 @@ export default {
     require('./audio_profile_list').default,
     require('./audio_list').default,
     require('./audio_page').default,
+    require('./about').default,
 
     // Wildcard routes, e.g. { path: '*', ... } (must go last)
     require('./notFound').default,
@@ -29,7 +30,7 @@ export default {
     const route = await next();
 
     // Provide default values for title, description etc.
-    route.title = `${route.title || 'Untitled Page'} - my.audioguide.com`;
+    route.title = `${route.title || 'Untitled Page'} - app.belvue.be`;
     route.description = route.description || '';
 
     return route;

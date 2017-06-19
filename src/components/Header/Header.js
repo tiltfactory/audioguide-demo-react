@@ -9,9 +9,9 @@
 
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Header.css';
 import Link from '../Link';
 import LanguageSwitcher from '../LanguageSwitcher';
+import s from './Header.css';
 import logoUrl from './logo.svg';
 
 class Header extends React.Component {

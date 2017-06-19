@@ -17,9 +17,17 @@ export default {
     if (params.audio_profile !== undefined) {
       endpoint = `${REST_HOST_NAME}/${drupalLocale}/jsonapi/node/audio?sort=field_id&filter[field_audio_profile.uuid][value]=${params.audio_profile}`;
     }
-    const nodesResponse = await fetch(endpoint).then(response => response.json());
+    const nodesResponse = await fetch(endpoint).then(
+        (response) => {
+          if (response.ok) {
+            return response.json();
+          }
+          // @todo handle exception
+          // return {};
+        },
+    );
 
-    // Wrap static and Drupal content
+    // Wrap static and Drupal content.
     // @todo handle profile for getting back to the profile list
     const data = { audioList: nodesResponse };
 
