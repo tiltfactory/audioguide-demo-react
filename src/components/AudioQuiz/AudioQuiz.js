@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Collapse from 'rc-collapse';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import AudioAnswer from '../AudioAnswer';
 import s from './AudioQuiz.css';

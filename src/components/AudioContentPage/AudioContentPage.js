@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { setProfile } from '../../actions/profile';
 import ReactAudioPlayer from 'react-audio-player';
 import Collapsible from 'react-collapsible';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -15,8 +17,15 @@ class AudioContentPage extends Page {
     // @todo
   };
 
+  constructor({ audioProfileItem }) {
+    super();
+    this.state = {
+      audioProfileItem,
+    };
+  }
+
   render() {
-    const { node, previousId, nextId } = this.props;
+    const { node } = this.props;
     // @todo check values
     // Get the (single) mp3 file URL from the main audio item.
     const mp3Id = node.data.relationships.field_mp3.data.id;
@@ -48,10 +57,12 @@ class AudioContentPage extends Page {
       }
     }
 
+    console.log(this.state);
+
     return (
       <div className={s.root}>
         <div className={s.navigation}>
-          <Link className={s.link} to="/audio_list/2320e7ce-f5c4-445c-963e-c907709a59bb">&lt; &lt; Audioguide jeunes</Link>
+          <Link className={s.link} to={`/audio_list/${this.state.audioProfileItem.attributes.uuid}`}>&lt; &lt; Audioguide { this.state.audioProfileItem.attributes.name }</Link>
           <span className={s.spacer}> | </span>
           <Link className={s.link} to="/audio/0cb1cdd2-4bee-4fd8-82a8-7a2d08d7ea7e">&lt;</Link>
           <span className={s.spacer}> | </span>
@@ -80,4 +91,8 @@ class AudioContentPage extends Page {
   }
 }
 
-export default withStyles(s)(AudioContentPage);
+const mapState = state => ({
+  audioProfileItem: state.profile.audioProfileItem,
+});
+
+export default connect(mapState)(withStyles(s)(AudioContentPage));

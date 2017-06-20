@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import user from './user';
 import runtime from './runtime';
 import intl from './intl';
+import profile from './profile';
 
 export default function createRootReducer({ apolloClient }) {
   return combineReducers({
@@ -9,5 +10,6 @@ export default function createRootReducer({ apolloClient }) {
     user,
     runtime,
     intl,
+    profile,
   });
 }

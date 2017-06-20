@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Page from '../Page';
 import Link from '../Link';
@@ -11,16 +12,17 @@ class AudioContentList extends Page {
       // @todo
   };
 
-  constructor(){
+  constructor({ audioProfileItem }) {
     super();
-    this.state ={
+    this.state = {
       input: '',
+      audioProfileItem,
     };
   }
 
-  onChangeHandler(e){
+  onChangeHandler(e) {
     this.setState({
-       input: e.target.value,
+      input: e.target.value,
     });
   }
 
@@ -37,14 +39,18 @@ class AudioContentList extends Page {
           <input value={this.state.input} placeholder="Chercher..." type="text" onChange={this.onChangeHandler.bind(this)} />
         </div>
         <div className={s.container}>
-          <h1>Audioguide jeunes</h1>
+          <h1>Audioguide { this.state.audioProfileItem.attributes.name }</h1>
           <ul>
             {audioList.data.map(
                                 audioItem =>
                                     (<li key={audioItem.attributes.uuid}>
                                       <Link className={s.link} to={`/audio/${audioItem.attributes.uuid}`}>
-                                        <span className={s.audioId}>{audioItem.attributes.field_id}</span>
-                                        <span className={s.audioTitle}> {audioItem.attributes.title}</span>
+                                        <span className={s.audioId}>
+                                          {audioItem.attributes.field_id}
+                                        </span>
+                                        <span className={s.audioTitle}>
+                                          {audioItem.attributes.title}
+                                        </span>
                                       </Link>
                                     </li>),
                             )}
@@ -55,4 +61,8 @@ class AudioContentList extends Page {
   }
 }
 
-export default withStyles(s)(AudioContentList);
+const mapState = state => ({
+  audioProfileItem: state.profile.audioProfileItem,
+});
+
+export default connect(mapState)(withStyles(s)(AudioContentList));
