@@ -7,6 +7,7 @@ export const SET_LOCALE_SUCCESS = 'SET_LOCALE_SUCCESS';
 export const SET_LOCALE_ERROR = 'SET_LOCALE_ERROR';
 export const SET_PROFILE = 'SET_PROFILE';
 export const SET_ITEM = 'SET_ITEM';
+export const SET_LIST = 'SET_LIST';
 
 /* environment specific @todo to move in separate configuration file */
 export const REST_HOST_NAME = 'http://belvue.dev';

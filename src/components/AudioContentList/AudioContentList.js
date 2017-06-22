@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { setList, setItem } from '../../actions/audio';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Page from '../Page';
 import Link from '../Link';
@@ -12,11 +13,14 @@ class AudioContentList extends Page {
       // @todo
   };
 
-  constructor({ audioProfileItem }) {
+  // @todo check scope
+  constructor({ audioProfileItem, setList, setItem }) {
     super();
     this.state = {
       input: '',
       audioProfileItem,
+      setList,
+      setItem,
     };
   }
 
@@ -28,6 +32,8 @@ class AudioContentList extends Page {
 
   render() {
     const { audioList } = this.props;
+    // @todo refactor to avoid side effect
+    this.state.setList({ audioList });
     // const list = this.state.audioList
     //              .filter(d => this.state.input === '' || d.includes(this.state.input))
     //              .map((d, index) => <li key={index}>{d}</li>);
@@ -44,7 +50,13 @@ class AudioContentList extends Page {
             {audioList.data.map(
                                 audioItem =>
                                     (<li key={audioItem.attributes.uuid}>
-                                      <Link className={s.link} to={`/audio/${audioItem.attributes.uuid}`}>
+                                      <Link
+                                        className={s.link}
+                                        to={`/audio/${audioItem.attributes.uuid}`}
+                                        onClick={() => {
+                                          this.state.setItem({ audioItem });
+                                        }}
+                                      >
                                         <span className={s.audioId}>
                                           {audioItem.attributes.field_id}
                                         </span>
@@ -65,4 +77,9 @@ const mapState = state => ({
   audioProfileItem: state.profile.audioProfileItem,
 });
 
-export default connect(mapState)(withStyles(s)(AudioContentList));
+const mapDispatch = {
+  setList,
+  setItem,
+};
+
+export default connect(mapState, mapDispatch)(withStyles(s)(AudioContentList));
