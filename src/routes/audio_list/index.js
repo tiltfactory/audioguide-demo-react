@@ -32,7 +32,7 @@ export default {
     const data = { audioList: nodesResponse };
 
     return {
-      title: '', // @todo set title from the audio profile
+      title: 'Audioguide', // @todo set title from the audio profile
       chunk: 'audio_list',
       component: <Layout><AudioContentList {...data} /></Layout>,
     };

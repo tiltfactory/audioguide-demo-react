@@ -39,17 +39,18 @@ class AudioProfileList extends Page {
                                     className={s.link}
                                     to={`/audio_list/${audioProfileItem.attributes.uuid}`}
                                     onClick={() => {
-                                       this.state.setProfile({ audioProfileItem });
+                                      this.state.setProfile({ audioProfileItem });
                                     }}
                                   >
                                     {audioProfileItem.attributes.name}
                                   </Link>
-                                  <div
+                                  {audioProfileItem.attributes.description !== null ? (
+                                    <div
                                     // eslint-disable-next-line react/no-danger
-                                    dangerouslySetInnerHTML={
+                                      dangerouslySetInnerHTML={
                                       { __html: audioProfileItem.attributes.description.value }
                                     }
-                                  />
+                                    />) : (<div />)}
                                 </li>),
                             )}
           </ul>
