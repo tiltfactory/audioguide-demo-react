@@ -1,5 +1,4 @@
-import { SET_ITEM } from '../constants';
-import { SET_LIST } from '../constants';
+import { SET_ITEM, SET_LIST } from '../constants';
 
 export default function runtime(state = {}, action) {
   switch (action.type) {
