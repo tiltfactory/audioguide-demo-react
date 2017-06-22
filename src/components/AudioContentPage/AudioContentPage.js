@@ -40,7 +40,7 @@ class AudioContentPage extends Page {
     for (const answerReference of node.data.relationships.field_audio_answer.data) {
       const answerParagraphItemId = answerReference.id;
       const answerParagraphItem = node.included.filter(obj => obj.id === answerParagraphItemId);
-      if (!(answerParagraphItem === undefined)) {
+      if (!(answerParagraphItem[0].relationships.field_mp3.data === null)) {
         // Then, for each answer, get its (single) mp3 file.
         // @todo refactoring needed
         const answerMp3Id = answerParagraphItem[0].relationships.field_mp3.data.id;
@@ -56,8 +56,6 @@ class AudioContentPage extends Page {
         answersList.push(answer);
       }
     }
-
-    console.log(this.state);
 
     return (
       <div className={s.root}>
@@ -84,7 +82,9 @@ class AudioContentPage extends Page {
               dangerouslySetInnerHTML={{ __html: node.data.attributes.body.value }}
             />
           </Collapsible>
-          <AudioQuiz answersList={answersList} />
+          {answersList.length > 0 ? (
+            <AudioQuiz answersList={answersList} />
+              ) : (<div />)}
         </div>
       </div>
     );
