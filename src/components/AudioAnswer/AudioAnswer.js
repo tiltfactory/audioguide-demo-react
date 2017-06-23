@@ -24,6 +24,7 @@ class AudioAnswer extends React.Component {
     };
   }
 
+  // @todo set current answer via Redux
   render() {
     const { answer } = this.props;
     return (
