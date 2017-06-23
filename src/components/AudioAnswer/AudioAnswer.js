@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Collapsible from 'react-collapsible';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import ReactAudioPlayer from 'react-audio-player';
 import s from './AudioAnswer.css';
@@ -10,21 +11,34 @@ class AudioAnswer extends React.Component {
     // @todo
   };
 
+  constructor() {
+    super();
+    this.state = {
+      selected: false,
+    };
+  }
+
+  handleClick() {
+    this.state = {
+      selected: true,
+    };
+  }
+
   render() {
     const { answer } = this.props;
-    // @todo collapsed by default and expand on click
-
     return (
       <div>
-        <h3><span className={s.answerTitle}>{answer.title}</span></h3>
-        <ReactAudioPlayer
-          src={answer.mp3URL}
-          controls
-        />
-        <div
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: answer.text }}
-        />
+        <h3><a href="#" onClick={e => this.handleClick(e)} className={s.answerTitle}>{answer.title}</a></h3>
+        <Collapsible open={this.state.selected}>
+          <ReactAudioPlayer
+            src={answer.mp3URL}
+            controls
+          />
+          <div
+              // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{ __html: answer.text }}
+          />
+        </Collapsible>
       </div>
     );
   }
