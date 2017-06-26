@@ -19,42 +19,45 @@ class AudioContentPage extends Page {
 
   // @todo check scope for setItem
   // @todo review usage from url and from Redux, use Redux as caching system
-  // @fixme refresh audioItem state while using prev next navigation
   constructor({ audioProfileItem, audioList, audioItem, setItem }) {
     super();
-
-    // Define indexes for audio list navigation
-    let previousIndex = null;
-    let nextIndex = null;
-    let currentIndex = 0;
-    let found = false;
-    // console.log('Current',audioItem);
-    while (!found && (currentIndex < audioList.data.length)) {
-      if (audioList.data[currentIndex].id === audioItem.id) {
-        found = true;
-        if (currentIndex > 0) {
-          previousIndex = currentIndex - 1;
-        }
-        if (currentIndex < audioList.data.length - 1) {
-          nextIndex = currentIndex + 1;
-        }
-      } else {
-        currentIndex += 1;
-      }
-    }
-
     this.state = {
       audioProfileItem,
       audioList,
       audioItem,
       setItem,
-      previousIndex,
-      nextIndex,
+      previousIndex: null,
+      nextIndex: null,
     };
+  }
+
+  /**
+   * Defines indexes for audio list navigation.
+   * @todo should live in Reducer.
+   * @param id
+   */
+  setNavigationIndexes(id) {
+    let currentIndex = 0;
+    let found = false;
+    while (!found && (currentIndex < this.state.audioList.data.length)) {
+      if (this.state.audioList.data[currentIndex].id === id) {
+        found = true;
+        if (currentIndex > 0) {
+          this.state.previousIndex = currentIndex - 1;
+        }
+        if (currentIndex < this.state.audioList.data.length - 1) {
+          this.state.nextIndex = currentIndex + 1;
+        }
+      } else {
+        currentIndex += 1;
+      }
+    }
   }
 
   render() {
     const { node } = this.props;
+    // Needs to be updated on each rendering of the component.
+    this.setNavigationIndexes(node.data.id);
     // @todo check values
     // Get the (single) mp3 file URL from the main audio item.
     const mp3Id = node.data.relationships.field_mp3.data.id;
