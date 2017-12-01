@@ -78,5 +78,5 @@ React components that will be available from routes.
 
 ## Documentation 
 
-- [Boilerplate description](./README_STARTER_KIT.md)
+- [Boilerplate description](./REACT_STARTER_KIT.md)
 - [Boilerplate documentation](./docs/README.md)
