@@ -7,38 +7,48 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+import 'whatwg-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ErrorReporter from 'redbox-react';
 import deepForceUpdate from 'react-deep-force-update';
-import FastClick from 'fastclick';
 import queryString from 'query-string';
 import { createPath } from 'history/PathUtils';
 import { addLocaleData } from 'react-intl';
-import fr from 'react-intl/locale-data/fr';
-import nl from 'react-intl/locale-data/nl';
-import de from 'react-intl/locale-data/de';
+// This is so bad: requiring all locale if they are not needed?
+/* @intl-code-template import ${lang} from 'react-intl/locale-data/${lang}'; */
 import en from 'react-intl/locale-data/en';
+import cs from 'react-intl/locale-data/cs';
+/* @intl-code-template-end */
 import App from './components/App';
 import createFetch from './createFetch';
 import configureStore from './store/configureStore';
 import { updateMeta } from './DOMUtils';
 import history from './history';
 import createApolloClient from './core/createApolloClient';
+import router from './router';
+import { getIntl } from './actions/intl';
 
 const apolloClient = createApolloClient();
 
-[fr, nl, de, en].forEach(addLocaleData);
+/* @intl-code-template addLocaleData(${lang}); */
+addLocaleData(en);
+addLocaleData(cs);
+/* @intl-code-template-end */
 
 /* eslint-disable global-require */
 
-const fetch = createFetch({
+// Universal HTTP client
+const fetch = createFetch(self.fetch, {
   baseUrl: window.App.apiUrl,
 });
 
 // Initialize a new Redux store
 // http://redux.js.org/docs/basics/UsageWithReact.html
-const store = configureStore(window.App.state, { apolloClient, fetch, history });
+const store = configureStore(window.App.state, {
+  apolloClient,
+  fetch,
+  history,
+});
 
 // Global (context) variables that can be easily accessed from any React component
 // https://facebook.github.io/react/docs/context.html
@@ -48,7 +58,9 @@ const context = {
   insertCss: (...styles) => {
     // eslint-disable-next-line no-underscore-dangle
     const removeCss = styles.map(x => x._insertCss());
-    return () => { removeCss.forEach(f => f()); };
+    return () => {
+      removeCss.forEach(f => f());
+    };
   },
   // For react-apollo
   client: apolloClient,
@@ -56,6 +68,8 @@ const context = {
   storeSubscription: null,
   // Universal HTTP client
   fetch,
+  // intl instance as it can be get with injectIntl
+  intl: store.dispatch(getIntl()),
 };
 
 // Switch off the native scroll restoration behavior and handle it manually
@@ -108,13 +122,9 @@ let onRenderComplete = function initialRenderComplete() {
   };
 };
 
-// Make taps on links and buttons work fast on mobiles
-FastClick.attach(document.body);
-
 const container = document.getElementById('app');
 let appInstance;
 let currentLocation = history.location;
-let router = require('./router').default;
 
 // Re-render the app when window.location changes
 async function onLocationChange(location, action) {
@@ -128,6 +138,8 @@ async function onLocationChange(location, action) {
     delete scrollPositionsHistory[location.key];
   }
   currentLocation = location;
+
+  context.intl = store.dispatch(getIntl());
 
   try {
     // Traverses the list of routes in the order they are defined until
@@ -151,16 +163,14 @@ async function onLocationChange(location, action) {
     }
 
     appInstance = ReactDOM.render(
-      <App context={context}>{route.component}</App>,
+      <App context={context}>
+        {route.component}
+      </App>,
       container,
       () => onRenderComplete(route, location),
     );
   } catch (error) {
-    // Display the error in full-screen for development mode
     if (__DEV__) {
-      appInstance = null;
-      document.title = `Error: ${error.message}`;
-      ReactDOM.render(<ErrorReporter error={error} />, container);
       throw error;
     }
 
@@ -188,32 +198,12 @@ export default function main() {
 // globally accesible entry point
 window.RSK_ENTRY = main;
 
-// Handle errors that might happen after rendering
-// Display the error in full-screen for development mode
-if (__DEV__) {
-  window.addEventListener('error', (event) => {
-    appInstance = null;
-    document.title = `Runtime Error: ${event.error.message}`;
-    ReactDOM.render(<ErrorReporter error={event.error} />, container);
-  });
-}
-
 // Enable Hot Module Replacement (HMR)
 if (module.hot) {
-  module.hot.accept('./router', async () => {
-    router = require('./router').default;
-
-    currentLocation = history.location;
-    await onLocationChange(currentLocation);
+  module.hot.accept('./router', () => {
     if (appInstance) {
-      try {
-        // Force-update the whole tree, including components that refuse to update
-        deepForceUpdate(appInstance);
-      } catch (error) {
-        appInstance = null;
-        document.title = `Hot Update Error: ${error.message}`;
-        ReactDOM.render(<ErrorReporter error={error} />, container);
-      }
+      // Force-update the whole tree, including components that refuse to update
+      deepForceUpdate(appInstance);
     }
   });
 }

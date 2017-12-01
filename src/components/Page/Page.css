@@ -19,17 +19,3 @@
   padding: 0 0 40px;
   max-width: var(--max-content-width);
 }
-
-.navigation {
-  margin: 0 auto;
-  background-color: #eee;
-  padding: 20px 15px;
-  max-width: var(--max-content-width);
-  text-align: center;
-}
-
-.link {
-  padding: 10px;
-  background-color: #ccc;
-  text-decoration: none;
-}

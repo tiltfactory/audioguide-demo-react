@@ -1,6 +1,0 @@
-{
-  "name": "AudioContentList",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./AudioContentList.js"
-}

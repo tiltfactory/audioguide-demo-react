@@ -1,6 +1,0 @@
-{
-  "name": "AudioAnswer",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./AudioAnswer.js"
-}
