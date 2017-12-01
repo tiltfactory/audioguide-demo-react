@@ -48,8 +48,8 @@ Content type, machine name: **audio**
 - Image (1)
 - MP3 (1)
 - Formatted long text (0..1)
-- Itinerary (1 -> 1)
-- Answer (1 -> many)
+- Itinerary (1)
+- Answer (1..*)
 
 ### Answer
 
@@ -70,7 +70,7 @@ React components that will be available from routes.
 
 ## Components per page
 
-@todo
+
 
 ### Shared components
 

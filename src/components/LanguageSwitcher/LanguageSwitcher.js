@@ -9,8 +9,10 @@ function LanguageSwitcher({ currentLocale, availableLocales, setLocale }) {
   const isSelected = locale => locale === currentLocale;
   const localeDict = {
     /* @intl-code-template '${lang}-${COUNTRY}': '${Name}', */
+    'fr-BE': 'Français',
+    'nl-BE': 'Nederlands',
+    'de-BE': 'Deutsch',
     'en-US': 'English',
-    'cs-CZ': 'Česky',
     /* @intl-code-template-end */
   };
   const localeName = locale => localeDict[locale] || locale;

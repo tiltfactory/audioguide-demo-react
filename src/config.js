@@ -19,8 +19,10 @@ module.exports = {
   // default locale is the first one
   locales: [
     /* @intl-code-template '${lang}-${COUNTRY}', */
+    'fr-BE',
+    'nl-BE',
+    'de-BE',
     'en-US',
-    'cs-CZ',
     /* @intl-code-template-end */
   ],
 
