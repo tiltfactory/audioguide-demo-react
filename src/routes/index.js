@@ -24,6 +24,10 @@ const routes = {
       load: () => import(/* webpackChunkName: 'itinerary' */ './itinerary'),
     },
     {
+      path: '/stop/:itinerary_id/:stop_id',
+      load: () => import(/* webpackChunkName: 'stop' */ './stop'),
+    },
+    {
       path: '/news',
       load: () => import(/* webpackChunkName: 'news' */ './news'),
     },
