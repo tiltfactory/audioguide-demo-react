@@ -1,0 +1,6 @@
+{
+  "name": "ItineraryListHeader",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ItineraryListHeader.js"
+}

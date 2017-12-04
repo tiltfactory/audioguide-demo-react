@@ -10,14 +10,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './ItineraryListPage.css';
-import Link from '../../components/Link';
-import ItineraryListHeader from '../../components/ItineraryListHeader';
+import s from './StopListPage.css';
 
-class ItineraryListPage extends React.Component {
+class StopListPage extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    itineraries: PropTypes.arrayOf(
+    stops: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
       }),
@@ -25,7 +23,7 @@ class ItineraryListPage extends React.Component {
   };
 
   render() {
-    const { itineraries } = this.props;
+    const { stops } = this.props;
 
     return (
       <div className={s.root}>
@@ -33,13 +31,10 @@ class ItineraryListPage extends React.Component {
           <h1>
             {this.props.title}
           </h1>
-          <ItineraryListHeader />
           <ul>
-            {itineraries.map(itinerary =>
-              <li key={itinerary.id}>
-                <Link to={`/itinerary/${itinerary.id}`}>
-                  {itinerary.attributes.name}
-                </Link>
+            {stops.map(stop =>
+              <li key={stop.id}>
+                {stop.attributes.title}
               </li>,
             )}
           </ul>
@@ -49,4 +44,4 @@ class ItineraryListPage extends React.Component {
   }
 }
 
-export default withStyles(s)(ItineraryListPage);
+export default withStyles(s)(StopListPage);

@@ -17,11 +17,15 @@ const routes = {
   children: [
     {
       path: '/',
-      load: () => import(/* webpackChunkName: 'home' */ './home'),
+      load: () => import(/* webpackChunkName: 'itineraries' */ './itineraries'),
     },
     {
-      path: '/itineraries',
-      load: () => import(/* webpackChunkName: 'itineraries' */ './itineraries'),
+      path: '/itinerary/:itinerary_id',
+      load: () => import(/* webpackChunkName: 'itinerary' */ './itinerary'),
+    },
+    {
+      path: '/news',
+      load: () => import(/* webpackChunkName: 'news' */ './news'),
     },
     {
       path: '/contact',

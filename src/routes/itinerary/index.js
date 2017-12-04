@@ -9,26 +9,25 @@
 
 import React from 'react';
 import Layout from '../../components/Layout';
-import ItineraryListPage from './ItineraryListPage';
+import StopListPage from './StopListPage';
 
-const title = 'Itineraries';
+const title = 'Itinerary';
 
-async function action({ locale, fetch }) {
+async function action({ locale, params }) {
   const REST_HOST_NAME = 'http://belvue.dev'; // @todo set in .env
   const drupalLocale = locale.substring(0, 2); // @todo improve
 
   // Fetch the localized terms.
-  // Sort by weight is the default value, but we keep this one explicitly.
-  const endpoint = `${REST_HOST_NAME}/${drupalLocale}/jsonapi/taxonomy_term/audio_itinerary?sort=weight`;
-  const terms = await fetch(endpoint).then(response => response.json());
-  if (!terms) throw new Error('Failed to load the itineraries.');
+  const endpoint = `${REST_HOST_NAME}/${drupalLocale}/jsonapi/node/audio?sort=field_id&filter[field_audio_itinerary.uuid][value]=${params.itinerary_id}`;
+  const nodes = await fetch(endpoint).then(response => response.json());
+  if (!nodes) throw new Error('Failed to load the stops for the itinerary.');
 
   return {
-    chunks: ['itineraries'],
+    chunks: ['itinerary'],
     title,
     component: (
       <Layout>
-        <ItineraryListPage title={title} itineraries={terms.data} />
+        <StopListPage title={title} stops={nodes.data} />
       </Layout>
     ),
   };
