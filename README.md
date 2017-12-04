@@ -59,20 +59,58 @@ Paragraph, machine name: **audio_answer**
 - Formatted long text (1)
 - MP3 file (1)
 
-## Page components
+## Components
+
+### Top level component
+
+**App**
+
+
+
+### Pages an routes
 
 React components that will be available from routes.
 
-- ItineraryList: [Route list](https://tiltfactory.prevue.it/view/ifkjvw)
-- StopList: [Stop list](https://tiltfactory.prevue.it/view/gwbjq2)
-- Stop: [Stop detail page](https://tiltfactory.prevue.it/view/6ztppa) and Stop detail page with answer: [playing](https://tiltfactory.prevue.it/view/ge1aaq), [stopped](https://tiltfactory.prevue.it/view/ln8s60).
-- About: About page (@todo).
+- / and /itineraries: **[ItineraryListPage](https://tiltfactory.prevue.it/view/ifkjvw)**
+- /itinerary/:itinerary_id **[StopListPage](https://tiltfactory.prevue.it/view/gwbjq2)**
+- /itinerary/:itinerary_id/:stop_id **[StopDetailPage](https://tiltfactory.prevue.it/view/6ztppa)**: Stop detail page, with optional answer: [playing](https://tiltfactory.prevue.it/view/ge1aaq), [stopped](https://tiltfactory.prevue.it/view/ln8s60).
+- /about **AboutPage**: About page (@todo).
 
-## Components per page
+### Specific components, per page
 
+#### ItineraryListPage
 
+- ItineraryListHeader
+  - Link: About page link
+  - Logo: svg image
+  - LanguageSwitcher
+- ItineraryList
+  - ItineraryTeaser: link to an itinerary with: thumbnail image (?), icon, title
 
-### Shared components
+#### StopListPage
+
+- StopListHeader
+  - Link: back to the itinerary list page.
+  - Image: (?)
+  - Title
+  - LanguageSwitcher
+- FilterableStopList
+  - Search
+  - StopList
+    - StopTeaser: thumbnail image, id, title, mp3 length 
+
+#### StopDetailPage
+
+- StopHeader
+  - Link: back to the current itinerary stop list page.
+  - StopLocation: itinerary title and stop id
+  - Title
+  - LanguageSwitcher
+- AudioPlayer
+- Text
+- AudioAnswer: optional audio answer
+
+### Generic components
 
 - LanguageSwitcher
 
