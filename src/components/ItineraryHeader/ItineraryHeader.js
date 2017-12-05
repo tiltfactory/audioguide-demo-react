@@ -7,7 +7,12 @@ import LanguageSwitcher from '../LanguageSwitcher';
 
 class ItineraryHeader extends React.Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
+    itinerary: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      attributes: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+      }),
+    }).isRequired,
   };
 
   render() {
@@ -17,7 +22,7 @@ class ItineraryHeader extends React.Component {
           <Link to="/">Back to itineraries</Link>
           <LanguageSwitcher />
           <p>
-            {this.props.title}
+            {this.props.itinerary.attributes.name}
           </p>
         </div>
       </div>

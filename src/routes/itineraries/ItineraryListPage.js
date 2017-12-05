@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './ItineraryListPage.css';
-import Link from '../../components/Link';
+import ItineraryTeaser from '../../components/ItineraryTeaser';
 import ItineraryListHeader from '../../components/ItineraryListHeader';
 
 class ItineraryListPage extends React.Component {
@@ -17,7 +17,6 @@ class ItineraryListPage extends React.Component {
 
   render() {
     const { itineraries } = this.props;
-
     return (
       <div className={s.root}>
         <div className={s.container}>
@@ -28,9 +27,10 @@ class ItineraryListPage extends React.Component {
           <ul>
             {itineraries.map(itinerary =>
               <li key={itinerary.id}>
-                <Link to={`/itinerary/${itinerary.id}`}>
-                  {itinerary.attributes.name}
-                </Link>
+                <ItineraryTeaser
+                  destination={`/itinerary/${itinerary.id}`}
+                  itinerary={itinerary}
+                />
               </li>,
             )}
           </ul>

@@ -30,7 +30,7 @@ class ItineraryPage extends React.Component {
           <h1>
             {this.props.title}
           </h1>
-          <ItineraryHeader title={itinerary.attributes.name} />
+          <ItineraryHeader itinerary={itinerary} />
           <FilterableStopList itinerary_id={itinerary.id} stops={stops} />
         </div>
       </div>

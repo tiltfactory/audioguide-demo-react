@@ -17,11 +17,9 @@ class ItineraryTeaser extends React.Component {
 
   render() {
     return (
-      <li>
-        <Link to={this.props.destination}>
-          {this.props.itinerary.attributes.name}
-        </Link>
-      </li>
+      <Link to={this.props.destination}>
+        {this.props.itinerary.attributes.name}
+      </Link>
     );
   }
 }

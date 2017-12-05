@@ -19,7 +19,7 @@ async function action({ locale, fetch }) {
 
   // Fetch the localized terms.
   // Sort by weight is the default value, but we keep this one explicitly.
-  const endpoint = `${REST_HOST_NAME}/${drupalLocale}/jsonapi/taxonomy_term/audio_itinerary?sort=weight`;
+  const endpoint = `${REST_HOST_NAME}/${drupalLocale}/jsonapi/taxonomy_term/audio_itinerary?sort=weight&include=field_image`;
   const terms = await fetch(endpoint).then(response => response.json());
   if (!terms) throw new Error('Failed to load the itineraries.');
 

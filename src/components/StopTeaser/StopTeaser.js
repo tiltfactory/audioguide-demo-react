@@ -17,11 +17,9 @@ class StopTeaser extends React.Component {
 
   render() {
     return (
-      <li>
-        <Link to={this.props.destination}>
-          {this.props.stop.attributes.title}
-        </Link>
-      </li>
+      <Link to={this.props.destination}>
+        {this.props.stop.attributes.title}
+      </Link>
     );
   }
 }

@@ -20,7 +20,7 @@ class StopList extends React.Component {
 
   render() {
     const filterText = this.props.filterText;
-    const rows = [];
+    const filteredStops = [];
 
     this.props.stops.forEach(stop => {
       if (
@@ -32,18 +32,19 @@ class StopList extends React.Component {
       ) {
         return;
       }
-      rows.push(
-        <StopTeaser
-          key={stop.id}
-          destination={`/stop/${this.props.itinerary_id}/${stop.id}`}
-          stop={stop}
-        />,
-      );
+      filteredStops.push(stop);
     });
 
     return (
       <ul>
-        {rows}
+        {filteredStops.map(stop =>
+          <li key={stop.id}>
+            <StopTeaser
+              destination={`/stop/${this.props.itinerary_id}/${stop.id}`}
+              stop={stop}
+            />
+          </li>,
+        )}
       </ul>
     );
   }
