@@ -23,7 +23,13 @@ class StopList extends React.Component {
     const rows = [];
 
     this.props.stops.forEach(stop => {
-      if (stop.attributes.title.indexOf(filterText) === -1) {
+      if (
+        !(
+          stop.attributes.title
+            .toLowerCase()
+            .indexOf(filterText.toLowerCase()) !== -1
+        )
+      ) {
         return;
       }
       rows.push(
