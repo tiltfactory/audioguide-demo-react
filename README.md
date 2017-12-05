@@ -92,15 +92,15 @@ React components that will be available from routes.
 - ItineraryList
   - ItineraryTeaser: link to an itinerary with: thumbnail image (?), icon, title
 
-#### StopListPage
+#### ItineraryPage
 
-- StopListHeader
+- ItineraryHeader
   - Link: back to the itinerary list page.
   - Image: (?)
   - Title
   - LanguageSwitcher
 - FilterableStopList
-  - Search
+  - SearchBar
   - StopList
     - StopTeaser: thumbnail image, id, title, mp3 length 
 
@@ -111,7 +111,7 @@ React components that will be available from routes.
   - StopLocation: itinerary title and stop id
   - Title
   - LanguageSwitcher
-- AudioPlayer
+- AudioPlayer: mp3, image, previous and next
 - Text
 - AudioQuiz
   - AudioAnswer
