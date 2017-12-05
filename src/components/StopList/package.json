@@ -1,0 +1,6 @@
+{
+  "name": "StopList",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./StopList.js"
+}

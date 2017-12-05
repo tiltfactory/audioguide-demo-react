@@ -1,17 +1,9 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './StopListPage.css';
-import Link from '../../components/Link';
+import StopListHeader from '../../components/StopListHeader';
+import FilterableStopList from '../../components/FilterableStopList';
 
 class StopListPage extends React.Component {
   static propTypes = {
@@ -33,16 +25,11 @@ class StopListPage extends React.Component {
           <h1>
             {this.props.title}
           </h1>
-          <Link to="/">Back to itineraries</Link>
-          <ul>
-            {stops.map(stop =>
-              <li key={stop.id}>
-                <Link to={`/stop/${this.props.itinerary_id}/${stop.id}`}>
-                  {stop.attributes.title}
-                </Link>
-              </li>,
-            )}
-          </ul>
+          <StopListHeader />
+          <FilterableStopList
+            itinerary_id={this.props.itinerary_id}
+            stops={stops}
+          />
         </div>
       </div>
     );
