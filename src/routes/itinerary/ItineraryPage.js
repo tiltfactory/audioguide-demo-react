@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './StopListPage.css';
-import StopListHeader from '../../components/StopListHeader';
+import s from './ItineraryPage.css';
+import ItineraryHeader from '../../components/ItineraryHeader';
 import FilterableStopList from '../../components/FilterableStopList';
 
-class StopListPage extends React.Component {
+class ItineraryPage extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    itinerary_id: PropTypes.string.isRequired,
+    itinerary: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      attributes: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+      }),
+    }).isRequired,
     stops: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
@@ -17,7 +22,7 @@ class StopListPage extends React.Component {
   };
 
   render() {
-    const { stops } = this.props;
+    const { itinerary, stops } = this.props;
 
     return (
       <div className={s.root}>
@@ -25,15 +30,12 @@ class StopListPage extends React.Component {
           <h1>
             {this.props.title}
           </h1>
-          <StopListHeader />
-          <FilterableStopList
-            itinerary_id={this.props.itinerary_id}
-            stops={stops}
-          />
+          <ItineraryHeader title={itinerary.attributes.name} />
+          <FilterableStopList itinerary_id={itinerary.id} stops={stops} />
         </div>
       </div>
     );
   }
 }
 
-export default withStyles(s)(StopListPage);
+export default withStyles(s)(ItineraryPage);

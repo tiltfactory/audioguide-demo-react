@@ -1,0 +1,6 @@
+{
+  "name": "ItineraryTeaser",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ItineraryTeaser.js"
+}
