@@ -1,0 +1,7 @@
+@import '../variables.css';
+
+.answerTitle {
+  background: #333;
+  color: #fff;
+  padding: 8px;
+}

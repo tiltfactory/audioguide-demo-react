@@ -113,7 +113,8 @@ React components that will be available from routes.
   - LanguageSwitcher
 - AudioPlayer
 - Text
-- AudioAnswer: optional audio answer
+- AudioQuiz
+  - AudioAnswer
 
 ### Generic components
 

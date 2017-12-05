@@ -1,0 +1,7 @@
+@import '../variables.css';
+
+.quizTitle {
+  background: #eee;
+  color: #333;
+  padding: 8px;
+}
