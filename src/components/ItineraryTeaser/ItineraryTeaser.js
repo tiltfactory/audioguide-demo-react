@@ -22,36 +22,12 @@ class ItineraryTeaser extends React.Component {
     }).isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = { imageUrl: null };
-  }
-
-  componentWillMount() {
-    // @todo check best practices
-    this.getImageUrl();
-  }
-
-  async getImageUrl() {
-    // @todo make image helpers reusable
-    const REST_HOST_NAME = 'http://belvue.dev'; // @todo set in .env
-    const imageUUID = this.props.itinerary.relationships.field_image.data.id;
-    const fileEndpoint = `${REST_HOST_NAME}/jsonapi/file/file/${imageUUID}`;
-    const imageResponse = await fetch(fileEndpoint).then(response =>
-      response.json(),
-    );
-    if (imageResponse) {
-      const url = `${REST_HOST_NAME}/${imageResponse.data.attributes.url}`;
-      this.setState({ imageUrl: url });
-    }
-  }
-
   render() {
     const itinerary = this.props.itinerary;
     return (
       <Link to={this.props.destination}>
-        <img src={this.state.imageUrl} alt={itinerary.attributes.name} />
-        {this.props.itinerary.attributes.name}
+        <img src={itinerary.imageUrl} alt={itinerary.attributes.name} />
+        {itinerary.attributes.name}
       </Link>
     );
   }

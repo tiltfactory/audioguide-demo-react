@@ -28,7 +28,7 @@ async function action({ locale, fetch }) {
     title,
     component: (
       <Layout>
-        <ItineraryListPage title={title} itineraries={terms.data} />
+        <ItineraryListPage title={title} itineraries={terms} />
       </Layout>
     ),
   };

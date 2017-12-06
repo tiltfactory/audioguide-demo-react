@@ -8,15 +8,37 @@ import ItineraryListHeader from '../../components/ItineraryListHeader';
 class ItineraryListPage extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    itineraries: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
+    itineraries: PropTypes.shape({
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+      included: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+    }).isRequired,
   };
 
-  render() {
+  attachIncludes() {
     const { itineraries } = this.props;
+    const REST_HOST_NAME = 'http://belvue.dev'; // @todo set in .env
+    const itinerariesWithIncludes = [];
+    itineraries.data.forEach(itinerary => {
+      const tmpItinerary = itinerary;
+      const imageId = itinerary.relationships.field_image.data.id;
+      const image = itineraries.included.filter(obj => obj.id === imageId);
+      if (image[0]) {
+        tmpItinerary.imageUrl = `${REST_HOST_NAME}/${image[0].attributes.url}`;
+      }
+      itinerariesWithIncludes.push(tmpItinerary);
+    });
+    return itinerariesWithIncludes;
+  }
+
+  render() {
     return (
       <div className={s.root}>
         <div className={s.container}>
@@ -25,7 +47,7 @@ class ItineraryListPage extends React.Component {
           </h1>
           <ItineraryListHeader />
           <ul>
-            {itineraries.map(itinerary =>
+            {this.attachIncludes().map(itinerary =>
               <li key={itinerary.id}>
                 <ItineraryTeaser
                   destination={`/itinerary/${itinerary.id}`}

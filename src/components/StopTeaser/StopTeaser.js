@@ -11,14 +11,40 @@ class StopTeaser extends React.Component {
       id: PropTypes.string.isRequired,
       attributes: PropTypes.shape({
         title: PropTypes.string.isRequired,
+        field_id: PropTypes.string.isRequired,
       }),
     }).isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = { imageUrl: null };
+  }
+
+  componentWillMount() {
+    // @todo check best practices
+    this.getImageUrl();
+  }
+
+  async getImageUrl() {
+    // @todo make image helpers reusable
+    const REST_HOST_NAME = 'http://belvue.dev'; // @todo set in .env
+    // waiting for images
+    const url = `${REST_HOST_NAME}/themes/custom/belvue/logo.svg`;
+    this.setState({ imageUrl: url });
+  }
+
   render() {
+    const stop = this.props.stop;
     return (
       <Link to={this.props.destination}>
-        {this.props.stop.attributes.title}
+        <img src={this.state.imageUrl} alt={stop.attributes.title} />
+        <p>
+          {stop.attributes.field_id}
+        </p>
+        <h2>
+          {stop.attributes.title}
+        </h2>
       </Link>
     );
   }

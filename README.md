@@ -77,7 +77,7 @@ each page has a different Header component.
 React components that will be available from routes.
 
 - / **[ItineraryListPage](https://tiltfactory.prevue.it/view/ifkjvw)**
-- /itinerary/:itinerary_id **[StopListPage](https://tiltfactory.prevue.it/view/gwbjq2)**
+- /itinerary/:itinerary_id **[ItineraryPage](https://tiltfactory.prevue.it/view/gwbjq2)**
 - /stop/:itinerary_id/:stop_id **[StopDetailPage](https://tiltfactory.prevue.it/view/6ztppa)**: Stop detail page, with optional answer: [playing](https://tiltfactory.prevue.it/view/ge1aaq), [stopped](https://tiltfactory.prevue.it/view/ln8s60).
 - /about **AboutPage**: About page (@todo).
 
