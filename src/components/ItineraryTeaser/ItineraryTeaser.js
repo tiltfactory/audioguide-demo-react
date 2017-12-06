@@ -9,16 +9,17 @@ class ItineraryTeaser extends React.Component {
     destination: PropTypes.string.isRequired,
     itinerary: PropTypes.shape({
       id: PropTypes.string.isRequired,
+      imageUrl: PropTypes.string.isRequired,
       attributes: PropTypes.shape({
         name: PropTypes.string.isRequired,
       }).isRequired,
-      relationships: PropTypes.shape({
-        field_image: PropTypes.shape({
-          data: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-          }).isRequired,
-        }).isRequired,
-      }).isRequired,
+      // relationships: PropTypes.shape({
+      //   field_image: PropTypes.shape({
+      //     data: PropTypes.shape({
+      //       id: PropTypes.string.isRequired,
+      //     }).isRequired,
+      //   }).isRequired,
+      // }).isRequired,
     }).isRequired,
   };
 

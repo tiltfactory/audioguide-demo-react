@@ -9,20 +9,78 @@ class ItineraryPage extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     itinerary: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      attributes: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-      }),
-    }).isRequired,
-    stops: PropTypes.arrayOf(
-      PropTypes.shape({
+      data: PropTypes.shape({
         id: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
+      }).isRequired,
+      included: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+    }).isRequired,
+    stops: PropTypes.shape({
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+      included: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+    }).isRequired,
   };
 
+  /**
+   * Attaches the includes Url to the itinerary data.
+   *
+   * @returns {Array}
+   */
+  itineraryWithIncludesUrl() {
+    const itinerary = this.props.itinerary;
+    const REST_HOST_NAME = 'http://belvue.dev'; // @todo set in .env
+    const tmpItinerary = itinerary.data;
+    const imageId = itinerary.data.relationships.field_image.data.id;
+    const image = itinerary.included.filter(obj => obj.id === imageId);
+    if (image[0]) {
+      tmpItinerary.imageUrl = `${REST_HOST_NAME}/${image[0].attributes.url}`;
+    } else {
+      // Images must be available in this case.
+      throw new Error('No image were found');
+    }
+    return tmpItinerary;
+  }
+
+  /**
+   * Attaches the includes Url to the stops data.
+   * @todo content needed or optional image.
+   *
+   * @returns {Array}
+   */
+  stopsWithIncludesUrl() {
+    const stops = this.props.stops;
+    const REST_HOST_NAME = 'http://belvue.dev'; // @todo set in .env
+    const stopsWithIncludes = [];
+    stops.data.forEach(stop => {
+      const tmpStop = stop;
+      if (stop.relationships.field_image) {
+        const imageId = stop.relationships.field_image.data.id;
+        const image = stops.included.filter(obj => obj.id === imageId);
+        tmpStop.imageUrl = `${REST_HOST_NAME}/${image[0].attributes.url}`;
+      } else {
+        tmpStop.imageUrl = '';
+      }
+      stopsWithIncludes.push(tmpStop);
+    });
+    return stopsWithIncludes;
+  }
+
   render() {
-    const { itinerary, stops } = this.props;
+    // const stops = this.stopsWithIncludesUrl;
+    this.stopsWithIncludesUrl();
+    const stops = this.props.stops.data;
+    const itinerary = this.itineraryWithIncludesUrl();
 
     return (
       <div className={s.root}>

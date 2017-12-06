@@ -22,8 +22,13 @@ class ItineraryListPage extends React.Component {
     }).isRequired,
   };
 
-  attachIncludes() {
-    const { itineraries } = this.props;
+  /**
+   * Attaches the includes Url to the itineraries data.
+   *
+   * @returns {Array}
+   */
+  itinerariesWithIncludesUrl() {
+    const itineraries = this.props.itineraries;
     const REST_HOST_NAME = 'http://belvue.dev'; // @todo set in .env
     const itinerariesWithIncludes = [];
     itineraries.data.forEach(itinerary => {
@@ -32,6 +37,9 @@ class ItineraryListPage extends React.Component {
       const image = itineraries.included.filter(obj => obj.id === imageId);
       if (image[0]) {
         tmpItinerary.imageUrl = `${REST_HOST_NAME}/${image[0].attributes.url}`;
+      } else {
+        // Images must be available in this case.
+        throw new Error('No image were found');
       }
       itinerariesWithIncludes.push(tmpItinerary);
     });
@@ -47,7 +55,7 @@ class ItineraryListPage extends React.Component {
           </h1>
           <ItineraryListHeader />
           <ul>
-            {this.attachIncludes().map(itinerary =>
+            {this.itinerariesWithIncludesUrl().map(itinerary =>
               <li key={itinerary.id}>
                 <ItineraryTeaser
                   destination={`/itinerary/${itinerary.id}`}

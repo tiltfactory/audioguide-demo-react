@@ -63,7 +63,7 @@ Paragraph, machine name: **audio_answer**
 - Formatted long text (1)
 - MP3 file (1)
 
-## Components
+## React Components
 
 ### Top level component
 
