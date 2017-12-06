@@ -10,7 +10,7 @@ import { JSON_API_URL } from '../../constants/env';
 class StopPage extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    itinerary_id: PropTypes.string.isRequired,
+    itineraryId: PropTypes.string.isRequired,
     stop: PropTypes.shape({
       data: PropTypes.shape({
         id: PropTypes.string.isRequired,
@@ -23,14 +23,24 @@ class StopPage extends React.Component {
     }).isRequired,
   };
 
-  render() {
-    const { stop } = this.props;
-
-    // Get the (single) mp3 file URL from the main audio item.
+  mp3Url() {
+    const stop = this.props.stop;
+    // Get the (single) mp3 file Url from the stop.
     const mp3Id = stop.data.relationships.field_mp3.data.id;
     const mp3 = stop.included.filter(obj => obj.id === mp3Id);
-    const mp3URL = `${JSON_API_URL}/${mp3[0].attributes.url}`;
+    return `${JSON_API_URL}/${mp3[0].attributes.url}`;
+  }
 
+  imageUrl() {
+    const stop = this.props.stop;
+    // Get the (single) image file Url from the stop.
+    const imageId = stop.data.relationships.field_image.data.id;
+    const image = stop.included.filter(obj => obj.id === imageId);
+    return `${JSON_API_URL}/${image[0].attributes.url}`;
+  }
+
+  answersList() {
+    const stop = this.props.stop;
     // Get the answers (field_audio_answer Paragraphs).
     // Prepare the data model to be used by the AudioAnswer component.
     // @todo use typing instead of array
@@ -57,6 +67,12 @@ class StopPage extends React.Component {
         answersList.push(answer);
       }
     });
+    return answersList;
+  }
+
+  render() {
+    const { itineraryId, stop } = this.props;
+    const answersList = this.answersList();
 
     return (
       <div className={s.root}>
@@ -70,10 +86,9 @@ class StopPage extends React.Component {
               {stop.data.attributes.title}
             </span>
           </h1>
-          <Link to={`/itinerary/${this.props.itinerary_id}`}>
-            Back to itinerary
-          </Link>
-          <ReactAudioPlayer src={mp3URL} autoPlay controls />
+          <Link to={`/itinerary/${itineraryId}`}>Back to itinerary</Link>
+          <img src={this.imageUrl()} alt={stop.data.attributes.title} />
+          <ReactAudioPlayer src={this.mp3Url()} autoPlay controls />
           <div
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{

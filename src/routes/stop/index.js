@@ -20,11 +20,7 @@ async function action({ locale, params }) {
     title,
     component: (
       <Layout>
-        <StopPage
-          title={title}
-          stop={node}
-          itinerary_id={params.itinerary_id}
-        />
+        <StopPage title={title} stop={node} itineraryId={params.itinerary_id} />
       </Layout>
     ),
   };
