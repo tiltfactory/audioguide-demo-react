@@ -113,7 +113,7 @@ React components that will be available from routes.
 
 - StopHeader
   - Link: back to the current itinerary stop list page.
-  - StopLocation: itinerary title and stop id
+  - StopLocation: itinerary title and stop id (@todo)
   - Title
   - LanguageSwitcher
 - AudioPlayer: mp3, image, previous and next

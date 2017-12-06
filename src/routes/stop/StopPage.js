@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import ReactAudioPlayer from 'react-audio-player';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './StopPage.css';
-import Link from '../../components/Link';
+import StopHeader from '../../components/StopHeader';
 import AudioQuiz from '../../components/AudioQuiz';
 import { JSON_API_URL } from '../../constants/env';
 
 class StopPage extends React.Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
     itineraryId: PropTypes.string.isRequired,
     stop: PropTypes.shape({
       data: PropTypes.shape({
@@ -77,16 +76,7 @@ class StopPage extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <h1>
-            <span className={s.audioId}>
-              {stop.data.attributes.field_id}
-            </span>
-            <span className={s.audioTitle}>
-              {this.props.title} -
-              {stop.data.attributes.title}
-            </span>
-          </h1>
-          <Link to={`/itinerary/${itineraryId}`}>Back to itinerary</Link>
+          <StopHeader itineraryId={itineraryId} stop={stop} />
           <img src={this.imageUrl()} alt={stop.data.attributes.title} />
           <ReactAudioPlayer src={this.mp3Url()} autoPlay controls />
           <div

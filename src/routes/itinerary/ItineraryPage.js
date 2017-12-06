@@ -8,7 +8,6 @@ import { JSON_API_URL } from '../../constants/env';
 
 class ItineraryPage extends React.Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
     itinerary: PropTypes.shape({
       data: PropTypes.shape({
         id: PropTypes.string.isRequired,
@@ -84,9 +83,6 @@ class ItineraryPage extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <h1>
-            {this.props.title}
-          </h1>
           <ItineraryHeader itinerary={itinerary} />
           <FilterableStopList itinerary_id={itinerary.id} stops={stops} />
         </div>
