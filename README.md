@@ -2,12 +2,20 @@
 
 ## Getting started
 
+### Local Drupal configuration
+
+Get a copy of the production Drupal 8 website and define the CORS configuration in /admin/config/services/cors to 
+`*|http://localhost:3000`
+
 ### JSON API configuration
 
 1. Copy the src/env.example.js into src/env.js
 2. Set the JSON_API_URL with your API url.
 
-### Boilerplate setup
+On your local/dev environment, it will be the Url defined for your vhost, with the protocol.
+_Example: http://mysite.dev_
+
+### React Boilerplate setup
 
 On MacOSX, get Yarn via Homebrew so it will be easily upgradable.
 
