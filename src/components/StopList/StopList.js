@@ -11,6 +11,7 @@ class StopList extends React.Component {
     stops: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
+        imageUrl: PropTypes.string.isRequired,
         attributes: PropTypes.shape({
           title: PropTypes.string.isRequired,
         }),
@@ -28,7 +29,8 @@ class StopList extends React.Component {
           stop.attributes.title
             .toLowerCase()
             .indexOf(filterText.toLowerCase()) !== -1
-        )
+        ) &&
+        !(stop.attributes.field_id.indexOf(filterText) !== -1)
       ) {
         return;
       }
