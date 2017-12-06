@@ -17,9 +17,9 @@ function LanguageSwitcher({ currentLocale, availableLocales, setLocale }) {
   };
   const localeName = locale => localeDict[locale] || locale;
   return (
-    <div>
+    <ul>
       {availableLocales.map(locale =>
-        <span key={locale}>
+        <li key={locale}>
           {isSelected(locale)
             ? <span>
                 {localeName(locale)}
@@ -35,9 +35,9 @@ function LanguageSwitcher({ currentLocale, availableLocales, setLocale }) {
               >
                 {localeName(locale)}
               </a>}{' '}
-        </span>,
+        </li>,
       )}
-    </div>
+    </ul>
   );
 }
 
