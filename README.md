@@ -9,7 +9,7 @@ Get a copy of the production Drupal 8 website and define the CORS configuration 
 
 ### JSON API configuration
 
-1. Copy the src/env.example.js into src/env.js
+1. Copy the src/constants/env.example.js into src/constants/env.js
 2. Set the JSON_API_URL with your API url.
 
 On your local/dev environment, it will be the Url defined for your vhost, with the protocol.
@@ -66,7 +66,7 @@ Content type, machine name: **audio**
 - MP3 (1)
 - Formatted long text (0..1)
 - Itinerary (1)
-- Answer (1..*)
+- Answer (0..*)
 
 ### Answer
 
@@ -91,7 +91,7 @@ React components that will be available from routes.
 
 - / **[ItineraryListPage](https://tiltfactory.prevue.it/view/ifkjvw)**
 - /itinerary/:itinerary_id **[ItineraryPage](https://tiltfactory.prevue.it/view/gwbjq2)**
-- /stop/:itinerary_id/:stop_id **[StopDetailPage](https://tiltfactory.prevue.it/view/6ztppa)**: Stop detail page, with optional answer: [playing](https://tiltfactory.prevue.it/view/ge1aaq), [stopped](https://tiltfactory.prevue.it/view/ln8s60).
+- /stop/:itinerary_id/:stop_id **[StopPage](https://tiltfactory.prevue.it/view/6ztppa)**: Stop detail page, with optional answer: [playing](https://tiltfactory.prevue.it/view/ge1aaq), [stopped](https://tiltfactory.prevue.it/view/ln8s60).
 - /about **AboutPage**: About page (@todo).
 
 ### Specific components, per page
@@ -132,6 +132,7 @@ React components that will be available from routes.
 ### Generic components
 
 - LanguageSwitcher
+- Link
 
 ## Documentation 
 
