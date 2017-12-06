@@ -10,16 +10,16 @@
 import React from 'react';
 import Layout from '../../components/Layout';
 import ItineraryListPage from './ItineraryListPage';
+import { JSON_API_URL } from '../../constants/env';
 
 const title = 'Itineraries';
 
 async function action({ locale, fetch }) {
-  const REST_HOST_NAME = 'http://belvue.dev'; // @todo set in .env
   const drupalLocale = locale.substring(0, 2); // @todo improve
 
   // Fetch the localized terms.
   // Sort by weight is the default value, but we keep this one explicitly.
-  const endpoint = `${REST_HOST_NAME}/${drupalLocale}/jsonapi/taxonomy_term/audio_itinerary?sort=weight&include=field_image`;
+  const endpoint = `${JSON_API_URL}/${drupalLocale}/jsonapi/taxonomy_term/audio_itinerary?sort=weight&include=field_image`;
   const terms = await fetch(endpoint).then(response => response.json());
   if (!terms) throw new Error('Failed to load the itineraries.');
 

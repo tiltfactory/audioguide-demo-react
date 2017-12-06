@@ -23,6 +23,7 @@ class StopList extends React.Component {
     const filterText = this.props.filterText;
     const filteredStops = [];
 
+    // Filter by title or id.
     this.props.stops.forEach(stop => {
       if (
         !(

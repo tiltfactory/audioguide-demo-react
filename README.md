@@ -2,6 +2,11 @@
 
 ## Getting started
 
+### JSON API configuration
+
+1. Copy the src/env.example.js into src/env.js
+2. Set the JSON_API_URL with your API url.
+
 ### Boilerplate setup
 
 On MacOSX, get Yarn via Homebrew so it will be easily upgradable.

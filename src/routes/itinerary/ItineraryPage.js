@@ -4,6 +4,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './ItineraryPage.css';
 import ItineraryHeader from '../../components/ItineraryHeader';
 import FilterableStopList from '../../components/FilterableStopList';
+import { JSON_API_URL } from '../../constants/env';
 
 class ItineraryPage extends React.Component {
   static propTypes = {
@@ -39,12 +40,11 @@ class ItineraryPage extends React.Component {
    */
   itineraryWithIncludesUrl() {
     const itinerary = this.props.itinerary;
-    const REST_HOST_NAME = 'http://belvue.dev'; // @todo set in .env
     const tmpItinerary = itinerary.data;
     const imageId = itinerary.data.relationships.field_image.data.id;
     const image = itinerary.included.filter(obj => obj.id === imageId);
     if (image[0]) {
-      tmpItinerary.imageUrl = `${REST_HOST_NAME}/${image[0].attributes.url}`;
+      tmpItinerary.imageUrl = `${JSON_API_URL}/${image[0].attributes.url}`;
     } else {
       // Images must be available in this case.
       throw new Error('No image were found');
@@ -60,14 +60,13 @@ class ItineraryPage extends React.Component {
    */
   stopsWithIncludesUrl() {
     const stops = this.props.stops;
-    const REST_HOST_NAME = 'http://belvue.dev'; // @todo set in .env
     const stopsWithIncludes = [];
     stops.data.forEach(stop => {
       const tmpStop = stop;
       if (stop.relationships.field_image) {
         const imageId = stop.relationships.field_image.data.id;
         const image = stops.included.filter(obj => obj.id === imageId);
-        tmpStop.imageUrl = `${REST_HOST_NAME}/${image[0].attributes.url}`;
+        tmpStop.imageUrl = `${JSON_API_URL}/${image[0].attributes.url}`;
       } else {
         tmpStop.imageUrl = '';
       }

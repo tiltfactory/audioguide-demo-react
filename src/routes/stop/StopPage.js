@@ -5,6 +5,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './StopPage.css';
 import Link from '../../components/Link';
 import AudioQuiz from '../../components/AudioQuiz';
+import { JSON_API_URL } from '../../constants/env';
 
 class StopPage extends React.Component {
   static propTypes = {
@@ -13,19 +14,22 @@ class StopPage extends React.Component {
     stop: PropTypes.shape({
       data: PropTypes.shape({
         id: PropTypes.string.isRequired,
-      }),
+      }).isRequired,
+      included: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
     }).isRequired,
   };
 
   render() {
     const { stop } = this.props;
 
-    const REST_HOST_NAME = 'http://belvue.dev'; // @todo set in .env
-
     // Get the (single) mp3 file URL from the main audio item.
     const mp3Id = stop.data.relationships.field_mp3.data.id;
     const mp3 = stop.included.filter(obj => obj.id === mp3Id);
-    const mp3URL = `${REST_HOST_NAME}/${mp3[0].attributes.url}`;
+    const mp3URL = `${JSON_API_URL}/${mp3[0].attributes.url}`;
 
     // Get the answers (field_audio_answer Paragraphs).
     // Prepare the data model to be used by the AudioAnswer component.
@@ -42,7 +46,7 @@ class StopPage extends React.Component {
         const answerMp3Id =
           answerParagraphItem[0].relationships.field_mp3.data.id;
         const answerMp3 = stop.included.filter(obj => obj.id === answerMp3Id);
-        const answerMp3URL = `${REST_HOST_NAME}/${answerMp3[0].attributes.url}`;
+        const answerMp3URL = `${JSON_API_URL}/${answerMp3[0].attributes.url}`;
         // Prepare the wrapper and store in the list.
         const answer = {
           title: answerParagraphItem[0].attributes.field_title,

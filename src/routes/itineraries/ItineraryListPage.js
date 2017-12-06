@@ -4,6 +4,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './ItineraryListPage.css';
 import ItineraryTeaser from '../../components/ItineraryTeaser';
 import ItineraryListHeader from '../../components/ItineraryListHeader';
+import { JSON_API_URL } from '../../constants/env';
 
 class ItineraryListPage extends React.Component {
   static propTypes = {
@@ -29,14 +30,13 @@ class ItineraryListPage extends React.Component {
    */
   itinerariesWithIncludesUrl() {
     const itineraries = this.props.itineraries;
-    const REST_HOST_NAME = 'http://belvue.dev'; // @todo set in .env
     const itinerariesWithIncludes = [];
     itineraries.data.forEach(itinerary => {
       const tmpItinerary = itinerary;
       const imageId = itinerary.relationships.field_image.data.id;
       const image = itineraries.included.filter(obj => obj.id === imageId);
       if (image[0]) {
-        tmpItinerary.imageUrl = `${REST_HOST_NAME}/${image[0].attributes.url}`;
+        tmpItinerary.imageUrl = `${JSON_API_URL}/${image[0].attributes.url}`;
       } else {
         // Images must be available in this case.
         throw new Error('No image were found');
