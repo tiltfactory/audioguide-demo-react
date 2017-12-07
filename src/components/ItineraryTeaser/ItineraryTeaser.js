@@ -9,7 +9,8 @@ class ItineraryTeaser extends React.Component {
     destination: PropTypes.string.isRequired,
     itinerary: PropTypes.shape({
       id: PropTypes.string.isRequired,
-      imageUrl: PropTypes.string.isRequired,
+      iconImageUrl: PropTypes.string.isRequired,
+      backgroundImageUrl: PropTypes.string.isRequired,
       attributes: PropTypes.shape({
         name: PropTypes.string.isRequired,
       }).isRequired,
@@ -27,7 +28,11 @@ class ItineraryTeaser extends React.Component {
     const itinerary = this.props.itinerary;
     return (
       <Link to={this.props.destination}>
-        <img src={itinerary.imageUrl} alt={itinerary.attributes.name} />
+        <img src={itinerary.iconImageUrl} alt={itinerary.attributes.name} />
+        <img
+          src={itinerary.backgroundImageUrl}
+          alt={itinerary.attributes.name}
+        />
         {itinerary.attributes.name}
       </Link>
     );

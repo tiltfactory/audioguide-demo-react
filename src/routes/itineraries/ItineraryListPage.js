@@ -22,24 +22,34 @@ class ItineraryListPage extends React.Component {
     }).isRequired,
   };
 
+  getImageFromIncluded(imageId) {
+    let result = null;
+    const image = this.props.itineraries.included.filter(
+      obj => obj.id === imageId,
+    );
+    if (image[0]) {
+      result = `${JSON_API_URL}/${image[0].attributes.url}`;
+    }
+    return result;
+  }
+
   /**
    * Attaches the includes Url to the itineraries data.
    *
    * @returns {Array}
    */
-  itinerariesWithIncludesUrl() {
+  itinerariesWithIncludedUrl() {
     const itineraries = this.props.itineraries;
     const itinerariesWithIncludes = [];
     itineraries.data.forEach(itinerary => {
       const tmpItinerary = itinerary;
-      const imageId = itinerary.relationships.field_image.data.id;
-      const image = itineraries.included.filter(obj => obj.id === imageId);
-      if (image[0]) {
-        tmpItinerary.imageUrl = `${JSON_API_URL}/${image[0].attributes.url}`;
-      } else {
-        // Images must be available in this case.
-        throw new Error('No image were found');
-      }
+      const iconImageId = itinerary.relationships.field_image.data.id;
+      const backgroundImageId =
+        itinerary.relationships.field_background_image.data.id;
+      tmpItinerary.iconImageUrl = this.getImageFromIncluded(iconImageId);
+      tmpItinerary.backgroundImageUrl = this.getImageFromIncluded(
+        backgroundImageId,
+      );
       itinerariesWithIncludes.push(tmpItinerary);
     });
     return itinerariesWithIncludes;
@@ -51,7 +61,7 @@ class ItineraryListPage extends React.Component {
         <div className={s.container}>
           <ItineraryListHeader />
           <ul>
-            {this.itinerariesWithIncludesUrl().map(itinerary =>
+            {this.itinerariesWithIncludedUrl().map(itinerary =>
               <li key={itinerary.id}>
                 <ItineraryTeaser
                   destination={`/itinerary/${itinerary.id}`}

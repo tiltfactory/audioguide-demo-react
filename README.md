@@ -53,7 +53,8 @@ Each content entity is fully translatable via Drupal and exposed with JSON API.
 Taxonomy vocabulary, machine name: **audio_itinerary**
 
 - Name (1)
-- Image (1)
+- Icon image (1)
+- Background image (1)
 - Formatted long text (0..1)
 
 ### Stop
