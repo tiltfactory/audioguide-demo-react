@@ -6,6 +6,7 @@ import s from './StopPage.css';
 import StopHeader from '../../components/StopHeader';
 import AudioQuiz from '../../components/AudioQuiz';
 import { JSON_API_URL } from '../../constants/env';
+import Link from '../../components/Link/Link';
 
 class StopPage extends React.Component {
   static propTypes = {
@@ -20,6 +21,13 @@ class StopPage extends React.Component {
         }).isRequired,
       ).isRequired,
     }).isRequired,
+    previousStopId: PropTypes.string,
+    nextStopId: PropTypes.string,
+  };
+
+  static defaultProps = {
+    previousStopId: null,
+    nextStopId: null,
   };
 
   mp3Url() {
@@ -70,7 +78,7 @@ class StopPage extends React.Component {
   }
 
   render() {
-    const { itineraryId, stop } = this.props;
+    const { itineraryId, stop, previousStopId, nextStopId } = this.props;
     const answersList = this.answersList();
 
     return (
@@ -78,6 +86,14 @@ class StopPage extends React.Component {
         <div className={s.container}>
           <StopHeader itineraryId={itineraryId} stop={stop} />
           <img src={this.imageUrl()} alt={stop.data.attributes.title} />
+          {this.props.previousStopId !== null
+            ? <Link to={`/stop/${itineraryId}/${previousStopId}`}>
+                Previous
+              </Link>
+            : <span>Empty previous state</span>}
+          {this.props.nextStopId !== null
+            ? <Link to={`/stop/${itineraryId}/${nextStopId}`}>Next</Link>
+            : <span>Empty next state</span>}
           <ReactAudioPlayer src={this.mp3Url()} autoPlay controls />
           <div
             // eslint-disable-next-line react/no-danger

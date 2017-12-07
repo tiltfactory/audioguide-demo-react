@@ -15,14 +15,34 @@ async function action({ locale, params }) {
   // Set page name from the current stop.
   const title = `Stop - ${node.data.attributes.title}`;
 
-  // @todo get previous and next audio files (if any)
+  // Get the stops list to find previous and next stops if any.
+  const nodesEndpoint = `${JSON_API_URL}/${drupalLocale}/jsonapi/node/audio?sort=field_id&filter[field_audio_itinerary.uuid][value]=${params.itinerary_id}&include=field_image`;
+  const nodes = await fetch(nodesEndpoint).then(response => response.json());
+  if (!nodes) throw new Error('Failed to load the stops for the itinerary.');
+  let previousStopId = null;
+  let nextStopId = null;
+  const currentStopIndex = nodes.data
+    .map(stop => stop.id)
+    .indexOf(params.stop_id);
+  if (currentStopIndex > 0) {
+    previousStopId = nodes.data[currentStopIndex - 1].id;
+  }
+  if (currentStopIndex < nodes.data.length - 1) {
+    nextStopId = nodes.data[currentStopIndex + 1].id;
+  }
 
   return {
     chunks: ['stop'],
     title,
     component: (
       <Layout>
-        <StopPage title={title} stop={node} itineraryId={params.itinerary_id} />
+        <StopPage
+          title={title}
+          stop={node}
+          previousStopId={previousStopId}
+          nextStopId={nextStopId}
+          itineraryId={params.itinerary_id}
+        />
       </Layout>
     ),
   };
