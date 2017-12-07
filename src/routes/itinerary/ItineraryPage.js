@@ -53,7 +53,6 @@ class ItineraryPage extends React.Component {
 
   /**
    * Attaches the includes Url to the stops data.
-   * @todo content needed or optional image.
    *
    * @returns {Array}
    */
@@ -62,12 +61,10 @@ class ItineraryPage extends React.Component {
     const stopsWithIncludes = [];
     stops.data.forEach(stop => {
       const tmpStop = stop;
-      if (stop.relationships.field_image) {
+      if (stop.relationships.field_image.data !== null) {
         const imageId = stop.relationships.field_image.data.id;
         const image = stops.included.filter(obj => obj.id === imageId);
         tmpStop.imageUrl = `${JSON_API_URL}/${image[0].attributes.url}`;
-      } else {
-        tmpStop.imageUrl = '';
       }
       stopsWithIncludes.push(tmpStop);
     });
@@ -76,8 +73,7 @@ class ItineraryPage extends React.Component {
 
   render() {
     // const stops = this.stopsWithIncludesUrl;
-    this.stopsWithIncludesUrl();
-    const stops = this.props.stops.data;
+    const stops = this.stopsWithIncludesUrl();
     const itinerary = this.itineraryWithIncludesUrl();
 
     return (

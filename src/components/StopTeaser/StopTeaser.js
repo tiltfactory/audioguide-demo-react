@@ -9,7 +9,7 @@ class StopTeaser extends React.Component {
     destination: PropTypes.string.isRequired,
     stop: PropTypes.shape({
       id: PropTypes.string.isRequired,
-      imageUrl: PropTypes.string.isRequired,
+      imageUrl: PropTypes.string,
       attributes: PropTypes.shape({
         title: PropTypes.string.isRequired,
         field_id: PropTypes.string.isRequired,
@@ -17,11 +17,19 @@ class StopTeaser extends React.Component {
     }).isRequired,
   };
 
+  static defaultProps = {
+    stop: PropTypes.shape({
+      imageUrl: null,
+    }).isRequired,
+  };
+
   render() {
     const stop = this.props.stop;
     return (
       <Link to={this.props.destination}>
-        <img src={stop.imageUrl} alt={stop.attributes.title} />
+        {stop.imageUrl !== null
+          ? <img src={stop.imageUrl} alt={stop.attributes.title} />
+          : <span>Image empty state</span>}
         <p>
           {stop.attributes.field_id}
         </p>

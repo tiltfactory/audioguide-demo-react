@@ -40,10 +40,14 @@ class StopPage extends React.Component {
 
   imageUrl() {
     const stop = this.props.stop;
-    // Get the (single) image file Url from the stop.
-    const imageId = stop.data.relationships.field_image.data.id;
-    const image = stop.included.filter(obj => obj.id === imageId);
-    return `${JSON_API_URL}/${image[0].attributes.url}`;
+    let result = null;
+    if (stop.data.relationships.field_image.data !== null) {
+      // Get the (single) image file Url from the stop.
+      const imageId = stop.data.relationships.field_image.data.id;
+      const image = stop.included.filter(obj => obj.id === imageId);
+      result = `${JSON_API_URL}/${image[0].attributes.url}`;
+    }
+    return result;
   }
 
   answersList() {
@@ -85,7 +89,9 @@ class StopPage extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <StopHeader itineraryId={itineraryId} stop={stop} />
-          <img src={this.imageUrl()} alt={stop.data.attributes.title} />
+          {this.imageUrl() !== null
+            ? <img src={this.imageUrl()} alt={stop.title} />
+            : <span>Image empty state</span>}
           {this.props.previousStopId !== null
             ? <Link to={`/stop/${itineraryId}/${previousStopId}`}>
                 Previous
