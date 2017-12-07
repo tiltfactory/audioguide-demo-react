@@ -24,15 +24,30 @@ class ItineraryTeaser extends React.Component {
     }).isRequired,
   };
 
+  static defaultProps = {
+    itinerary: PropTypes.shape({
+      iconImageUrl: null,
+      backgroundImageUrl: null,
+    }).isRequired,
+  };
+
   render() {
     const itinerary = this.props.itinerary;
     return (
       <Link to={this.props.destination}>
-        <img src={itinerary.iconImageUrl} alt={itinerary.attributes.name} />
-        <img
-          src={itinerary.backgroundImageUrl}
-          alt={itinerary.attributes.name}
-        />
+        {itinerary.iconImageUrl !== null
+          ? <img
+              src={itinerary.iconImageUrl}
+              alt={itinerary.attributes.title}
+            />
+          : <span>Image empty state</span>}
+
+        {itinerary.backgroundImageUrl !== null
+          ? <img
+              src={itinerary.backgroundImageUrl}
+              alt={itinerary.attributes.title}
+            />
+          : <span>Image empty state</span>}
         {itinerary.attributes.name}
       </Link>
     );

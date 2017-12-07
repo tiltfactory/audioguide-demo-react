@@ -9,7 +9,8 @@ class ItineraryHeader extends React.Component {
   static propTypes = {
     itinerary: PropTypes.shape({
       id: PropTypes.string.isRequired,
-      imageUrl: PropTypes.string.isRequired,
+      iconImageUrl: PropTypes.string.isRequired,
+      backgroundImageUrl: PropTypes.string.isRequired,
       attributes: PropTypes.shape({
         name: PropTypes.string.isRequired,
       }).isRequired,
@@ -23,6 +24,13 @@ class ItineraryHeader extends React.Component {
     }).isRequired,
   };
 
+  static defaultProps = {
+    itinerary: PropTypes.shape({
+      iconImageUrl: null,
+      backgroundImageUrl: null,
+    }).isRequired,
+  };
+
   render() {
     const itinerary = this.props.itinerary;
 
@@ -30,7 +38,20 @@ class ItineraryHeader extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <Link to="/">Back to itineraries</Link>
-          <img src={itinerary.imageUrl} alt={itinerary.attributes.name} />
+          {itinerary.iconImageUrl !== null
+            ? <img
+                src={itinerary.iconImageUrl}
+                alt={itinerary.attributes.title}
+              />
+            : <span>Image empty state</span>}
+
+          {itinerary.backgroundImageUrl !== null
+            ? <img
+                src={itinerary.backgroundImageUrl}
+                alt={itinerary.attributes.title}
+              />
+            : <span>Image empty state</span>}
+          {itinerary.attributes.name}
           <LanguageSwitcher />
           <h1>
             {itinerary.attributes.name}

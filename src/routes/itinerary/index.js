@@ -7,7 +7,7 @@ async function action({ locale, params }) {
   const drupalLocale = locale.substring(0, 2); // @todo improve
 
   // Fetch the localized itinerary term.
-  const termEndpoint = `${JSON_API_URL}/${drupalLocale}/jsonapi/taxonomy_term/audio_itinerary/${params.itinerary_id}?include=field_image`;
+  const termEndpoint = `${JSON_API_URL}/${drupalLocale}/jsonapi/taxonomy_term/audio_itinerary/${params.itinerary_id}?include=field_image,field_background_image`;
   const term = await fetch(termEndpoint).then(response => response.json());
   if (!term) throw new Error('Failed to load the itinerary.');
   // Set page name from the current itinerary.

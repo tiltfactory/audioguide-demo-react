@@ -32,6 +32,17 @@ class ItineraryPage extends React.Component {
     }).isRequired,
   };
 
+  getImageFromItineraryIncluded(imageId) {
+    let result = null;
+    const image = this.props.itinerary.included.filter(
+      obj => obj.id === imageId,
+    );
+    if (image[0]) {
+      result = `${JSON_API_URL}/${image[0].attributes.url}`;
+    }
+    return result;
+  }
+
   /**
    * Attaches the includes Url to the itinerary data.
    *
@@ -40,13 +51,18 @@ class ItineraryPage extends React.Component {
   itineraryWithIncludesUrl() {
     const itinerary = this.props.itinerary;
     const tmpItinerary = itinerary.data;
-    const imageId = itinerary.data.relationships.field_image.data.id;
-    const image = itinerary.included.filter(obj => obj.id === imageId);
-    if (image[0]) {
-      tmpItinerary.imageUrl = `${JSON_API_URL}/${image[0].attributes.url}`;
-    } else {
-      // Images must be available in this case.
-      throw new Error('No image were found');
+    if (itinerary.data.relationships.field_image.data !== null) {
+      const iconImageId = itinerary.data.relationships.field_image.data.id;
+      tmpItinerary.iconImageUrl = this.getImageFromItineraryIncluded(
+        iconImageId,
+      );
+    }
+    if (itinerary.data.relationships.field_background_image.data !== null) {
+      const backgroundImageId =
+        itinerary.data.relationships.field_background_image.data.id;
+      tmpItinerary.backgroundImageUrl = this.getImageFromItineraryIncluded(
+        backgroundImageId,
+      );
     }
     return tmpItinerary;
   }
@@ -61,6 +77,7 @@ class ItineraryPage extends React.Component {
     const stopsWithIncludes = [];
     stops.data.forEach(stop => {
       const tmpStop = stop;
+      // @todo refactor getImageFromItineraryIncluded
       if (stop.relationships.field_image.data !== null) {
         const imageId = stop.relationships.field_image.data.id;
         const image = stops.included.filter(obj => obj.id === imageId);
