@@ -8,8 +8,26 @@
  */
 @import url(../variables.css);
 
-.languageSwitcher {
+.lg {
   padding: 0;
   margin: 0;
   list-style: none;
+  background-color: #fff;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 3;
+}
+
+.lg li > * {
+  display: block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  color: #000;
+  opacity: 0.5;
+}
+
+.lg li span {
+  font-weight: bold;
+  opacity: 1;
 }

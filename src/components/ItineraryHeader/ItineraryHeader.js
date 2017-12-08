@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import Ionicon from 'react-ionicons';
 import s from './ItineraryHeader.css';
 import Link from '../Link';
 import LanguageSwitcher from '../LanguageSwitcher';
@@ -35,9 +36,16 @@ class ItineraryHeader extends React.Component {
     const itinerary = this.props.itinerary;
 
     return (
-      <div>
+      <header>
         <div>
-          <Link to="/">Back to itineraries</Link>
+          <Link to="/">
+            <Ionicon
+              icon="ios-information-circle"
+              fontSize="22px"
+              color="#BE9F8A"
+            />{' '}
+            Home
+          </Link>
           {itinerary.iconImageUrl !== null
             ? <img
                 src={itinerary.iconImageUrl}
@@ -57,7 +65,7 @@ class ItineraryHeader extends React.Component {
             {itinerary.attributes.name}
           </h1>
         </div>
-      </div>
+      </header>
     );
   }
 }
