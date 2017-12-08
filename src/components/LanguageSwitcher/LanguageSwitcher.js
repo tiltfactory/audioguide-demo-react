@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setLocale } from '../../actions/intl';
+import s from './LanguageSwitcher.css';
 
 function LanguageSwitcher({ currentLocale, availableLocales, setLocale }) {
   const isSelected = locale => locale === currentLocale;
@@ -17,7 +18,7 @@ function LanguageSwitcher({ currentLocale, availableLocales, setLocale }) {
   };
   const localeName = locale => localeDict[locale] || locale;
   return (
-    <ul>
+    <ul className={s.languageSwitcher}>
       {availableLocales.map(locale =>
         <li key={locale}>
           {isSelected(locale)

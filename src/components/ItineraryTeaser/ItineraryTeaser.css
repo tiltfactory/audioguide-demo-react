@@ -1,1 +1,6 @@
-@import '../variables.css';
+@import url(../variables.css);
+
+.name {
+  display: block;
+  margin-top: 0.3em;
+}

@@ -61,10 +61,10 @@ class ItineraryListPage extends React.Component {
 
   render() {
     return (
-      <div className={s.root}>
+      <div>
         <div className={s.container}>
           <ItineraryListHeader />
-          <ul>
+          <ul className={s.gridPage}>
             {this.itinerariesWithIncludedUrl().map(itinerary =>
               <li key={itinerary.id}>
                 <ItineraryTeaser

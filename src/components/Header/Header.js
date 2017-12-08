@@ -38,8 +38,8 @@ const messages = defineMessages({
 class Header extends React.Component {
   render() {
     return (
-      <div className={s.root}>
-        <div className={s.container}>
+      <div>
+        <div>
           <Navigation />
           <Link className={s.brand} to="/">
             <img

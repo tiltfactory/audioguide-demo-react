@@ -8,13 +8,15 @@ import logoUrl from './belvue_logo.svg';
 class ItineraryListHeader extends React.Component {
   render() {
     return (
-      <div className={s.root}>
+      <header className={s.headerBlock}>
         <div className={s.container}>
-          <Link to="/about">About</Link>
-          <img src={logoUrl} alt="BELvue museum" />
+          <Link to="/about" className={s.linkAbout}>
+            About
+          </Link>
+          <img src={logoUrl} alt="BELvue museum" className={s.logo} />
           <LanguageSwitcher />
         </div>
-      </div>
+      </header>
     );
   }
 }

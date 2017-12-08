@@ -35,8 +35,8 @@ class ItineraryHeader extends React.Component {
     const itinerary = this.props.itinerary;
 
     return (
-      <div className={s.root}>
-        <div className={s.container}>
+      <div>
+        <div>
           <Link to="/">Back to itineraries</Link>
           {itinerary.iconImageUrl !== null
             ? <img

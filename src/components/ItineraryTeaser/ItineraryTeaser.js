@@ -35,20 +35,24 @@ class ItineraryTeaser extends React.Component {
     const itinerary = this.props.itinerary;
     return (
       <Link to={this.props.destination}>
-        {itinerary.iconImageUrl !== null
-          ? <img
-              src={itinerary.iconImageUrl}
-              alt={itinerary.attributes.title}
-            />
-          : <span>Image empty state</span>}
+        <div>
+          {itinerary.iconImageUrl !== null
+            ? <img
+                src={itinerary.iconImageUrl}
+                alt={itinerary.attributes.title}
+              />
+            : <span>Image empty state</span>}
 
-        {itinerary.backgroundImageUrl !== null
-          ? <img
-              src={itinerary.backgroundImageUrl}
-              alt={itinerary.attributes.title}
-            />
-          : <span>Image empty state</span>}
-        {itinerary.attributes.name}
+          {itinerary.backgroundImageUrl !== null
+            ? <img
+                src={itinerary.backgroundImageUrl}
+                alt={itinerary.attributes.title}
+              />
+            : <span>Image empty state</span>}
+          <span className={s.name}>
+            {itinerary.attributes.name}
+          </span>
+        </div>
       </Link>
     );
   }
