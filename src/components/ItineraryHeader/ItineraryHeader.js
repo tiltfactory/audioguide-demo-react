@@ -34,34 +34,31 @@ class ItineraryHeader extends React.Component {
 
   render() {
     const itinerary = this.props.itinerary;
+    const inlineStyle = {
+      backgroundImage: `url(${itinerary.backgroundImageUrl})`,
+    };
 
     return (
-      <header>
-        <div>
-          <Link to="/">
-            <Ionicon
-              icon="ios-information-circle"
-              fontSize="22px"
-              color="#BE9F8A"
-            />{' '}
-            Home
-          </Link>
-          {itinerary.iconImageUrl !== null
-            ? <img
-                src={itinerary.iconImageUrl}
-                alt={itinerary.attributes.title}
-              />
-            : <span>Image empty state</span>}
-
-          {itinerary.backgroundImageUrl !== null
-            ? <img
-                src={itinerary.backgroundImageUrl}
-                alt={itinerary.attributes.title}
-              />
-            : <span>Image empty state</span>}
-          {itinerary.attributes.name}
-          <LanguageSwitcher />
-          <h1>
+      <header className={s.header} style={inlineStyle}>
+        <div className={s.container}>
+          <div className={s.contentHeader}>
+            <Link to="/" className={s.backUrl}>
+              <Ionicon
+                icon="md-arrow-round-back"
+                fontSize="22px"
+                color="#BE9F8A"
+              />{' '}
+              Home
+            </Link>
+            {itinerary.iconImageUrl !== null
+              ? <img
+                  src={itinerary.iconImageUrl}
+                  alt={itinerary.attributes.title}
+                />
+              : <span>Image empty state</span>}
+            <LanguageSwitcher />
+          </div>
+          <h1 className={s.title}>
             {itinerary.attributes.name}
           </h1>
         </div>

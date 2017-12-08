@@ -14,8 +14,8 @@
   list-style: none;
   background-color: #fff;
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 0;
+  right: 0;
   z-index: 3;
 }
 

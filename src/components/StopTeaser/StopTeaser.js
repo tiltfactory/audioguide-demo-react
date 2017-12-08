@@ -26,7 +26,7 @@ class StopTeaser extends React.Component {
   render() {
     const stop = this.props.stop;
     return (
-      <Link to={this.props.destination}>
+      <Link to={this.props.destination} className={s.listItem}>
         {stop.imageUrl !== null
           ? <img src={stop.imageUrl} alt={stop.attributes.title} />
           : <span>Image empty state</span>}

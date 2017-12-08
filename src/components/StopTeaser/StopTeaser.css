@@ -1,1 +1,5 @@
 @import '../variables.css';
+
+.listItem {
+  padding: 24px;
+}

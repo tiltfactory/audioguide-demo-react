@@ -9,16 +9,16 @@
 @import url(../variables.css);
 
 .headerBlock {
-  position: relative;
+  padding: 20px 15px;
 }
 
 .container {
   margin: 0 auto;
-  padding: 20px 15px;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .logo {
@@ -27,6 +27,6 @@
 
 .linkAbout {
   position: absolute;
-  top: 24px;
-  left: 20px;
+  top: 0;
+  left: 0;
 }

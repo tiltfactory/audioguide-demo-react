@@ -1,1 +1,53 @@
 @import url(../variables.css);
+
+.header {
+  background-size: cover;
+  position: relative;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #343234;
+  opacity: 0.9;
+  top: 0;
+  left: 0;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 20px 15px;
+  position: relative;
+  z-index: 2;
+}
+
+.backUrl {
+  color: var(--color-main);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 34px;
+}
+
+.contentHeader {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.contentHeader img {
+  height: 32px;
+}
+
+.title {
+  text-align: center;
+  font-size: 28px;
+  color: white;
+}

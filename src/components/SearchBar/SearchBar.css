@@ -1,2 +1,22 @@
 @import '../variables.css';
 
+.form {
+  display: flex;
+}
+
+.wrapperIcon {
+  background-color: var(--color-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+}
+
+.search {
+  line-height: 48px;
+  background-color: #1d1d1d;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 0 1em;
+}
