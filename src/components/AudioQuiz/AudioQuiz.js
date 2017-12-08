@@ -19,9 +19,9 @@ class AudioQuiz extends React.Component {
     return (
       <div className={s.quizz}>
         <h3 className={s.quizTitle}>Choose an answer</h3>
-        <ul>
+        <ul className={s.listAnswers}>
           {answersList.map(audioAnswerItem =>
-            <li key={audioAnswerItem.uuid}>
+            <li key={audioAnswerItem.uuid} className={s.itemAnswer}>
               <AudioAnswer answer={audioAnswerItem} />
             </li>,
           )}

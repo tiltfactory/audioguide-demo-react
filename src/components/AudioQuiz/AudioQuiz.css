@@ -10,3 +10,39 @@
   padding: 8px 20px;
   margin-top: 0;
 }
+
+.listAnswers {
+  counter-reset: cpt;
+}
+
+.itemAnswer {
+  counter-increment: cpt;
+  position: relative;
+}
+
+.itemAnswer::before {
+  content: counter(cpt, upper-alpha);
+  pointer-events: none;
+  position: absolute;
+  left: 20px;
+  top: 16px;
+  width: 30px;
+  height: 30px;
+  background-color: var(--color-main);
+  color: white;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.itemAnswer + .itemAnswer::after {
+  content: '';
+  width: calc(100% - 40px);
+  position: absolute;
+  top: 0;
+  left: 20px;
+  height: 1px;
+  background-color: black;
+  opacity: 0.1;
+}
