@@ -10,7 +10,6 @@ import Link from '../../components/Link/Link';
 
 class StopPage extends React.Component {
   static propTypes = {
-    itineraryId: PropTypes.string.isRequired,
     stop: PropTypes.shape({
       data: PropTypes.shape({
         id: PropTypes.string.isRequired,
@@ -23,6 +22,16 @@ class StopPage extends React.Component {
     }).isRequired,
     previousStopId: PropTypes.string,
     nextStopId: PropTypes.string,
+    itinerary: PropTypes.shape({
+      data: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+      }).isRequired,
+      included: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+    }).isRequired,
   };
 
   static defaultProps = {
@@ -82,23 +91,23 @@ class StopPage extends React.Component {
   }
 
   render() {
-    const { itineraryId, stop, previousStopId, nextStopId } = this.props;
+    const { itinerary, stop, previousStopId, nextStopId } = this.props;
     const answersList = this.answersList();
 
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <StopHeader itineraryId={itineraryId} stop={stop} />
+          <StopHeader itinerary={itinerary} stop={stop} />
           {this.imageUrl() !== null
             ? <img src={this.imageUrl()} alt={stop.title} />
             : <span>Image empty state</span>}
           {this.props.previousStopId !== null
-            ? <Link to={`/stop/${itineraryId}/${previousStopId}`}>
+            ? <Link to={`/stop/${itinerary.data.id}/${previousStopId}`}>
                 Previous
               </Link>
             : <span>Empty previous state</span>}
           {this.props.nextStopId !== null
-            ? <Link to={`/stop/${itineraryId}/${nextStopId}`}>Next</Link>
+            ? <Link to={`/stop/${itinerary.data.id}/${nextStopId}`}>Next</Link>
             : <span>Empty next state</span>}
           <ReactAudioPlayer src={this.mp3Url()} autoPlay controls />
           <div

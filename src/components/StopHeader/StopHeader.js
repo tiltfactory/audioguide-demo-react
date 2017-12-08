@@ -7,8 +7,17 @@ import LanguageSwitcher from '../LanguageSwitcher';
 
 class StopHeader extends React.Component {
   static propTypes = {
-    itineraryId: PropTypes.string.isRequired,
     stop: PropTypes.shape({
+      data: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+      }).isRequired,
+      included: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+    }).isRequired,
+    itinerary: PropTypes.shape({
       data: PropTypes.shape({
         id: PropTypes.string.isRequired,
       }).isRequired,
@@ -21,16 +30,16 @@ class StopHeader extends React.Component {
   };
 
   render() {
-    const stop = this.props.stop;
+    const { stop, itinerary } = this.props;
 
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <Link to={`/itinerary/${this.props.itineraryId}`}>
+          <Link to={`/itinerary/${this.props.itinerary.data.id}`}>
             Back to itinerary
           </Link>
           <span className={s.stopLocation}>
-            {stop.data.attributes.field_id}
+            {itinerary.data.attributes.name} | {stop.data.attributes.field_id}
           </span>
           <LanguageSwitcher />
           <h1>
