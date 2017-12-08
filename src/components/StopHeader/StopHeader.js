@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import Ionicon from 'react-ionicons';
 import s from './StopHeader.css';
 import Link from '../Link';
 import LanguageSwitcher from '../LanguageSwitcher';
@@ -61,23 +62,29 @@ class StopHeader extends React.Component {
     const itinerary = this.itineraryWithIncludedUrl();
 
     return (
-      <div className={s.root}>
-        <div className={s.container}>
-          <Link to={`/itinerary/${this.props.itinerary.data.id}`}>
-            Back to itinerary
-            {itinerary.iconImageUrl !== null
-              ? <img src={itinerary.iconImageUrl} alt={itinerary.title} />
-              : <span>Image empty state</span>}
-          </Link>
-          <span className={s.stopLocation}>
-            {itinerary.attributes.name} | {stop.data.attributes.field_id}
-          </span>
-          <LanguageSwitcher />
+      <header>
+        <div>
+          <div>
+            <Link to={`/itinerary/${this.props.itinerary.data.id}`}>
+              <Ionicon
+                icon="md-arrow-round-back"
+                fontSize="22px"
+                color="#BE9F8A"
+              />{' '}
+              {itinerary.iconImageUrl !== null
+                ? <img src={itinerary.iconImageUrl} alt={itinerary.title} />
+                : <span>Image empty state</span>}
+            </Link>
+            <span className={s.stopLocation}>
+              {itinerary.attributes.name} | {stop.data.attributes.field_id}
+            </span>
+            <LanguageSwitcher />
+          </div>
           <h1>
             {stop.data.attributes.title}
           </h1>
         </div>
-      </div>
+      </header>
     );
   }
 }

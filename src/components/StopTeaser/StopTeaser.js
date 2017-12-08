@@ -25,17 +25,27 @@ class StopTeaser extends React.Component {
 
   render() {
     const stop = this.props.stop;
+    const inlineStyle = {
+      backgroundImage: `url(${stop.imageUrl})`,
+    };
+
     return (
       <Link to={this.props.destination} className={s.listItem}>
-        {stop.imageUrl !== null
-          ? <img src={stop.imageUrl} alt={stop.attributes.title} />
-          : <span>Image empty state</span>}
-        <p>
-          {stop.attributes.field_id}
-        </p>
-        <h2>
-          {stop.attributes.title}
-        </h2>
+        <div className={s.container}>
+          <figure style={inlineStyle}>
+            {stop.imageUrl !== null
+              ? <img src={stop.imageUrl} alt={stop.attributes.title} />
+              : <span>Image empty state</span>}
+            <span className={s.itemId}>
+              {stop.attributes.field_id}
+            </span>
+          </figure>
+          <div className={s.infos}>
+            <h2>
+              {stop.attributes.title}
+            </h2>
+          </div>
+        </div>
       </Link>
     );
   }
