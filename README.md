@@ -29,11 +29,19 @@ This will install both run-time project dependencies and developer tools listed 
 
 This command will build the app from the source files (/src) into the output /build folder. As soon as the initial build completes, it will start the Node.js server (node build/server.js) and Browsersync with HMR on top of it.
 
+`yarn run build -- --release`
+
+Exports a production build (in the build directory).
+
 ### Storybook setup
 
 `yarn run storybook`
 
 Starts the UI component dev environment based on [Storybook](https://storybook.js.org/).
+
+## Production server
+
+Apache proxy with [PM2](http://pm2.keymetrics.io/).
 
 ## Prototype
 
