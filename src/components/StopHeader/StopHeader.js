@@ -46,7 +46,7 @@ class StopHeader extends React.Component {
    *
    * @returns {Array}
    */
-  itineraryWithIncludesUrl() {
+  itineraryWithIncludedUrl() {
     const itinerary = this.props.itinerary;
     const tmpItinerary = itinerary.data;
     if (itinerary.data.relationships.field_image.data !== null) {
@@ -58,7 +58,7 @@ class StopHeader extends React.Component {
 
   render() {
     const stop = this.props.stop;
-    const itinerary = this.itineraryWithIncludesUrl();
+    const itinerary = this.itineraryWithIncludedUrl();
 
     return (
       <div className={s.root}>

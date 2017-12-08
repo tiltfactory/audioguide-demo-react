@@ -40,7 +40,7 @@ class ItineraryListPage extends React.Component {
    */
   itinerariesWithIncludedUrl() {
     const itineraries = this.props.itineraries;
-    const itinerariesWithIncludes = [];
+    const itinerariesWithIncluded = [];
     itineraries.data.forEach(itinerary => {
       const tmpItinerary = itinerary;
       if (itinerary.relationships.field_image.data !== null) {
@@ -54,9 +54,9 @@ class ItineraryListPage extends React.Component {
           backgroundImageId,
         );
       }
-      itinerariesWithIncludes.push(tmpItinerary);
+      itinerariesWithIncluded.push(tmpItinerary);
     });
-    return itinerariesWithIncludes;
+    return itinerariesWithIncluded;
   }
 
   render() {

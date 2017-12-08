@@ -48,7 +48,7 @@ class ItineraryPage extends React.Component {
    *
    * @returns {Array}
    */
-  itineraryWithIncludesUrl() {
+  itineraryWithIncludedUrl() {
     const itinerary = this.props.itinerary;
     const tmpItinerary = itinerary.data;
     if (itinerary.data.relationships.field_image.data !== null) {
@@ -72,9 +72,9 @@ class ItineraryPage extends React.Component {
    *
    * @returns {Array}
    */
-  stopsWithIncludesUrl() {
+  stopsWithIncludedUrl() {
     const stops = this.props.stops;
-    const stopsWithIncludes = [];
+    const stopsWithIncluded = [];
     stops.data.forEach(stop => {
       const tmpStop = stop;
       // @todo refactor getImageFromItineraryIncluded
@@ -83,15 +83,15 @@ class ItineraryPage extends React.Component {
         const image = stops.included.filter(obj => obj.id === imageId);
         tmpStop.imageUrl = `${JSON_API_URL}/${image[0].attributes.url}`;
       }
-      stopsWithIncludes.push(tmpStop);
+      stopsWithIncluded.push(tmpStop);
     });
-    return stopsWithIncludes;
+    return stopsWithIncluded;
   }
 
   render() {
-    // const stops = this.stopsWithIncludesUrl;
-    const stops = this.stopsWithIncludesUrl();
-    const itinerary = this.itineraryWithIncludesUrl();
+    // const stops = this.stopsWithIncludedUrl;
+    const stops = this.stopsWithIncludedUrl();
+    const itinerary = this.itineraryWithIncludedUrl();
 
     return (
       <div className={s.root}>
