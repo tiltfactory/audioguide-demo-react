@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactAudioPlayer from 'react-audio-player';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import Ionicon from 'react-ionicons';
 import s from './StopPage.css';
 import StopHeader from '../../components/StopHeader';
 import AudioQuiz from '../../components/AudioQuiz';
@@ -38,6 +39,14 @@ class StopPage extends React.Component {
     previousStopId: null,
     nextStopId: null,
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isPlaying: true,
+    };
+    this.handlePlay = this.handlePlay.bind(this);
+  }
 
   mp3Url() {
     const stop = this.props.stop;
@@ -90,36 +99,104 @@ class StopPage extends React.Component {
     return answersList;
   }
 
+  handlePlay() {
+    if (this.state.isPlaying) {
+      this.rap.audioEl.pause();
+    } else {
+      this.rap.audioEl.play();
+    }
+    this.setState({
+      isPlaying: !this.state.isPlaying,
+    });
+  }
+
   render() {
     const { itinerary, stop, previousStopId, nextStopId } = this.props;
     const answersList = this.answersList();
+    const inlineStyle = {
+      backgroundImage: `url(${this.imageUrl()})`,
+    };
 
     return (
-      <div className={s.root}>
-        <div className={s.container}>
-          <StopHeader itinerary={itinerary} stop={stop} />
-          {this.imageUrl() !== null
-            ? <img src={this.imageUrl()} alt={stop.title} />
-            : <span>Image empty state</span>}
-          {this.props.previousStopId !== null
-            ? <Link to={`/stop/${itinerary.data.id}/${previousStopId}`}>
-                Previous
-              </Link>
-            : <span>Empty previous state</span>}
-          {this.props.nextStopId !== null
-            ? <Link to={`/stop/${itinerary.data.id}/${nextStopId}`}>Next</Link>
-            : <span>Empty next state</span>}
-          <ReactAudioPlayer src={this.mp3Url()} autoPlay controls />
+      <div>
+        <StopHeader itinerary={itinerary} stop={stop} />
+        <div className={s.playerWrapper}>
+          <div className={[s.btn, s.btnPrev].join(' ')}>
+            {this.props.previousStopId !== null
+              ? <Link to={`/stop/${itinerary.data.id}/${previousStopId}`}>
+                  <span>
+                    <Ionicon
+                      icon="md-arrow-round-back"
+                      color="white"
+                      fontSize="36px"
+                    />
+                  </span>
+                </Link>
+              : <span className={s.trackDisabled}>
+                  <Ionicon
+                    icon="md-arrow-round-back"
+                    color="white"
+                    fontSize="36px"
+                  />
+                </span>}
+          </div>
           <div
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: stop.data.attributes.body.value,
-            }}
-          />
-          {answersList.length > 0
-            ? <AudioQuiz answersList={answersList} />
-            : <div />}
+            className={[s.btn, s.btnPlay].join(' ')}
+            style={inlineStyle}
+            onClick={this.handlePlay}
+            role="button"
+            tabIndex="0"
+          >
+            {this.imageUrl() !== null
+              ? <img src={this.imageUrl()} alt={stop.title} />
+              : <span>Image empty state</span>}
+            <div className={s.progressBtn}>
+              <span />
+            </div>
+            <div />
+            <div className={s.innerBtn}>
+              {this.state.isPlaying
+                ? <img src="/icon-pause.svg" alt="pause" />
+                : <img src="/icon-play.svg" alt="play" />}
+            </div>
+          </div>
+          <div className={[s.btn, s.btnNext].join(' ')}>
+            {this.props.nextStopId !== null
+              ? <Link to={`/stop/${itinerary.data.id}/${nextStopId}`}>
+                  <span>
+                    <Ionicon
+                      icon="md-arrow-round-forward"
+                      color="white"
+                      fontSize="36px"
+                    />
+                  </span>
+                </Link>
+              : <span className={s.trackDisabled}>
+                  <Ionicon
+                    icon="md-arrow-round-forward"
+                    color="white"
+                    fontSize="36px"
+                  />
+                </span>}
+          </div>
         </div>
+        <ReactAudioPlayer
+          autoPlay
+          src={this.mp3Url()}
+          ref={element => {
+            this.rap = element;
+          }}
+        />
+        <div
+          className={s.content}
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: stop.data.attributes.body.value,
+          }}
+        />
+        {answersList.length > 0
+          ? <AudioQuiz answersList={answersList} />
+          : <div />}
       </div>
     );
   }

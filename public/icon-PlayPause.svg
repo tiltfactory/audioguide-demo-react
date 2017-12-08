@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="60" viewBox="0 0 60 60">
+  <defs>
+    <circle id="b" cx="30" cy="30" r="30"/>
+    <filter id="a" width="136.7%" height="136.7%" x="-18.3%" y="-13.3%" filterUnits="objectBoundingBox">
+      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1"/>
+      <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"/>
+      <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter2"/>
+      <feGaussianBlur in="shadowOffsetOuter2" result="shadowBlurOuter2" stdDeviation="2.5"/>
+      <feColorMatrix in="shadowBlurOuter2" result="shadowMatrixOuter2" values="0 0 0 0 0.290196078 0 0 0 0 0.564705882 0 0 0 0 0.88627451 0 0 0 0.01 0"/>
+      <feMorphology in="SourceAlpha" operator="dilate" radius=".25" result="shadowSpreadOuter3"/>
+      <feOffset in="shadowSpreadOuter3" result="shadowOffsetOuter3"/>
+      <feColorMatrix in="shadowOffsetOuter3" result="shadowMatrixOuter3" values="0 0 0 0 0.290196078 0 0 0 0 0.564705882 0 0 0 0 0.88627451 0 0 0 0.03 0"/>
+      <feMerge>
+        <feMergeNode in="shadowMatrixOuter1"/>
+        <feMergeNode in="shadowMatrixOuter2"/>
+        <feMergeNode in="shadowMatrixOuter3"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <use fill="black" filter="url(#a)" xlink:href="#b"/>
+    <use fill="#FFFFFF" xlink:href="#b"/>
+    <polygon fill="#1D1D1D" points="24 20 24 40 40 30"/>
+    <path fill="#1D1D1D" d="M23,20 L27,20 L27,40 L23,40 L23,20 Z M33,20 L37,20 L37,40 L33,40 L33,20 Z"/>
+  </g>
+</svg>

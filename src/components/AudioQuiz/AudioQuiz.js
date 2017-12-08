@@ -17,7 +17,7 @@ class AudioQuiz extends React.Component {
     const { answersList } = this.props;
     // @todo listen to audio answer then
     return (
-      <div>
+      <div className={s.quizz}>
         <h3 className={s.quizTitle}>Choose an answer</h3>
         <ul>
           {answersList.map(audioAnswerItem =>

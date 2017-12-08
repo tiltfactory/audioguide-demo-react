@@ -1,7 +1,12 @@
 @import '../variables.css';
 
+.quizz {
+  background-color: #fff;
+}
+
 .quizTitle {
   background: #eee;
   color: #333;
-  padding: 8px;
+  padding: 8px 20px;
+  margin-top: 0;
 }

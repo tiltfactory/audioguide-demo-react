@@ -62,25 +62,29 @@ class StopHeader extends React.Component {
     const itinerary = this.itineraryWithIncludedUrl();
 
     return (
-      <header>
-        <div>
-          <div>
-            <Link to={`/itinerary/${this.props.itinerary.data.id}`}>
+      <header className={s.header}>
+        <div className={s.container}>
+          <div className={s.contentHeader}>
+            <Link
+              to={`/itinerary/${this.props.itinerary.data.id}`}
+              className={s.backUrl}
+            >
               <Ionicon
                 icon="md-arrow-round-back"
                 fontSize="22px"
                 color="#BE9F8A"
-              />{' '}
+              />
               {itinerary.iconImageUrl !== null
                 ? <img src={itinerary.iconImageUrl} alt={itinerary.title} />
                 : <span>Image empty state</span>}
             </Link>
-            <span className={s.stopLocation}>
-              {itinerary.attributes.name} | {stop.data.attributes.field_id}
-            </span>
+            <div className={s.stopLocation}>
+              {itinerary.attributes.name}{' '}
+              <span>{stop.data.attributes.field_id}</span>
+            </div>
             <LanguageSwitcher />
           </div>
-          <h1>
+          <h1 className={s.title}>
             {stop.data.attributes.title}
           </h1>
         </div>
