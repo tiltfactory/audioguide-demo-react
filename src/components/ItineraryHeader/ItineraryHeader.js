@@ -1,10 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { defineMessages, FormattedMessage } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Ionicon from 'react-ionicons';
 import s from './ItineraryHeader.css';
 import Link from '../Link';
 import LanguageSwitcher from '../LanguageSwitcher';
+
+const messages = defineMessages({
+  home: {
+    id: 'navigation.home',
+    defaultMessage: 'Home',
+    description: 'Home link in header',
+  },
+});
 
 class ItineraryHeader extends React.Component {
   static propTypes = {
@@ -48,7 +57,7 @@ class ItineraryHeader extends React.Component {
                 fontSize="22px"
                 color="#BE9F8A"
               />{' '}
-              Home
+              <FormattedMessage {...messages.home} />
             </Link>
             {itinerary.iconImageUrl !== null
               ? <img

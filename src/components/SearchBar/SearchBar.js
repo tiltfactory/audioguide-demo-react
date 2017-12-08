@@ -1,11 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { defineMessages, injectIntl, intlShape } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Ionicon from 'react-ionicons';
 import s from './SearchBar.css';
 
+const messages = defineMessages({
+  search: {
+    id: 'search.placeholder',
+    defaultMessage: 'Search...',
+    description: 'Search placeholder',
+  },
+});
+
 class SearchBar extends React.Component {
   static propTypes = {
+    intl: intlShape.isRequired,
     filterText: PropTypes.string.isRequired,
     // @todo set correct proptype
     onFilterTextChange: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -21,6 +31,8 @@ class SearchBar extends React.Component {
   }
 
   render() {
+    const { formatMessage } = this.props.intl;
+
     return (
       <form className={s.form}>
         <label className={s.wrapperIcon}>
@@ -29,7 +41,7 @@ class SearchBar extends React.Component {
         <input
           className={s.search}
           type="text"
-          placeholder="Search..."
+          placeholder={formatMessage(messages.search)}
           value={this.props.filterText}
           onChange={this.handleFilterTextChange}
         />
@@ -38,4 +50,4 @@ class SearchBar extends React.Component {
   }
 }
 
-export default withStyles(s)(SearchBar);
+export default injectIntl(withStyles(s)(SearchBar));

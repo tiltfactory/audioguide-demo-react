@@ -1,5 +1,12 @@
 [
   {
+    "id": "search.placeholder",
+    "description": "Search placeholder",
+    "defaultMessage": "Search...",
+    "message": "Rechercher...",
+    "files": ["src/components/SearchBar/SearchBar.js"]
+  },
+  {
     "id": "header.banner.desc",
     "description": "Description in header",
     "defaultMessage": "Complex web apps made easy",
@@ -19,6 +26,13 @@
     "defaultMessage": "Your Company Brand",
     "message": "",
     "files": ["src/components/Header/Header.js"]
+  },
+  {
+    "id": "navigation.home",
+    "description": "Home link in header",
+    "defaultMessage": "Home",
+    "message": "Accueil",
+    "files": ["src/components/ItineraryHeader/ItineraryHeader.js"]
   },
   {
     "id": "navigation.about",

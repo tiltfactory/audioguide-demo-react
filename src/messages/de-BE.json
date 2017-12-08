@@ -61,5 +61,19 @@
     "message": "Log In",
     "description": "Log in page title",
     "files": ["src/routes/login/index.js"]
+  },
+  {
+    "id": "navigation.home",
+    "description": "Home link in header",
+    "defaultMessage": "Home",
+    "message": "",
+    "files": ["src/components/ItineraryHeader/ItineraryHeader.js"]
+  },
+  {
+    "id": "search.placeholder",
+    "description": "Search placeholder",
+    "defaultMessage": "Search...",
+    "message": "",
+    "files": ["src/components/SearchBar/SearchBar.js"]
   }
 ]
