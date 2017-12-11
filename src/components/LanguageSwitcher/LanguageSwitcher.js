@@ -17,6 +17,7 @@ class LanguageSwitcher extends React.Component {
     const { currentLocale, availableLocales, setLocale } = this.props;
     const isSelected = locale => locale === currentLocale;
     const localeDict = {
+      // @todo check if this should be moved outside of the component
       /* @intl-code-template '${lang}-${COUNTRY}': '${Name}', */
       'fr-BE': 'Français',
       'nl-BE': 'Nederlands',

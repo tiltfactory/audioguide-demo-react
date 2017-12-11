@@ -45,7 +45,7 @@ class ItineraryTeaser extends React.Component {
                   src={itinerary.iconImageUrl}
                   alt={itinerary.attributes.title}
                 />
-              : <span>Image empty state</span>}
+              : <span />}
 
             <span className={s.name}>
               {itinerary.attributes.name}

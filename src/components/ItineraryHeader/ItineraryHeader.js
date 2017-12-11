@@ -64,7 +64,7 @@ class ItineraryHeader extends React.Component {
                   src={itinerary.iconImageUrl}
                   alt={itinerary.attributes.title}
                 />
-              : <span>Image empty state</span>}
+              : <span />}
             <LanguageSwitcher />
           </div>
           <h1 className={s.title}>

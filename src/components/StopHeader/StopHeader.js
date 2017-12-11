@@ -76,7 +76,7 @@ class StopHeader extends React.Component {
               />
               {itinerary.iconImageUrl !== null
                 ? <img src={itinerary.iconImageUrl} alt={itinerary.title} />
-                : <span>Image empty state</span>}
+                : <span />}
             </Link>
             <div className={s.stopLocation}>
               {itinerary.attributes.name}{' '}

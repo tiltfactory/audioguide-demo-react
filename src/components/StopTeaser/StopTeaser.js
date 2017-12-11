@@ -35,7 +35,7 @@ class StopTeaser extends React.Component {
           <figure style={inlineStyle}>
             {stop.imageUrl !== null
               ? <img src={stop.imageUrl} alt={stop.attributes.title} />
-              : <span>Image empty state</span>}
+              : <span />}
             <span className={s.itemId}>
               {stop.attributes.field_id}
             </span>
