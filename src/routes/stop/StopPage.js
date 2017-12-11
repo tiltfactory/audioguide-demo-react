@@ -43,9 +43,21 @@ class StopPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPlaying: true,
+      // @todo should be defined from to the player state
+      isPlaying: false,
     };
     this.handlePlay = this.handlePlay.bind(this);
+  }
+
+  handlePlay() {
+    if (this.state.isPlaying) {
+      this.rap.audioEl.pause();
+    } else {
+      this.rap.audioEl.play();
+    }
+    this.setState({
+      isPlaying: !this.state.isPlaying,
+    });
   }
 
   mp3Url() {
@@ -97,17 +109,6 @@ class StopPage extends React.Component {
       }
     });
     return answersList;
-  }
-
-  handlePlay() {
-    if (this.state.isPlaying) {
-      this.rap.audioEl.pause();
-    } else {
-      this.rap.audioEl.play();
-    }
-    this.setState({
-      isPlaying: !this.state.isPlaying,
-    });
   }
 
   render() {
@@ -181,7 +182,7 @@ class StopPage extends React.Component {
           </div>
         </div>
         <ReactAudioPlayer
-          autoPlay
+          autoPlay={this.state.isPlaying}
           src={this.mp3Url()}
           ref={element => {
             this.rap = element;
