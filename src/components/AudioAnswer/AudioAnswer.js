@@ -45,7 +45,7 @@ class AudioAnswer extends React.Component {
         </a>
         <Collapsible open={this.state.selected}>
           <div className={s.collapsedContent}>
-            <ReactAudioPlayer src={answer.mp3URL} controls />
+            <ReactAudioPlayer src={answer.mp3Url} controls />
             <div
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{ __html: answer.text }}
