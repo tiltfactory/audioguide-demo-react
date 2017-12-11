@@ -14,6 +14,20 @@ class LanguageSwitcher extends React.Component {
     setLocale: PropTypes.func.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      openMenu: false,
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState({
+      openMenu: !this.state.openMenu,
+    });
+  }
+
   render() {
     const { currentLocale, availableLocales, setLocale } = this.props;
     const isSelected = locale => locale === currentLocale;
@@ -29,7 +43,14 @@ class LanguageSwitcher extends React.Component {
     const localeName = locale => localeDict[locale] || locale;
 
     return (
-      <div>
+      <div className={this.state.openMenu ? s.plzOpenMenu : ''}>
+        <button
+          className={s.switchButton}
+          onClick={this.handleClick}
+          tabIndex="0"
+        >
+          {localeDict[currentLocale]}
+        </button>
         <ul className={s.languageSelector}>
           {availableLocales.map(locale =>
             <li key={locale}>
@@ -43,6 +64,7 @@ class LanguageSwitcher extends React.Component {
                     href={`?lang=${locale}`}
                     onClick={e => {
                       setLocale({ locale });
+                      this.handleClick();
                       e.preventDefault();
                     }}
                   >
