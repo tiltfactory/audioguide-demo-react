@@ -85,12 +85,12 @@ class StopPage extends React.Component {
         const answerMp3Id =
           answerParagraphItem[0].relationships.field_mp3.data.id;
         const answerMp3 = stop.included.filter(obj => obj.id === answerMp3Id);
-        const answerMp3URL = `${JSON_API_URL}/${answerMp3[0].attributes.url}`;
+        const answerMp3Url = `${JSON_API_URL}/${answerMp3[0].attributes.url}`;
         // Prepare the wrapper and store in the list.
         const answer = {
           title: answerParagraphItem[0].attributes.field_title,
           text: answerParagraphItem[0].attributes.field_text.value,
-          mp3URL: answerMp3URL,
+          mp3Url: answerMp3Url,
           uuid: answerParagraphItem[0].attributes.uuid,
         };
         answersList.push(answer);
@@ -149,7 +149,7 @@ class StopPage extends React.Component {
           >
             {this.imageUrl() !== null
               ? <img src={this.imageUrl()} alt={stop.title} />
-              : <span>Image empty state</span>}
+              : <span />}
             <div className={s.progressBtn}>
               <span />
             </div>

@@ -8,7 +8,10 @@ import s from './AudioAnswer.css';
 class AudioAnswer extends React.Component {
   static propTypes = {
     answer: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      uuid: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+      mp3Url: PropTypes.string.isRequired,
     }).isRequired,
   };
 

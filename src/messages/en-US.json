@@ -3,8 +3,15 @@
     "id": "search.placeholder",
     "description": "Search placeholder",
     "defaultMessage": "Search...",
-    "message": "Rechercher...",
+    "message": "",
     "files": ["src/components/SearchBar/SearchBar.js"]
+  },
+  {
+    "id": "audio_quiz.title",
+    "description": "Audio quiz title",
+    "defaultMessage": "Waiting for your choice",
+    "message": "",
+    "files": ["src/components/AudioQuiz/AudioQuiz.js"]
   },
   {
     "id": "header.banner.desc",
@@ -31,7 +38,7 @@
     "id": "navigation.home",
     "description": "Home link in header",
     "defaultMessage": "Home",
-    "message": "Accueil",
+    "message": "",
     "files": ["src/components/ItineraryHeader/ItineraryHeader.js"]
   },
   {
@@ -75,19 +82,5 @@
     "message": "Log In",
     "description": "Log in page title",
     "files": ["src/routes/login/index.js"]
-  },
-  {
-    "id": "navigation.home",
-    "description": "Home link in header",
-    "defaultMessage": "Home",
-    "message": "",
-    "files": ["src/components/ItineraryHeader/ItineraryHeader.js"]
-  },
-  {
-    "id": "search.placeholder",
-    "description": "Search placeholder",
-    "defaultMessage": "Search...",
-    "message": "",
-    "files": ["src/components/SearchBar/SearchBar.js"]
   }
 ]

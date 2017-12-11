@@ -17,8 +17,8 @@ class SearchBar extends React.Component {
   static propTypes = {
     intl: intlShape.isRequired,
     filterText: PropTypes.string.isRequired,
-    // @todo set correct proptype
-    onFilterTextChange: PropTypes.arrayOf(PropTypes.object).isRequired,
+    // @todo check correct propType
+    onFilterTextChange: PropTypes.func.isRequired,
   };
 
   constructor(props) {
