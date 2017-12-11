@@ -22,10 +22,11 @@ class AudioAnswer extends React.Component {
     };
   }
 
-  handleClick() {
-    this.state = {
+  handleClick(e) {
+    e.preventDefault();
+    this.setState({
       selected: true,
-    };
+    });
   }
 
   // @todo set current answer via Redux
