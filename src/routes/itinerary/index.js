@@ -13,7 +13,7 @@ async function action({ locale, params }) {
   // Set page name from the current itinerary.
   const title = `Itinerary - ${term.data.attributes.name}`;
   // Fetch the translated node stops for this itinerary.
-  const nodesEndpoint = `${JSON_API_URL}/${drupalLocale}/jsonapi/node/audio?sort=field_id&filter[field_audio_itinerary.uuid][value]=${params.itinerary_id}&include=field_image`;
+  const nodesEndpoint = `${JSON_API_URL}/${drupalLocale}/jsonapi/node/audio?sort=field_weight&filter[field_audio_itinerary.uuid][value]=${params.itinerary_id}&include=field_image`;
   const nodes = await fetch(nodesEndpoint).then(response => response.json());
   if (!nodes) throw new Error('Failed to load the stops for the itinerary.');
 
