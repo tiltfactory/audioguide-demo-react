@@ -20,39 +20,37 @@ class LanguageSwitcher extends React.Component {
     const localeDict = {
       // @todo check if this should be moved outside of the component
       /* @intl-code-template '${lang}-${COUNTRY}': '${Name}', */
-      'fr-BE': 'Français',
-      'nl-BE': 'Nederlands',
-      'de-BE': 'Deutsch',
-      'en-US': 'English',
+      'fr-BE': 'FR',
+      'nl-BE': 'NL',
+      'de-BE': 'DE',
+      'en-US': 'EN',
       /* @intl-code-template-end */
     };
     const localeName = locale => localeDict[locale] || locale;
 
     return (
-      <div className={s.root}>
-        <div className={s.container}>
-          <ul className={s.languageSelector}>
-            {availableLocales.map(locale =>
-              <li key={locale}>
-                {isSelected(locale)
-                  ? <span>
-                      {localeName(locale)}
-                    </span>
-                  : // github.com/yannickcr/eslint-plugin-react/issues/945
-                    // eslint-disable-next-line react/jsx-indent
-                    <a
-                      href={`?lang=${locale}`}
-                      onClick={e => {
-                        setLocale({ locale });
-                        e.preventDefault();
-                      }}
-                    >
-                      {localeName(locale)}
-                    </a>}{' '}
-              </li>,
-            )}
-          </ul>
-        </div>
+      <div>
+        <ul className={s.languageSelector}>
+          {availableLocales.map(locale =>
+            <li key={locale}>
+              {isSelected(locale)
+                ? <span>
+                    {localeName(locale)}
+                  </span>
+                : // github.com/yannickcr/eslint-plugin-react/issues/945
+                  // eslint-disable-next-line react/jsx-indent
+                  <a
+                    href={`?lang=${locale}`}
+                    onClick={e => {
+                      setLocale({ locale });
+                      e.preventDefault();
+                    }}
+                  >
+                    {localeName(locale)}
+                  </a>}{' '}
+            </li>,
+          )}
+        </ul>
       </div>
     );
   }
