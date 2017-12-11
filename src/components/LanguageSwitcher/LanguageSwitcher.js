@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { connect } from 'react-redux';
 import { setLocale } from '../../actions/intl';
 import s from './LanguageSwitcher.css';
@@ -66,4 +67,4 @@ const mapDispatch = {
   setLocale,
 };
 
-export default connect(mapState, mapDispatch)(LanguageSwitcher);
+export default connect(mapState, mapDispatch)(withStyles(s)(LanguageSwitcher));
