@@ -46,14 +46,29 @@ class StopPage extends React.Component {
       // @todo should be defined from to the player state
       isPlaying: false,
       currentProgress: 0,
-      mp3Length: 0,
     };
     this.handlePlay = this.handlePlay.bind(this);
+  }
+
+  componentWillReceiveProps() {
+    this.reset();
+  }
+
+  componentWillUnmount() {
+    this.reset();
   }
 
   tick() {
     this.setState({
       currentProgress: this.rap.audioEl.currentTime / this.rap.audioEl.duration,
+    });
+  }
+
+  reset() {
+    clearInterval(this.interval);
+    this.setState({
+      isPlaying: false,
+      currentProgress: 0,
     });
   }
 
@@ -63,7 +78,7 @@ class StopPage extends React.Component {
       clearInterval(this.interval);
     } else {
       this.rap.audioEl.play();
-      this.interval = setInterval(() => this.tick(), 1000);
+      this.interval = setInterval(() => this.tick(), 100);
     }
     this.setState({
       isPlaying: !this.state.isPlaying,
@@ -218,6 +233,7 @@ class StopPage extends React.Component {
           ref={element => {
             this.rap = element;
           }}
+          onEnded={() => this.reset()}
         />
         <div
           className={s.content}
