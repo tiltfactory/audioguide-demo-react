@@ -45,15 +45,25 @@ class StopPage extends React.Component {
     this.state = {
       // @todo should be defined from to the player state
       isPlaying: false,
+      currentProgress: 0,
+      mp3Length: 0,
     };
     this.handlePlay = this.handlePlay.bind(this);
+  }
+
+  tick() {
+    this.setState({
+      currentProgress: this.rap.audioEl.currentTime / this.rap.audioEl.duration,
+    });
   }
 
   handlePlay() {
     if (this.state.isPlaying) {
       this.rap.audioEl.pause();
+      clearInterval(this.interval);
     } else {
       this.rap.audioEl.play();
+      this.interval = setInterval(() => this.tick(), 1000);
     }
     this.setState({
       isPlaying: !this.state.isPlaying,
@@ -151,10 +161,31 @@ class StopPage extends React.Component {
             {this.imageUrl() !== null
               ? <img src={this.imageUrl()} alt={stop.title} />
               : <span />}
-            <div className={s.progressBtn}>
+            <div
+              className={s.progressBtn}
+              style={{
+                transform: `rotate(${this.state.currentProgress * 360}deg)`,
+              }}
+            >
               <span />
             </div>
-            <div />
+            <div className={s.progressBar}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 210 210"
+              >
+                <circle
+                  fill="none"
+                  cx="105"
+                  cy="105"
+                  r="100.5"
+                  stroke="#1D1D1D"
+                  strokeWidth="9"
+                  strokeDashoffset={-this.state.currentProgress * 630}
+                />
+              </svg>
+            </div>
             <div className={s.innerBtn}>
               {this.state.isPlaying
                 ? <img src="/icon-pause.svg" alt="pause" />
