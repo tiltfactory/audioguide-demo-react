@@ -10,7 +10,7 @@
     "id": "audio_quiz.title",
     "description": "Audio quiz title",
     "defaultMessage": "Waiting for your choice",
-    "message": "Votre choix est attendu en fin de lecture",
+    "message": "Fais ton choix en fin d’écoute",
     "files": ["src/components/AudioQuiz/AudioQuiz.js"]
   },
   {

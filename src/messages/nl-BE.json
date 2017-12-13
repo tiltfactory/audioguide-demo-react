@@ -10,7 +10,7 @@
     "id": "audio_quiz.title",
     "description": "Audio quiz title",
     "defaultMessage": "Waiting for your choice",
-    "message": "NL Waiting for your choice",
+    "message": "Na het beluisteren, maak uw keuze",
     "files": ["src/components/AudioQuiz/AudioQuiz.js"]
   },
   {
