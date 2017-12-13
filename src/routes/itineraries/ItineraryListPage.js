@@ -22,6 +22,14 @@ class ItineraryListPage extends React.Component {
     }).isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAboutOpen: false,
+    };
+    this.toggle = this.toggle.bind(this);
+  }
+
   getImageFromIncluded(imageId) {
     let result = null;
     const image = this.props.itineraries.included.filter(
@@ -31,6 +39,13 @@ class ItineraryListPage extends React.Component {
       result = `${JSON_API_URL}/${image[0].attributes.url}`;
     }
     return result;
+  }
+
+  toggle(e) {
+    e.preventDefault();
+    this.setState({
+      isAboutOpen: true,
+    });
   }
 
   /**
@@ -63,7 +78,7 @@ class ItineraryListPage extends React.Component {
     return (
       <div>
         <div className={s.container}>
-          <ItineraryListHeader />
+          <ItineraryListHeader onClick={this.toggle} />
           <ul className={s.gridPage}>
             {this.itinerariesWithIncludedUrl().map(itinerary =>
               <li key={itinerary.id}>

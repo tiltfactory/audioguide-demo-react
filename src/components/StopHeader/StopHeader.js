@@ -29,7 +29,7 @@ class StopHeader extends React.Component {
         }).isRequired,
       ).isRequired,
     }).isRequired,
-    bg: PropTypes.string.isRequired,
+    bg: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   };
 
   getImageFromIncluded(imageId) {

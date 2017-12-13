@@ -11,7 +11,11 @@ class ItineraryListHeader extends React.Component {
     return (
       <header className={s.headerBlock}>
         <div className={s.container}>
-          <Link to="/about" className={s.linkAbout}>
+          <Link
+            to="/about"
+            className={s.linkAbout}
+            onClick={() => this.onClick}
+          >
             <Ionicon
               icon="ios-information-circle"
               fontSize="22px"
