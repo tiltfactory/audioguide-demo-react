@@ -21,6 +21,24 @@
 .header {
   background-size: cover;
   position: relative;
+  padding-bottom: 90px;
+  background-color: #413e41;
+  overflow: hidden;
+}
+
+.background {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  filter: blur(4px);
+  transform: scale(1.2);
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+  background-position: center;
 }
 
 .container {

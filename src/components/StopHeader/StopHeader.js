@@ -29,6 +29,7 @@ class StopHeader extends React.Component {
         }).isRequired,
       ).isRequired,
     }).isRequired,
+    bg: PropTypes.string.isRequired,
   };
 
   getImageFromIncluded(imageId) {
@@ -60,6 +61,7 @@ class StopHeader extends React.Component {
   render() {
     const stop = this.props.stop;
     const itinerary = this.itineraryWithIncludedUrl();
+    const backgroundImage = this.props.bg;
 
     return (
       <header className={s.header}>
@@ -88,6 +90,7 @@ class StopHeader extends React.Component {
             {stop.data.attributes.title}
           </h1>
         </div>
+        <div className={s.background} style={backgroundImage} />
       </header>
     );
   }

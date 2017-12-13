@@ -145,7 +145,7 @@ class StopPage extends React.Component {
 
     return (
       <div>
-        <StopHeader itinerary={itinerary} stop={stop} />
+        <StopHeader itinerary={itinerary} stop={stop} bg={inlineStyle} />
         <ReactAudioPlayer
           autoPlay={this.state.isPlaying}
           src={this.mp3Url()}

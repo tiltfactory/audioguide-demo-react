@@ -10,6 +10,7 @@
   height: 200px;
   overflow: hidden;
   margin-bottom: -100px;
+  margin-top: -120px;
 }
 
 .playerWrapper + * {
