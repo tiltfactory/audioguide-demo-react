@@ -34,8 +34,8 @@ class LanguageSwitcher extends React.Component {
     const localeDict = {
       // @todo check if this should be moved outside of the component
       /* @intl-code-template '${lang}-${COUNTRY}': '${Name}', */
-      'fr-BE': 'FR',
       'nl-BE': 'NL',
+      'fr-BE': 'FR',
       'de-BE': 'DE',
       'en-US': 'EN',
       /* @intl-code-template-end */
