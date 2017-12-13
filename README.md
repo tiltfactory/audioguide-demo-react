@@ -33,6 +33,13 @@ This command will build the app from the source files (/src) into the output /bu
 
 Exports a production build (in the build directory).
 
+### Deployment
+
+1. Get the latest codebase `git pull`
+2. Install new dependencies if any `yarn install`
+3. Production build `yarn run build -- --release`
+4. Restart PM2 `pm2 restart build/server.js`
+
 ### Storybook setup
 
 `yarn run storybook`
