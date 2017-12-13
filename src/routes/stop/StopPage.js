@@ -146,6 +146,14 @@ class StopPage extends React.Component {
     return (
       <div>
         <StopHeader itinerary={itinerary} stop={stop} />
+        <ReactAudioPlayer
+          autoPlay={this.state.isPlaying}
+          src={this.mp3Url()}
+          ref={element => {
+            this.rap = element;
+          }}
+          onEnded={() => this.reset()}
+        />
         <div className={s.playerWrapper}>
           <div className={[s.btn, s.btnPrev].join(' ')}>
             {this.props.previousStopId !== null
@@ -196,7 +204,7 @@ class StopPage extends React.Component {
                   cy="105"
                   r="100.5"
                   stroke="#1D1D1D"
-                  strokeWidth="9"
+                  strokeWidth="7"
                   strokeDashoffset={-this.state.currentProgress * 630}
                 />
               </svg>
@@ -227,14 +235,8 @@ class StopPage extends React.Component {
                 </span>}
           </div>
         </div>
-        <ReactAudioPlayer
-          autoPlay={this.state.isPlaying}
-          src={this.mp3Url()}
-          ref={element => {
-            this.rap = element;
-          }}
-          onEnded={() => this.reset()}
-        />
+
+        {answersList.length > 0 ? <AudioQuiz answersList={answersList} /> : ''}
         <div
           className={s.content}
           // eslint-disable-next-line react/no-danger
@@ -242,9 +244,6 @@ class StopPage extends React.Component {
             __html: stop.data.attributes.body.value,
           }}
         />
-        {answersList.length > 0
-          ? <AudioQuiz answersList={answersList} />
-          : <div />}
       </div>
     );
   }

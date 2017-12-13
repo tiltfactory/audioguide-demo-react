@@ -29,6 +29,7 @@
 
 .languageSelector li {
   display: block;
+  line-height: 38px;
 }
 
 .languageSelector li + li {
