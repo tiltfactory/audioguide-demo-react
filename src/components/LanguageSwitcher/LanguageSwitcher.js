@@ -24,9 +24,17 @@ class LanguageSwitcher extends React.Component {
 
   handleClick() {
     this.setState({
-      openMenu: !this.state.openMenu,
+      openMenu: true,
     });
+    document.addEventListener('click', this.closeMenu);
   }
+
+  closeMenu = () => {
+    this.setState({
+      openMenu: false,
+    });
+    document.removeEventListener('click', this.closeMenu);
+  };
 
   render() {
     const { currentLocale, availableLocales, setLocale } = this.props;
