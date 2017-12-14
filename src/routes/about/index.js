@@ -9,7 +9,7 @@
 
 import React from 'react';
 import Layout from '../../components/Layout';
-import Page from '../../components/Page';
+import Page from '../../components/Modal';
 
 async function action({ locale }) {
   const data = await new Promise(resolve => {

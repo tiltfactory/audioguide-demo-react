@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Ionicon from 'react-ionicons';
 import s from './ItineraryListHeader.css';
@@ -7,6 +8,10 @@ import LanguageSwitcher from '../LanguageSwitcher';
 import logoUrl from './belvue_logo.svg';
 
 class ItineraryListHeader extends React.Component {
+  static propTypes = {
+    onClick: PropTypes.string.isRequired,
+  };
+
   render() {
     return (
       <header className={s.headerBlock}>
@@ -14,7 +19,7 @@ class ItineraryListHeader extends React.Component {
           <Link
             to="/about"
             className={s.linkAbout}
-            onClick={() => this.onClick}
+            onClick={e => this.props.onClick(e)}
           >
             <Ionicon
               icon="ios-information-circle"

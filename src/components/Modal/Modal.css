@@ -1,0 +1,53 @@
+/**
+ * React Starter Kit (https://www.reactstarterkit.com/)
+ *
+ * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+
+@import '../variables.css';
+
+.modal {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+  z-index: 3;
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.3s ease-out;
+  overflow: auto;
+}
+
+.container {
+  background-color: #fff;
+  min-height: calc(100vh - 2rem);
+  padding: 1.5em;
+  margin-bottom: 1rem;
+}
+
+.container h1 {
+  margin: 0;
+}
+
+.btnClose {
+  position: fixed;
+  right: 2rem;
+  top: 2rem;
+  z-index: 1;
+  background: transparent;
+  border: 0;
+  outline: none;
+}
+
+.plzOpenModal {
+  visibility: visible;
+  pointer-events: auto;
+  opacity: 1;
+}

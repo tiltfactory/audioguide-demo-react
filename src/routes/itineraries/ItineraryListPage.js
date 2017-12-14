@@ -4,6 +4,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './ItineraryListPage.css';
 import ItineraryTeaser from '../../components/ItineraryTeaser';
 import ItineraryListHeader from '../../components/ItineraryListHeader';
+import Modal from '../../components/Modal';
 import { JSON_API_URL } from '../../constants/env';
 
 class ItineraryListPage extends React.Component {
@@ -44,7 +45,7 @@ class ItineraryListPage extends React.Component {
   toggle(e) {
     e.preventDefault();
     this.setState({
-      isAboutOpen: true,
+      isAboutOpen: !this.state.isAboutOpen,
     });
   }
 
@@ -77,8 +78,12 @@ class ItineraryListPage extends React.Component {
   render() {
     return (
       <div>
+        <Modal
+          onClick={e => this.toggle(e)}
+          openModal={this.state.isAboutOpen}
+        />
         <div className={s.container}>
-          <ItineraryListHeader onClick={this.toggle} />
+          <ItineraryListHeader onClick={e => this.toggle(e)} />
           <ul className={s.gridPage}>
             {this.itinerariesWithIncludedUrl().map(itinerary =>
               <li key={itinerary.id}>
