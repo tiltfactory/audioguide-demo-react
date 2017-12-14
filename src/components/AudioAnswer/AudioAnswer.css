@@ -10,6 +10,11 @@
   position: relative;
 }
 
+.answerTitle:active,
+.answerTitle:focus {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 .answerTitle::after {
   position: absolute;
   top: 50%;

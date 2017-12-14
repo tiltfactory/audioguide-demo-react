@@ -23,6 +23,11 @@
   position: relative;
 }
 
+.wrapperLink a:focus,
+.wrapperLink a:active {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .wrapperLink::after {
   content: '';
   position: absolute;
