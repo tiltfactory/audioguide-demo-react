@@ -9,7 +9,7 @@ import logoUrl from './belvue_logo.svg';
 
 class ItineraryListHeader extends React.Component {
   static propTypes = {
-    onClick: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
   };
 
   render() {

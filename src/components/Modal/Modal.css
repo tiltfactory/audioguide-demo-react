@@ -17,12 +17,13 @@
   right: 0;
   bottom: 0;
   padding: 1rem;
-  z-index: 3;
+  z-index: 10;
   visibility: hidden;
   pointer-events: none;
   opacity: 0;
-  transition: all 0.3s ease-out;
+  transition: all 0.2s ease-out;
   overflow: auto;
+  transform: translateY(10px);
 }
 
 .container {
@@ -50,4 +51,5 @@
   visibility: visible;
   pointer-events: auto;
   opacity: 1;
+  transform: translateY(0);
 }
