@@ -6,11 +6,12 @@
   display: block;
   color: white;
   position: relative;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .listItem:focus,
 .listItem:active {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 .listItem::after {
