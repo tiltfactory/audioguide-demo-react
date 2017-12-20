@@ -74,7 +74,6 @@ class SearchBar extends React.Component {
           style={
             this.state.openSearch ? { display: 'flex' } : { display: 'none' }
           }
-          onClick={() => this.handleClick()}
         >
           <Ionicon icon="md-close" color="#949494" fontSize="24px" />
         </div>
