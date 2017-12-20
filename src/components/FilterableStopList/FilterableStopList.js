@@ -31,7 +31,7 @@ class FilterableStopList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={s.wrapper}>
         <SearchBar
           filterText={this.state.filterText}
           onFilterTextChange={this.handleFilterTextChange}

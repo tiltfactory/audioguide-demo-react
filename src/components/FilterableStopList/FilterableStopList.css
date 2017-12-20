@@ -1,1 +1,6 @@
 @import '../variables.css';
+
+.wrapper {
+  position: relative;
+  z-index: 4;
+}

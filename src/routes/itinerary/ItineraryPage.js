@@ -94,7 +94,7 @@ class ItineraryPage extends React.Component {
     const itinerary = this.itineraryWithIncludedUrl();
 
     return (
-      <div>
+      <div className={s.wrapper}>
         <div className={s.container}>
           <ItineraryHeader itinerary={itinerary} />
           <FilterableStopList itinerary_id={itinerary.id} stops={stops} />
