@@ -5,3 +5,21 @@
   padding-top: 48px;
   margin-top: -48px;
 }
+
+.title {
+  color: #fff;
+  margin: 0;
+  font-size: 14px;
+  height: 40px;
+  line-height: 40px;
+  background-color: var(--color-main);
+  text-transform: uppercase;
+  padding: 0 20px;
+  font-weight: 400;
+}
+
+.title img {
+  width: 24px;
+  vertical-align: middle;
+  margin-right: 10px;
+}

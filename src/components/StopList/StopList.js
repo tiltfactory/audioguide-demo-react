@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import Sticky from 'react-stickynode';
 import s from './StopList.css';
 import StopTeaser from '../StopTeaser';
 
@@ -38,16 +39,23 @@ class StopList extends React.Component {
     });
 
     return (
-      <ul className={s.list}>
-        {filteredStops.map(stop =>
-          <li key={stop.id}>
-            <StopTeaser
-              destination={`/stop/${this.props.itinerary_id}/${stop.id}`}
-              stop={stop}
-            />
-          </li>,
-        )}
-      </ul>
+      <div className={s.list}>
+        <Sticky innerZ={99}>
+          <h2 className={s.title}>
+            <img src="/tile.png" alt="test" />Objets
+          </h2>
+        </Sticky>
+        <ul>
+          {filteredStops.map(stop =>
+            <li key={stop.id}>
+              <StopTeaser
+                destination={`/stop/${this.props.itinerary_id}/${stop.id}`}
+                stop={stop}
+              />
+            </li>,
+          )}
+        </ul>
+      </div>
     );
   }
 }
