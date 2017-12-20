@@ -35,10 +35,12 @@ class SearchBar extends React.Component {
 
     return (
       <form className={s.form}>
-        <label className={s.wrapperIcon}>
-          <Ionicon icon="ios-search" color="white" fontSize="18px" />
+        <label className={s.wrapperIcon} htmlFor="searchfield">
+          <Ionicon icon="ios-search" color="#2567D9" fontSize="24px" />
         </label>
         <input
+          id="searchfield"
+          name="searchfield"
           className={s.search}
           type="text"
           placeholder={formatMessage(messages.search)}

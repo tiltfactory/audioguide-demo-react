@@ -21,7 +21,7 @@
 }
 
 .gridPage li {
-  flex: 1 50%;
+  flex: 1 100%;
 }
 
 .gridPage li a {
