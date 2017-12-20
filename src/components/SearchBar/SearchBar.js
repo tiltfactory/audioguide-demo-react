@@ -4,7 +4,7 @@ import { defineMessages, injectIntl, intlShape } from 'react-intl';
 import Sticky from 'react-stickynode';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Ionicon from 'react-ionicons';
-import s from './SearchBar.css';
+import s from './SearchBar.css'; // eslint-disable-line no-use-before-define
 
 const messages = defineMessages({
   search: {
@@ -52,7 +52,8 @@ class SearchBar extends React.Component {
 
     return (
       <div>
-        <Sticky innerZ={100}>
+        <Sticky innerZ={100} top={-48} activeClass="SearchBar-active-20Pac">
+          <span className={s.active} />
           <form className={s.form}>
             <input
               id="searchfield"

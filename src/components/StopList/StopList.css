@@ -1,1 +1,7 @@
 @import '../variables.css';
+
+.list {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding-top: 48px;
+  margin-top: -48px;
+}

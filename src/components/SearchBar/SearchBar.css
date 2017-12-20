@@ -2,7 +2,6 @@
 
 .form {
   display: flex;
-  height: 0;
 }
 
 .wrapperIcon,
@@ -36,10 +35,9 @@
   width: 100%;
   padding: 0 1em;
   font-family: var(--font-family-base);
-  transform: translateY(-100%);
   transition: transform 0.1s ease-out;
 }
 
-.search:focus {
-  transform: translateY(0);
+.active .search:focus {
+  transform: translateY(100%);
 }

@@ -38,7 +38,7 @@ class StopList extends React.Component {
     });
 
     return (
-      <ul>
+      <ul className={s.list}>
         {filteredStops.map(stop =>
           <li key={stop.id}>
             <StopTeaser
