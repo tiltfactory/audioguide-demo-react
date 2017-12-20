@@ -2,6 +2,7 @@
 
 .form {
   display: flex;
+  position: relative;
 }
 
 .wrapperIcon,
@@ -33,11 +34,20 @@
   color: white;
   border: none;
   width: 100%;
-  padding: 0 1em;
+  padding: 0 1em 0 44px;
   font-family: var(--font-family-base);
   transition: transform 0.1s ease-out;
 }
 
-.active .search:focus {
-  transform: translateY(100%);
+.searchIcon {
+  position: absolute;
+  top: 12px;
+  left: 15px;
+  pointer-events: none;
+  transition: transform 0.1s ease-out;
+}
+
+.active .search:focus,
+.active .search:focus + svg {
+  transform: translateY(48px);
 }

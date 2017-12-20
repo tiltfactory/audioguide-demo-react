@@ -50,7 +50,7 @@ class Html extends React.Component {
           {scripts.map(script =>
             <link key={script} rel="preload" href={script} as="script" />,
           )}
-          <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
           <link rel="stylesheet" href="https://use.typekit.net/hah3vuk.css" />
           {styles.map(style =>
             <style

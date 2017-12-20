@@ -66,6 +66,12 @@ class SearchBar extends React.Component {
               onFocus={this.onFocus}
               onBlur={this.onBlur}
             />
+            <Ionicon
+              icon="ios-search"
+              className={s.searchIcon}
+              color="#ffffff"
+              fontSize="24px"
+            />
           </form>
         </Sticky>
         <div
