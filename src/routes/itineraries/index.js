@@ -12,7 +12,7 @@ import Layout from '../../components/Layout';
 import ItineraryListPage from './ItineraryListPage';
 import { JSON_API_URL } from '../../constants/env';
 
-const title = 'Itineraries';
+const title = 'Audioguide'; // @todo make it translatable
 
 async function action({ locale, fetch }) {
   const drupalLocale = locale.substring(0, 2); // @todo improve

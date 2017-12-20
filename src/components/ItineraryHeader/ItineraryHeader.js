@@ -19,10 +19,11 @@ class ItineraryHeader extends React.Component {
   static propTypes = {
     itinerary: PropTypes.shape({
       id: PropTypes.string.isRequired,
-      iconImageUrl: PropTypes.string.isRequired,
-      backgroundImageUrl: PropTypes.string.isRequired,
+      iconImageUrl: PropTypes.string,
+      backgroundImageUrl: PropTypes.string,
       attributes: PropTypes.shape({
         name: PropTypes.string.isRequired,
+        description: PropTypes.string,
       }).isRequired,
       // relationships: PropTypes.shape({
       //   field_image: PropTypes.shape({
@@ -38,6 +39,9 @@ class ItineraryHeader extends React.Component {
     itinerary: PropTypes.shape({
       iconImageUrl: null,
       backgroundImageUrl: null,
+      attributes: PropTypes.shape({
+        description: null,
+      }),
     }).isRequired,
   };
 
@@ -70,6 +74,14 @@ class ItineraryHeader extends React.Component {
           <h1 className={s.title}>
             {itinerary.attributes.name}
           </h1>
+          {itinerary.attributes.description !== null
+            ? <h2
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{
+                  __html: itinerary.attributes.description.value,
+                }}
+              />
+            : <span />}
         </div>
       </header>
     );

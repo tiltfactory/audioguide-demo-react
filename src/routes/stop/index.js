@@ -12,8 +12,6 @@ async function action({ locale, params }) {
   const endpoint = `${JSON_API_URL}/${drupalLocale}/jsonapi/node/audio/${params.stop_id}?include=field_image,field_mp3,field_audio_answer,field_audio_answer.field_mp3`;
   const node = await fetch(endpoint).then(response => response.json());
   if (!node) throw new Error('Failed to load the stop.');
-  // Set page name from the current stop.
-  const title = `Stop - ${node.data.attributes.title}`;
 
   // Get the stops list to find previous and next stops if any.
   const nodesEndpoint = `${JSON_API_URL}/${drupalLocale}/jsonapi/node/audio?sort=field_weight&filter[field_audio_itinerary.uuid][value]=${params.itinerary_id}&include=field_image`;
@@ -35,6 +33,9 @@ async function action({ locale, params }) {
   const termEndpoint = `${JSON_API_URL}/${drupalLocale}/jsonapi/taxonomy_term/audio_itinerary/${params.itinerary_id}?include=field_image,field_background_image`;
   const term = await fetch(termEndpoint).then(response => response.json());
   if (!term) throw new Error('Failed to load the itinerary.');
+
+  // Set page name from the current stop.
+  const title = `${term.data.attributes.name} - ${node.data.attributes.title}`;
 
   return {
     chunks: ['stop'],
