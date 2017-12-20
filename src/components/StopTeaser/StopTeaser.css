@@ -58,10 +58,10 @@
   display: flex;
 }
 
-.container::after {
+li + li .container::after {
   content: '';
   position: absolute;
-  bottom: -24px;
+  top: -24px;
   background-color: #fff;
   height: 1px;
   width: 100%;

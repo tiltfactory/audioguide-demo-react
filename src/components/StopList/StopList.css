@@ -1,9 +1,15 @@
 @import '../variables.css';
 
 .list {
+  padding-bottom: 20px;
+}
+
+.listContent {
   background-color: rgba(0, 0, 0, 0.8);
-  padding-top: 48px;
-  margin-top: -48px;
+}
+
+.list + .list {
+  padding-top: 0;
 }
 
 .title {

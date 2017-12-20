@@ -39,22 +39,46 @@ class StopList extends React.Component {
     });
 
     return (
-      <div className={s.list}>
-        <Sticky innerZ={99}>
-          <h2 className={s.title}>
-            <img src="/tile.png" alt="test" />Objets
-          </h2>
-        </Sticky>
-        <ul>
-          {filteredStops.map(stop =>
-            <li key={stop.id}>
-              <StopTeaser
-                destination={`/stop/${this.props.itinerary_id}/${stop.id}`}
-                stop={stop}
-              />
-            </li>,
-          )}
-        </ul>
+      <div>
+        <div className={s.list} id="test1">
+          <div className={s.listContent}>
+            <Sticky innerZ={99} bottomBoundary="#test1">
+              <h2 className={s.title}>
+                <img src="/tile.png" alt="test" />Objets
+              </h2>
+            </Sticky>
+            <ul>
+              {filteredStops.map(stop =>
+                <li key={stop.id}>
+                  <StopTeaser
+                    destination={`/stop/${this.props.itinerary_id}/${stop.id}`}
+                    stop={stop}
+                  />
+                </li>,
+              )}
+            </ul>
+          </div>
+        </div>
+
+        <div className={s.list} id="test2">
+          <div className={s.listContent}>
+            <Sticky innerZ={99} bottomBoundary="#test2">
+              <h2 className={s.title}>
+                <img src="/tile.png" alt="test" />Objets
+              </h2>
+            </Sticky>
+            <ul>
+              {filteredStops.map(stop =>
+                <li key={stop.id}>
+                  <StopTeaser
+                    destination={`/stop/${this.props.itinerary_id}/${stop.id}`}
+                    stop={stop}
+                  />
+                </li>,
+              )}
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }

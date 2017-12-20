@@ -75,7 +75,8 @@ class ItineraryHeader extends React.Component {
             {itinerary.attributes.name}
           </h1>
           {itinerary.attributes.description !== null
-            ? <h2
+            ? <div
+                className={s.subtitle}
                 // eslint-disable-next-line react/no-danger
                 dangerouslySetInnerHTML={{
                   __html: itinerary.attributes.description.value,
