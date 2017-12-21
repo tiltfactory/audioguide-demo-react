@@ -19,12 +19,18 @@
   right: 0;
   z-index: 3;
   width: 100px;
-  display: none;
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: top right;
+  transform: scale(0.8);
   text-align: center;
+  transition: all 0.1s ease-out;
 }
 
 .plzOpenMenu .languageSelector {
-  display: block;
+  pointer-events: auto;
+  opacity: 1;
+  transform: scale(1);
 }
 
 .languageSelector li {
