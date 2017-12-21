@@ -19,8 +19,10 @@ class FilterableStopList extends React.Component {
     super(props);
     this.state = {
       filterText: '',
+      isSearching: false,
     };
     this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+    this.handleSearchFocus = this.handleSearchFocus.bind(this);
   }
 
   handleFilterTextChange(text) {
@@ -29,12 +31,24 @@ class FilterableStopList extends React.Component {
     });
   }
 
+  handleSearchFocus() {
+    this.setState({
+      isSearching: !this.state.isSearching,
+    });
+  }
+
   render() {
     return (
-      <div className={s.wrapper}>
+      <div
+        className={[
+          s.wrapper,
+          this.state.isSearching ? 'isSearching' : '',
+        ].join(' ')}
+      >
         <SearchBar
           filterText={this.state.filterText}
           onFilterTextChange={this.handleFilterTextChange}
+          onSearchFocus={this.handleSearchFocus}
         />
         <StopList
           itinerary_id={this.props.itinerary_id}

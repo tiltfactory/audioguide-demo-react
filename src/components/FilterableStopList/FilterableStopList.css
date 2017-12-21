@@ -4,3 +4,7 @@
   position: relative;
   z-index: 4;
 }
+
+:global(.isSearching .sticky-outer-wrapper.active .sticky-inner-wrapper h2) {
+  transform: translateY(48px);
+}

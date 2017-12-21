@@ -20,6 +20,7 @@ class SearchBar extends React.Component {
     filterText: PropTypes.string.isRequired,
     // @todo check correct propType
     onFilterTextChange: PropTypes.func.isRequired,
+    onSearchFocus: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -35,12 +36,14 @@ class SearchBar extends React.Component {
     this.setState({
       openSearch: true,
     });
+    this.props.onSearchFocus(true);
   };
 
   onBlur = () => {
     this.setState({
       openSearch: false,
     });
+    this.props.onSearchFocus(false);
   };
 
   handleFilterTextChange(e) {
