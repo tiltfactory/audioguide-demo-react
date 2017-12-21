@@ -102,8 +102,12 @@ class ItineraryPage extends React.Component {
   }
 
   render() {
-    const itineraryStops = this.stopsWithIncludedUrl(this.props.itineraryStops);
-    const externalStops = this.stopsWithIncludedUrl(this.props.externalStops);
+    const itineraryStops = ItineraryPage.stopsWithIncludedUrl(
+      this.props.itineraryStops,
+    );
+    const externalStops = ItineraryPage.stopsWithIncludedUrl(
+      this.props.externalStops,
+    );
     const itinerary = this.itineraryWithIncludedUrl();
 
     return (
