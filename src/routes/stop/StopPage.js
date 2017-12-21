@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactAudioPlayer from 'react-audio-player';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Ionicon from 'react-ionicons';
+import Collapsible from 'react-collapsible';
 import s from './StopPage.css';
 import StopHeader from '../../components/StopHeader';
 import AudioQuiz from '../../components/AudioQuiz';
@@ -46,6 +47,7 @@ class StopPage extends React.Component {
       // @todo should be defined from to the player state
       isPlaying: false,
       currentProgress: 0,
+      displayText: false,
     };
     this.handlePlay = this.handlePlay.bind(this);
   }
@@ -61,6 +63,13 @@ class StopPage extends React.Component {
   tick() {
     this.setState({
       currentProgress: this.rap.audioEl.currentTime / this.rap.audioEl.duration,
+    });
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    this.setState({
+      displayText: !this.state.displayText,
     });
   }
 
@@ -235,15 +244,25 @@ class StopPage extends React.Component {
                 </span>}
           </div>
         </div>
-
+        <div className={s.toggleText}>
+          <a
+            href="#"
+            onClick={e => this.handleClick(e)}
+            className={s.toggleTextBtn}
+          >
+            Lire la retranscription
+          </a>
+          <Collapsible open={this.state.displayText}>
+            <div
+              className={s.content}
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{
+                __html: stop.data.attributes.body.value,
+              }}
+            />
+          </Collapsible>
+        </div>
         {answersList.length > 0 ? <AudioQuiz answersList={answersList} /> : ''}
-        <div
-          className={s.content}
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: stop.data.attributes.body.value,
-          }}
-        />
       </div>
     );
   }

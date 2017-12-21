@@ -3,6 +3,8 @@
 .wrapper {
   position: relative;
   z-index: 5;
+  background: url(/bg-header.png) #000 no-repeat top center fixed;
+  background-size: cover;
 }
 
 :global(.isSearching .sticky-outer-wrapper.active .sticky-inner-wrapper h2) {

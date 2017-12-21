@@ -10,6 +10,8 @@
 
 .headerBlock {
   padding: 20px;
+  background: url(/bg-header.png) #000 no-repeat top center fixed;
+  background-size: cover;
 }
 
 .container {
