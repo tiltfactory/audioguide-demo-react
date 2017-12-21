@@ -114,6 +114,18 @@ class StopList extends React.Component {
           </div>
         </div>
 
+        <div className={s.didntFoundAnything}>
+          <Ionicon icon="md-sad" color="#BAA188" fontSize="250px" />
+          <p>Stop non trouvé…</p>
+          <button className={s.btn}>
+            <Ionicon
+              icon="md-refresh"
+              color="#ffffff"
+              fontSize="24px"
+            />Réinitialiser la recherche
+          </button>
+        </div>
+
         <Modal onClick={e => this.toggle(e)} openModal={this.state.isModalOpen}>
           <div className={s.switchIt}>
             <h1 className={s.modalTitle}>Attention, dis !</h1>
