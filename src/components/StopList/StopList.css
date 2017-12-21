@@ -30,3 +30,57 @@
   vertical-align: middle;
   margin-right: 10px;
 }
+
+.listInOtherItinaries {
+  margin-top: 20px;
+}
+
+.listInOtherItinaries .listContent {
+  background-color: transparent;
+}
+
+.listInOtherItinaries ul {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.listInOtherItinaries .title {
+  background: transparent;
+  padding: 0 24px;
+}
+
+.switchIt {
+  text-align: center;
+  padding-bottom: 60px;
+}
+
+.switchIt .modalTitle {
+  font-size: 28px;
+  color: var(--color-main);
+  position: relative;
+}
+
+.switchIt .modalTitle::after {
+  content: '';
+  width: 30px;
+  height: 2px;
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  margin-left: -15px;
+  background-color: var(--color-main);
+}
+
+.btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background-color: var(--color-main);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 13px;
+  text-transform: uppercase;
+}

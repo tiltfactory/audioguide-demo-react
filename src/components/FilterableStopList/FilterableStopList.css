@@ -2,7 +2,7 @@
 
 .wrapper {
   position: relative;
-  z-index: 4;
+  z-index: 5;
 }
 
 :global(.isSearching .sticky-outer-wrapper.active .sticky-inner-wrapper h2) {

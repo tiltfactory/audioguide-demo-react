@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Sticky from 'react-stickynode';
+import Ionicon from 'react-ionicons';
 import s from './StopList.css';
 import StopTeaser from '../StopTeaser';
+import Modal from '../../components/Modal';
+import Link from '../Link';
 
 class StopList extends React.Component {
   static propTypes = {
@@ -18,6 +21,21 @@ class StopList extends React.Component {
       }),
     ).isRequired,
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isModalOpen: false,
+    };
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle(e) {
+    e.preventDefault();
+    this.setState({
+      isModalOpen: !this.state.isModalOpen,
+    });
+  }
 
   render() {
     const filterText = this.props.filterText;
@@ -79,6 +97,36 @@ class StopList extends React.Component {
             </ul>
           </div>
         </div>
+
+        <div className={[s.list, s.listInOtherItinaries].join(' ')}>
+          <div className={s.listContent}>
+            <h2 className={s.title}>Disponibles dans d’autres parcours</h2>
+            <ul>
+              <li key={filteredStops[0].id}>
+                <StopTeaser
+                  destination={`/stop/${this.props
+                    .itinerary_id}/${filteredStops[0].id}`}
+                  stop={filteredStops[0]}
+                  onClick={e => this.toggle(e)}
+                />
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <Modal onClick={e => this.toggle(e)} openModal={this.state.isModalOpen}>
+          <div className={s.switchIt}>
+            <h1 className={s.modalTitle}>Attention, dis !</h1>
+            <p>Tu t’apprètes à changer de parcours, en es-tu bien sûr?</p>
+            <Link className={s.btn} to={'#'} id="switchItinary">
+              <Ionicon
+                icon="md-arrow-round-forward"
+                color="#ffffff"
+                fontSize="24px"
+              />Je change de parcours
+            </Link>
+          </div>
+        </Modal>
       </div>
     );
   }

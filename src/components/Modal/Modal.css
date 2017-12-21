@@ -17,20 +17,25 @@
   right: 0;
   bottom: 0;
   padding: 1rem;
-  z-index: 10;
+  z-index: 100000;
   visibility: hidden;
   pointer-events: none;
   opacity: 0;
   transition: all 0.2s ease-out;
   overflow: auto;
-  transform: translateY(10px);
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
 }
 
 .container {
   background-color: #fff;
-  min-height: calc(100vh - 2rem);
   padding: 1.5em;
   margin-bottom: 1rem;
+  position: relative;
+  transform: translateY(10px);
+  transition: all 0.2s ease-out;
 }
 
 .container h1 {
@@ -38,9 +43,9 @@
 }
 
 .btnClose {
-  position: fixed;
-  right: 2rem;
-  top: 2rem;
+  position: absolute;
+  right: 0;
+  top: 0;
   z-index: 1;
   background: transparent;
   border: 0;
@@ -51,5 +56,16 @@
   visibility: visible;
   pointer-events: auto;
   opacity: 1;
+}
+
+.plzOpenModal .container {
   transform: translateY(0);
+}
+
+.fs {
+  justify-content: flex-start;
+}
+
+.fs .container {
+  min-height: calc(100vh - 2rem);
 }

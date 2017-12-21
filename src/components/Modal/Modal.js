@@ -18,16 +18,26 @@ class Modal extends React.Component {
     //   title: PropTypes.string.isRequired,
     //   html: PropTypes.string.isRequired,
     openModal: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
+    children: PropTypes.element.isRequired,
+    fullscreen: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    onClick: null,
+    fullscreen: false,
   };
 
   render() {
     // const { title, html } = this.props;
+    const { children } = this.props;
     return (
       <div
-        className={[s.modal, this.props.openModal ? s.plzOpenModal : ''].join(
-          ' ',
-        )}
+        className={[
+          s.modal,
+          this.props.openModal ? s.plzOpenModal : '',
+          this.props.fullscreen ? s.fs : '',
+        ].join(' ')}
       >
         <div className={s.container}>
           <button
@@ -37,19 +47,7 @@ class Modal extends React.Component {
           >
             <Ionicon icon="md-close" color="black" fontSize="36px" />
           </button>
-          <h1>Title</h1>
-          <div
-          // eslint-disable-next-line react/no-danger
-          // dangerouslySetInnerHTML={{ __html: html }}
-          />
-          <p>
-            Ce paramètre optionnel indique une chaine de caractères pour séparer
-            chaque élément du tableau. Le séparateur est converti en une chaine
-            de caractères si nécessaire. Si ce paramètre n est pas utilisé, les
-            éléments du tableau seront séparés par une virgule. Si ce paramètre
-            est la chaîne vide, les éléments seront accolés les uns aux autres
-            sans espace entre. La valeur par défaut de ce paramètre est ,.
-          </p>
+          {children}
         </div>
       </div>
     );
