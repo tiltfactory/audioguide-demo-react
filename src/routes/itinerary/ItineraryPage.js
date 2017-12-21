@@ -18,7 +18,21 @@ class ItineraryPage extends React.Component {
         }).isRequired,
       ).isRequired,
     }).isRequired,
-    stops: PropTypes.shape({
+
+    itineraryStops: PropTypes.shape({
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+      included: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+    }).isRequired,
+
+    externalStops: PropTypes.shape({
       data: PropTypes.arrayOf(
         PropTypes.shape({
           id: PropTypes.string.isRequired,
@@ -31,6 +45,26 @@ class ItineraryPage extends React.Component {
       ).isRequired,
     }).isRequired,
   };
+
+  /**
+   * Attaches the includes Url to the stops data.
+   *
+   * @returns {Array}
+   */
+  static stopsWithIncludedUrl(stops) {
+    const stopsWithIncluded = [];
+    stops.data.forEach(stop => {
+      const tmpStop = stop;
+      // @todo refactor getImageFromItineraryIncluded
+      if (stop.relationships.field_image.data !== null) {
+        const imageId = stop.relationships.field_image.data.id;
+        const image = stops.included.filter(obj => obj.id === imageId);
+        tmpStop.imageUrl = `${JSON_API_URL}/${image[0].attributes.url}`;
+      }
+      stopsWithIncluded.push(tmpStop);
+    });
+    return stopsWithIncluded;
+  }
 
   getImageFromItineraryIncluded(imageId) {
     let result = null;
@@ -67,37 +101,20 @@ class ItineraryPage extends React.Component {
     return tmpItinerary;
   }
 
-  /**
-   * Attaches the includes Url to the stops data.
-   *
-   * @returns {Array}
-   */
-  stopsWithIncludedUrl() {
-    const stops = this.props.stops;
-    const stopsWithIncluded = [];
-    stops.data.forEach(stop => {
-      const tmpStop = stop;
-      // @todo refactor getImageFromItineraryIncluded
-      if (stop.relationships.field_image.data !== null) {
-        const imageId = stop.relationships.field_image.data.id;
-        const image = stops.included.filter(obj => obj.id === imageId);
-        tmpStop.imageUrl = `${JSON_API_URL}/${image[0].attributes.url}`;
-      }
-      stopsWithIncluded.push(tmpStop);
-    });
-    return stopsWithIncluded;
-  }
-
   render() {
-    // const stops = this.stopsWithIncludedUrl;
-    const stops = this.stopsWithIncludedUrl();
+    const itineraryStops = this.stopsWithIncludedUrl(this.props.itineraryStops);
+    const externalStops = this.stopsWithIncludedUrl(this.props.externalStops);
     const itinerary = this.itineraryWithIncludedUrl();
 
     return (
       <div className={s.wrapper}>
         <div className={s.container}>
           <ItineraryHeader itinerary={itinerary} />
-          <FilterableStopList itinerary_id={itinerary.id} stops={stops} />
+          <FilterableStopList
+            itinerary_id={itinerary.id}
+            itineraryStops={itineraryStops}
+            externalStops={externalStops}
+          />
         </div>
       </div>
     );

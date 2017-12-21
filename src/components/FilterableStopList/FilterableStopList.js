@@ -8,7 +8,12 @@ import StopList from '../StopList';
 class FilterableStopList extends React.Component {
   static propTypes = {
     itinerary_id: PropTypes.string.isRequired,
-    stops: PropTypes.arrayOf(
+    itineraryStops: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
+    externalStops: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
       }),
@@ -52,7 +57,12 @@ class FilterableStopList extends React.Component {
         />
         <StopList
           itinerary_id={this.props.itinerary_id}
-          stops={this.props.stops}
+          stops={this.props.itineraryStops}
+          filterText={this.state.filterText}
+        />
+        <StopList
+          itinerary_id={this.props.itinerary_id}
+          stops={this.props.externalStops}
           filterText={this.state.filterText}
         />
       </div>
