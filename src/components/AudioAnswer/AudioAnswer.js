@@ -25,7 +25,7 @@ class AudioAnswer extends React.Component {
   handleClick(e) {
     e.preventDefault();
     this.setState({
-      selected: true,
+      selected: !this.state.selected,
     });
   }
 
