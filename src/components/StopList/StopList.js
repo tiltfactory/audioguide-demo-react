@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { defineMessages, FormattedMessage } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Sticky from 'react-stickynode';
 import Ionicon from 'react-ionicons';
@@ -7,6 +8,39 @@ import s from './StopList.css';
 import StopTeaser from '../StopTeaser';
 import Modal from '../../components/Modal';
 import Link from '../Link';
+
+const messages = defineMessages({
+  in_other_itinerary: {
+    id: 'search.in_other_itinerary',
+    defaultMessage: 'Available in other itineraries',
+    description: 'Stops available in another itinerary.',
+  },
+  itinerary_change_warning_title: {
+    id: 'search.itinerary_change_warning_title',
+    defaultMessage: 'Itinerary change',
+    description: 'Warns user of itinerary change.',
+  },
+  itinerary_change_warning_description: {
+    id: 'search.itinerary_change_warning_description',
+    defaultMessage: 'You are about to change your itinerary, are you sure?',
+    description: 'Warns user of itinerary change.',
+  },
+  itinerary_change_confirmation: {
+    id: 'search.itinerary_change_confirmation',
+    defaultMessage: 'Change itinerary?',
+    description: 'Label for the itinerary change button.',
+  },
+  stop_not_found: {
+    id: 'search.stop_not_found',
+    defaultMessage: 'Stop not found',
+    description: 'Empty state for not found stops.',
+  },
+  reset_search: {
+    id: 'search.reset_search',
+    defaultMessage: 'Reset search',
+    description: 'Label for the reset search button.',
+  },
+});
 
 class StopList extends React.Component {
   static propTypes = {
@@ -245,13 +279,12 @@ class StopList extends React.Component {
         filteredStops.externalFilteredStops.length === 0
           ? <div className={s.didntFoundAnything}>
               <Ionicon icon="md-sad" color="#BAA188" fontSize="250px" />
-              <p>Stop non trouvé…</p>
+              <p>
+                <FormattedMessage {...messages.stop_not_found} />
+              </p>
               <button className={s.btn}>
-                <Ionicon
-                  icon="md-refresh"
-                  color="#ffffff"
-                  fontSize="24px"
-                />Réinitialiser la recherche
+                <Ionicon icon="md-refresh" color="#ffffff" fontSize="24px" />
+                <FormattedMessage {...messages.reset_search} />
               </button>
             </div>
           : <span />}
@@ -261,7 +294,9 @@ class StopList extends React.Component {
         filteredStops.externalFilteredStops.length !== 0
           ? <div className={[s.list, s.listInOtherItinaries].join(' ')}>
               <div className={s.listContent}>
-                <h2 className={s.title}>Disponible dans d’autres parcours</h2>
+                <h2 className={s.title}>
+                  <FormattedMessage {...messages.in_other_itinerary} />
+                </h2>
                 <ul>
                   {filteredStops.externalFilteredStops.map(stop =>
                     <li key={stop.id}>
@@ -279,14 +314,21 @@ class StopList extends React.Component {
 
         <Modal onClick={e => this.toggle(e)} openModal={this.state.isModalOpen}>
           <div className={s.switchIt}>
-            <h1 className={s.modalTitle}>Attention, dis !</h1>
-            <p>Tu t’apprêtes à changer de parcours, en es-tu bien sûr ?</p>
+            <h1 className={s.modalTitle}>
+              <FormattedMessage {...messages.itinerary_change_warning_title} />
+            </h1>
+            <p>
+              <FormattedMessage
+                {...messages.itinerary_change_warning_description}
+              />
+            </p>
             <Link className={s.btn} to={'#'} id="switchItinary">
               <Ionicon
                 icon="md-arrow-round-forward"
                 color="#ffffff"
                 fontSize="24px"
-              />Je change de parcours
+              />
+              <FormattedMessage {...messages.itinerary_change_confirmation} />
             </Link>
           </div>
         </Modal>
