@@ -13,13 +13,18 @@ class StopList extends React.Component {
     filterText: PropTypes.string.isRequired,
     itinerary_id: PropTypes.string.isRequired,
 
-    // childItineraries: PropTypes.shape({
-    //   data: PropTypes.arrayOf(
-    //     PropTypes.shape({
-    //       id: PropTypes.string.isRequired,
-    //     }).isRequired,
-    //   ).isRequired,
-    // }),
+    childItineraries: PropTypes.shape({
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+      included: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+    }),
 
     stops: PropTypes.arrayOf(
       PropTypes.shape({
@@ -41,8 +46,20 @@ class StopList extends React.Component {
   };
 
   static defaultProps = {
+    // @todo empty array, should be more developer friendly
     childItineraries: null,
   };
+
+  /**
+   * Returns a string that can be safely used as an id.
+   * @todo
+   *
+   * @param text
+   * @returns {*}
+   */
+  static slugify(text) {
+    return text;
+  }
 
   constructor(props) {
     super(props);
@@ -108,7 +125,7 @@ class StopList extends React.Component {
       // by itinerary at this stage, we can safely consider that it is
       // the parent itinerary with no child itinerary assigned to this stop.
       // In this case, that means that the stop is ungrouped (by child itinerary).
-      if (stop.relationships.field_audio_itinerary.data.length > 1) {
+      if (stop.relationships.field_audio_itinerary.data.length === 1) {
         ungroupedStops.push(stop);
       } else {
         groupedStops.push(stop);
@@ -117,30 +134,52 @@ class StopList extends React.Component {
 
     // Grouped and ungrouped stops from the current itinerary, filtered.
     const ungroupedFilteredStops = this.filterByText(ungroupedStops);
-    const groupedFilteredStops = [];
+    const groupedFilteredStops = this.filterByText(groupedStops);
     // External stops, not from this itinerary.
     // They will always appear ungrouped.
-    // @todo pass the external itinerary id that will be used in the route.
     const externalFilteredStops = this.filterByText(this.props.externalStops);
 
     // The itinerary can have child itineraries, but that does not mean that
     // stops are assigned to these children.
-    // If the list of ungroupedStops is similar to the original one,
-    // there are no groups.
-    const hasGroups = this.props.stops.length === ungroupedStops.length;
-
-    if (hasGroups) {
-      // Child itineraries.
-      // They will be used to define the groups.
-      // @todo see issue with parent / child relationship on itinerary/index.js route
-      // const childItineraries = this.props.childItineraries;
-      // Filter by title or id.
-      this.filterByText(ungroupedStops);
+    // If it has groups, then iterate through each filtered
+    // stop and assign it to a group.
+    const childItinerariesStops = [];
+    const childItinerariesFilteredStops = [];
+    if (groupedFilteredStops.length > 0) {
+      // Prepare groups to store results, exclude parent itinerary.
+      // @todo see issue related to json api getting parent / child relationship
+      this.props.childItineraries.data.forEach(childItinerary => {
+        if (childItinerary.id !== this.props.itinerary_id) {
+          childItinerariesStops.push({
+            itinerary: childItinerary,
+            stops: [],
+          });
+        }
+      });
+      groupedFilteredStops.forEach(stop => {
+        const stopItineraries = stop.relationships.field_audio_itinerary.data;
+        // Store the stop into the child itinerary stops list if it matches.
+        // @todo improve performances
+        childItinerariesStops.forEach(childItinerary => {
+          stopItineraries.forEach(stopItinerary => {
+            if (stopItinerary.id === childItinerary.itinerary.id) {
+              childItinerary.stops.push(stop);
+            }
+          });
+        });
+      });
+      // Remove childItineraries that contains no stops
+      childItinerariesStops.forEach(childItinerary => {
+        if (childItinerary.stops.length > 0) {
+          childItinerariesFilteredStops.push(childItinerary);
+        }
+      });
     }
 
     return {
       ungroupedFilteredStops,
-      groupedFilteredStops,
+      groupedFilteredStops, // @todo more obvious naming
+      childItinerariesFilteredStops,
       externalFilteredStops,
     };
   }
@@ -166,29 +205,39 @@ class StopList extends React.Component {
             </div>
           : <span />}
 
-        {filteredStops.groupedFilteredStops.length !== 0
-          ? // @todo iterate on each group
-            <div className={s.list} id="test1">
-              <div className={s.listContent}>
-                <Sticky innerZ={99} bottomBoundary="#test1">
-                  <h2 className={s.title}>
-                    <img src="/tile.png" alt="test" />Objets
-                  </h2>
-                </Sticky>
-                <ul>
-                  {filteredStops.groupedFilteredStops.map(stop =>
-                    <li key={stop.id}>
-                      <StopTeaser
-                        destination={`/stop/${this.props
-                          .itinerary_id}/${stop.id}`}
-                        stop={stop}
-                      />
-                    </li>,
-                  )}
-                </ul>
-              </div>
+        {filteredStops.childItinerariesFilteredStops.map(itineraryStops =>
+          <div
+            className={s.list}
+            id={StopList.slugify(itineraryStops.itinerary.attributes.name)}
+            key={itineraryStops.itinerary.id}
+          >
+            <div className={s.listContent}>
+              <Sticky
+                innerZ={99}
+                bottomBoundary={`#${StopList.slugify(
+                  itineraryStops.itinerary.attributes.name,
+                )}`}
+              >
+                <h2 className={s.title}>
+                  <span>
+                    {itineraryStops.itinerary.attributes.name}
+                  </span>
+                </h2>
+              </Sticky>
+              <ul>
+                {itineraryStops.stops.map(stop =>
+                  <li key={stop.id}>
+                    <StopTeaser
+                      destination={`/stop/${itineraryStops.itinerary
+                        .id}/${stop.id}`}
+                      stop={stop}
+                    />
+                  </li>,
+                )}
+              </ul>
             </div>
-          : <span />}
+          </div>,
+        )}
 
         {filteredStops.ungroupedFilteredStops.length === 0 &&
         filteredStops.groupedFilteredStops.length === 0 &&
