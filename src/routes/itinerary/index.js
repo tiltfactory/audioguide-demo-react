@@ -14,6 +14,19 @@ async function action({ locale, params }) {
   );
   if (!itineraryTerm) throw new Error('Failed to load the itinerary.');
 
+  // Fetch the child itineraries from the current parent itinerary if any.
+  // @todo currently, there is an issue on getting the parent / child relationship
+  // so we are getting all available terms.
+  const childItineraryTermsEndpoint = `${JSON_API_URL}/${drupalLocale}/jsonapi/taxonomy_term/audio_itinerary?sort=weight&include=field_image`;
+  let childItineraryTerms = {};
+  try {
+    childItineraryTerms = await fetch(
+      childItineraryTermsEndpoint,
+    ).then(response => response.json());
+  } catch (error) {
+    // @todo improve error management with PropTypes
+  }
+
   // Set page name from the current itinerary.
   const title = itineraryTerm.data.attributes.name;
 
@@ -46,6 +59,7 @@ async function action({ locale, params }) {
         <ItineraryPage
           title={title}
           itinerary={itineraryTerm}
+          childItineraries={childItineraryTerms}
           itineraryStops={itineraryStopNodes}
           externalStops={stopNodes}
         />

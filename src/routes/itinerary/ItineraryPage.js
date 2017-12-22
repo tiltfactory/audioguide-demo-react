@@ -19,6 +19,19 @@ class ItineraryPage extends React.Component {
       ).isRequired,
     }).isRequired,
 
+    childItineraries: PropTypes.shape({
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+      included: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+    }),
+
     itineraryStops: PropTypes.shape({
       data: PropTypes.arrayOf(
         PropTypes.shape({
@@ -44,6 +57,10 @@ class ItineraryPage extends React.Component {
         }).isRequired,
       ).isRequired,
     }).isRequired,
+  };
+
+  static defaultProps = {
+    childItineraries: null,
   };
 
   /**
@@ -109,6 +126,8 @@ class ItineraryPage extends React.Component {
       this.props.externalStops,
     );
     const itinerary = this.itineraryWithIncludedUrl();
+    // @todo includes
+    const childItineraries = this.props.childItineraries;
 
     return (
       <div className={s.wrapper}>
@@ -116,6 +135,7 @@ class ItineraryPage extends React.Component {
           <ItineraryHeader itinerary={itinerary} />
           <FilterableStopList
             itinerary_id={itinerary.id}
+            childItineraries={childItineraries}
             itineraryStops={itineraryStops}
             externalStops={externalStops}
           />
