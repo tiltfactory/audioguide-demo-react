@@ -137,6 +137,7 @@ class StopList extends React.Component {
     const groupedFilteredStops = this.filterByText(groupedStops);
     // External stops, not from this itinerary.
     // They will always appear ungrouped.
+    // @todo get main itinerary id for this stop to pass it as itinerary id to the stop teaser.
     const externalFilteredStops = this.filterByText(this.props.externalStops);
 
     // The itinerary can have child itineraries, but that does not mean that
@@ -168,7 +169,7 @@ class StopList extends React.Component {
           });
         });
       });
-      // Remove childItineraries that contains no stops
+      // Keep only childItineraries that contains at least one stop.
       childItinerariesStops.forEach(childItinerary => {
         if (childItinerary.stops.length > 0) {
           childItinerariesFilteredStops.push(childItinerary);
@@ -228,8 +229,8 @@ class StopList extends React.Component {
                 {itineraryStops.stops.map(stop =>
                   <li key={stop.id}>
                     <StopTeaser
-                      destination={`/stop/${itineraryStops.itinerary
-                        .id}/${stop.id}`}
+                      destination={`/stop/${this.props
+                        .itinerary_id}/${stop.id}`}
                       stop={stop}
                     />
                   </li>,
