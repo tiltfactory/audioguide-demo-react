@@ -81,7 +81,7 @@ Content type, machine name: **audio**
 - Image (1)
 - MP3 (1)
 - Formatted long text (0..1)
-- Itinerary (1)
+- Itinerary (1..*)
 - Answer (0..*)
 
 ### Answer
