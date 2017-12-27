@@ -4,7 +4,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Ionicon from 'react-ionicons';
 import s from './StopHeader.css';
 import Link from '../Link';
-import LanguageSwitcher from '../LanguageSwitcher';
 import { JSON_API_URL } from '../../constants/env';
 
 class StopHeader extends React.Component {
@@ -84,7 +83,6 @@ class StopHeader extends React.Component {
               {itinerary.attributes.name}{' '}
               <span>{stop.data.attributes.field_id}</span>
             </div>
-            <LanguageSwitcher />
           </div>
           <h1 className={s.title}>
             {stop.data.attributes.title}

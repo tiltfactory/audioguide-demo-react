@@ -5,7 +5,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Ionicon from 'react-ionicons';
 import s from './ItineraryHeader.css';
 import Link from '../Link';
-import LanguageSwitcher from '../LanguageSwitcher';
 
 const messages = defineMessages({
   home: {
@@ -69,7 +68,6 @@ class ItineraryHeader extends React.Component {
                   alt={itinerary.attributes.title}
                 />
               : <span />}
-            <LanguageSwitcher />
           </div>
           <h1 className={s.title}>
             {itinerary.attributes.name}
