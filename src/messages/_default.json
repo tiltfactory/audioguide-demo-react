@@ -124,5 +124,19 @@
     "defaultMessage": "Stop not found",
     "message": "",
     "files": ["src/components/StopList/StopList.js"]
+  },
+  {
+    "id": "about.description",
+    "description": "<p>About description</p>",
+    "defaultMessage": "Description",
+    "message": "",
+    "files": ["src/routes/itineraries/ItineraryListPage.js"]
+  },
+  {
+    "id": "about.title",
+    "description": "About title",
+    "defaultMessage": "About",
+    "message": "",
+    "files": ["src/routes/itineraries/ItineraryListPage.js"]
   }
 ]

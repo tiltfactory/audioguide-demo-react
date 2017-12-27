@@ -1,11 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { defineMessages, FormattedMessage } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './ItineraryListPage.css';
 import ItineraryTeaser from '../../components/ItineraryTeaser';
 import ItineraryListHeader from '../../components/ItineraryListHeader';
 import Modal from '../../components/Modal';
 import { JSON_API_URL } from '../../constants/env';
+
+const messages = defineMessages({
+  about_title: {
+    id: 'about.title',
+    defaultMessage: 'About',
+    description: 'About title',
+  },
+  about_description: {
+    id: 'about.description',
+    defaultMessage: 'Description',
+    description: '<p>About description</p>',
+  },
+});
 
 class ItineraryListPage extends React.Component {
   static propTypes = {
@@ -84,20 +98,12 @@ class ItineraryListPage extends React.Component {
           fullscreen
         >
           <div>
-            <h1>Title</h1>
-            <div
-            // eslint-disable-next-line react/no-danger
-            // dangerouslySetInnerHTML={{ __html: html }}
-            />
-            <p>
-              Ce paramètre optionnel indique une chaine de caractères pour
-              séparer chaque élément du tableau. Le séparateur est converti en
-              une chaine de caractères si nécessaire. Si ce paramètre n est pas
-              utilisé, les éléments du tableau seront séparés par une virgule.
-              Si ce paramètre est la chaîne vide, les éléments seront accolés
-              les uns aux autres sans espace entre. La valeur par défaut de ce
-              paramètre est ,.
-            </p>
+            <h1>
+              <FormattedMessage {...messages.about_title} />
+            </h1>
+            <div>
+              <FormattedMessage {...messages.about_description} />
+            </div>
           </div>
         </Modal>
         <div className={s.container}>
