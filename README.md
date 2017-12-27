@@ -29,7 +29,7 @@ This will install both run-time project dependencies and developer tools listed 
 
 This command will build the app from the source files (/src) into the output /build folder. As soon as the initial build completes, it will start the Node.js server (node build/server.js) and Browsersync with HMR on top of it.
 
-`yarn run build -- --release`
+`yarn run build --release`
 
 Exports a production build (in the build directory).
 
@@ -37,7 +37,7 @@ Exports a production build (in the build directory).
 
 1. Get the latest codebase `git pull`
 2. Install new dependencies if any `yarn install`
-3. Production build `yarn run build -- --release`
+3. Production build `yarn run build --release`
 4. Restart PM2 `pm2 restart build/server.js`
 
 ### Storybook setup
