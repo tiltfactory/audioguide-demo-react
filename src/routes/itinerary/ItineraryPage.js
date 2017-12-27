@@ -4,7 +4,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './ItineraryPage.css';
 import ItineraryHeader from '../../components/ItineraryHeader';
 import FilterableStopList from '../../components/FilterableStopList';
-import { JSON_API_URL } from '../../constants/env';
 
 class ItineraryPage extends React.Component {
   static propTypes = {
@@ -76,7 +75,7 @@ class ItineraryPage extends React.Component {
       if (stop.relationships.field_image.data !== null) {
         const imageId = stop.relationships.field_image.data.id;
         const image = stops.included.filter(obj => obj.id === imageId);
-        tmpStop.imageUrl = `${JSON_API_URL}/${image[0].attributes.url}`;
+        tmpStop.imageUrl = image[0].meta.derivatives.thumbnail;
       }
       stopsWithIncluded.push(tmpStop);
     });
@@ -89,7 +88,7 @@ class ItineraryPage extends React.Component {
       obj => obj.id === imageId,
     );
     if (image[0]) {
-      result = `${JSON_API_URL}/${image[0].attributes.url}`;
+      result = image[0].meta.derivatives.thumbnail;
     }
     return result;
   }
