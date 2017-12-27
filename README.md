@@ -11,6 +11,7 @@ Get a copy of the production Drupal 8 website and define the CORS configuration 
 
 1. Copy the src/constants/env.example.js into src/constants/env.js
 2. Set the JSON_API_URL with your API url.
+3. Optionally set the CONSUMER_ID with the one obtained by the [Consumers](https://www.drupal.org/project/consumers) Drupal module.   
 
 On your local/dev environment, it will be the Url defined for your vhost, with the protocol.
 _Example: http://mysite.dev_
@@ -38,7 +39,7 @@ Exports a production build (in the build directory).
 1. Get the latest codebase `git pull`
 2. Install new dependencies if any `yarn install`
 3. Production build `yarn run build --release`
-4. Restart PM2 `pm2 restart build/server.js`
+4. Start or restart PM2 `pm2 start build/server.js` `pm2 restart build/server.js`
 
 ### Storybook setup
 
@@ -150,7 +151,7 @@ React components that will be available from routes.
 - LanguageSwitcher
 - Link
 
-## Documentation 
+## React Starter Kit boilerplate
 
-- [Boilerplate description](./REACT_STARTER_KIT.md)
-- [Boilerplate documentation](./docs/README.md)
+- [README](./REACT_STARTER_KIT.md)
+- [Documentation](./docs/README.md)
