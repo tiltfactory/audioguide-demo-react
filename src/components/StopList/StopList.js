@@ -282,10 +282,6 @@ class StopList extends React.Component {
               <p>
                 <FormattedMessage {...messages.stop_not_found} />
               </p>
-              <button className={s.btn}>
-                <Ionicon icon="md-refresh" color="#ffffff" fontSize="24px" />
-                <FormattedMessage {...messages.reset_search} />
-              </button>
             </div>
           : <span />}
 
