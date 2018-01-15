@@ -22,7 +22,7 @@ class ItineraryHeader extends React.Component {
       backgroundImageUrl: PropTypes.string,
       attributes: PropTypes.shape({
         name: PropTypes.string.isRequired,
-        description: PropTypes.string,
+        description: PropTypes.object,
       }).isRequired,
       // relationships: PropTypes.shape({
       //   field_image: PropTypes.shape({
