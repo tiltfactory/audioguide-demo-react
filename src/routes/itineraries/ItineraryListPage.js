@@ -17,7 +17,7 @@ const messages = defineMessages({
   about_description: {
     id: 'about.description',
     defaultMessage: 'Description',
-    description: '<p>About description</p>',
+    description: 'About description',
   },
 });
 
