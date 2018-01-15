@@ -13,9 +13,8 @@ async function action({ locale, params }) {
   let itineraryTerm = {};
   let title = {};
   try {
-    itineraryTerm = await fetch(itineraryTermEndpoint).then(response =>
-      response.json(),
-    );
+    const response = await fetch(itineraryTermEndpoint, { method: 'GET' });
+    itineraryTerm = await response.json();
     // Set page name from the current itinerary.
     title = itineraryTerm.data.attributes.name;
   } catch (error) {
@@ -28,9 +27,10 @@ async function action({ locale, params }) {
   const childItineraryTermsEndpoint = `${JSON_API_URL}/${drupalLocale}/jsonapi/taxonomy_term/audio_itinerary?_consumer_id=${CONSUMER_ID}&sort=weight&include=field_image`;
   let childItineraryTerms = {};
   try {
-    childItineraryTerms = await fetch(childItineraryTermsEndpoint).then(
-      response => response.json(),
-    );
+    const response = await fetch(childItineraryTermsEndpoint, {
+      method: 'GET',
+    });
+    childItineraryTerms = await response.json();
   } catch (error) {
     // @todo improve error management with PropTypes
   }
@@ -41,23 +41,25 @@ async function action({ locale, params }) {
   }&include=field_image`;
   let itineraryStopNodes = {};
   try {
-    itineraryStopNodes = await fetch(itineraryStopNodesEndpoint).then(
-      response => response.json(),
-    );
+    const response = await fetch(itineraryStopNodesEndpoint, {
+      method: 'GET',
+    });
+    itineraryStopNodes = await response.json();
   } catch (error) {
     // @todo improve error management with PropTypes
   }
 
   // Fetch all the available translated node stops that are not part of the
   // current itinerary.
-  const stopNodesEndpoint = `${JSON_API_URL}/${drupalLocale}/jsonapi/node/audio?_consumer_id=${CONSUMER_ID}&sort=field_weight&include=field_image&filter[not-current-itinerary][condition][path]=field_audio_itinerary.uuid&filter[not-current-itinerary][condition][operator]=NOT%20IN&filter[not-current-itinerary][condition][value][]=${
+  const externalStopNodesEndpoint = `${JSON_API_URL}/${drupalLocale}/jsonapi/node/audio?_consumer_id=${CONSUMER_ID}&sort=field_weight&include=field_image&filter[not-current-itinerary][condition][path]=field_audio_itinerary.uuid&filter[not-current-itinerary][condition][operator]=NOT%20IN&filter[not-current-itinerary][condition][value][]=${
     params.itinerary_id
   }`;
-  let stopNodes = {};
+  let externalStopNodes = {};
   try {
-    stopNodes = await fetch(stopNodesEndpoint).then(response =>
-      response.json(),
-    );
+    const response = await fetch(externalStopNodesEndpoint, {
+      method: 'GET',
+    });
+    externalStopNodes = await response.json();
   } catch (error) {
     // @todo improve error management with PropTypes
   }
@@ -72,7 +74,7 @@ async function action({ locale, params }) {
           itinerary={itineraryTerm}
           childItineraries={childItineraryTerms}
           itineraryStops={itineraryStopNodes}
-          externalStops={stopNodes}
+          externalStops={externalStopNodes}
         />
       </Layout>
     ),
