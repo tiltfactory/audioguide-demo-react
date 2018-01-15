@@ -31,7 +31,7 @@ class AudioQuiz extends React.Component {
           <FormattedMessage {...messages.title} />
         </h3>
         <ul className={s.listAnswers}>
-          {answersList.map(audioAnswerItem =>
+          {answersList.map(audioAnswerItem => (
             <li
               key={`list-item-${audioAnswerItem.uuid}`}
               className={s.itemAnswer}
@@ -40,8 +40,8 @@ class AudioQuiz extends React.Component {
                 key={`answer-${audioAnswerItem.uuid}`}
                 answer={audioAnswerItem}
               />
-            </li>,
-          )}
+            </li>
+          ))}
         </ul>
       </div>
     );

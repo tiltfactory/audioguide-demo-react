@@ -125,8 +125,6 @@ class ItineraryPage extends React.Component {
       this.props.externalStops,
     );
     const itinerary = this.itineraryWithIncludedUrl();
-    // @todo includes
-    const childItineraries = this.props.childItineraries;
 
     return (
       <div className={s.wrapper}>
@@ -134,7 +132,7 @@ class ItineraryPage extends React.Component {
           <ItineraryHeader itinerary={itinerary} />
           <FilterableStopList
             itinerary_id={itinerary.id}
-            childItineraries={childItineraries}
+            childItineraries={this.props.childItineraries}
             itineraryStops={itineraryStops}
             externalStops={externalStops}
           />

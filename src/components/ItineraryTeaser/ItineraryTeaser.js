@@ -9,8 +9,8 @@ class ItineraryTeaser extends React.Component {
     destination: PropTypes.string.isRequired,
     itinerary: PropTypes.shape({
       id: PropTypes.string.isRequired,
-      iconImageUrl: PropTypes.string.isRequired,
-      backgroundImageUrl: PropTypes.string.isRequired,
+      iconImageUrl: PropTypes.string,
+      backgroundImageUrl: PropTypes.string,
       attributes: PropTypes.shape({
         name: PropTypes.string.isRequired,
       }).isRequired,
@@ -25,23 +25,28 @@ class ItineraryTeaser extends React.Component {
   };
 
   render() {
-    const itinerary = this.props.itinerary;
-    const inlineStyle = {
-      backgroundImage: `url(${itinerary.backgroundImageUrl})`,
-    };
+    let inlineStyle = {};
+    if (this.props.itinerary.iconImageUrl !== null) {
+      inlineStyle = {
+        backgroundImage: `url(${this.props.itinerary.backgroundImageUrl})`,
+      };
+    }
+
     return (
       <div className={s.wrapperLink} style={inlineStyle}>
         <Link to={this.props.destination}>
           <div className={s.pos}>
-            {itinerary.iconImageUrl !== null
-              ? <img
-                  src={itinerary.iconImageUrl}
-                  alt={itinerary.attributes.title}
-                />
-              : <span />}
+            {this.props.itinerary.iconImageUrl !== null ? (
+              <img
+                src={this.props.itinerary.iconImageUrl}
+                alt={this.props.itinerary.attributes.name}
+              />
+            ) : (
+              <span />
+            )}
 
             <span className={s.name}>
-              {itinerary.attributes.name}
+              {this.props.itinerary.attributes.name}
             </span>
           </div>
         </Link>

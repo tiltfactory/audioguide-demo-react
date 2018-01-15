@@ -20,23 +20,22 @@ class Modal extends React.Component {
     openModal: PropTypes.bool.isRequired,
     onClick: PropTypes.func,
     children: PropTypes.element.isRequired,
-    fullscreen: PropTypes.bool,
+    fullScreen: PropTypes.bool,
   };
 
   static defaultProps = {
     onClick: null,
-    fullscreen: false,
+    fullScreen: false,
   };
 
   render() {
-    // const { title, html } = this.props;
     const { children } = this.props;
     return (
       <div
         className={[
           s.modal,
           this.props.openModal ? s.plzOpenModal : '',
-          this.props.fullscreen ? s.fs : '',
+          this.props.fullScreen ? s.fs : '',
         ].join(' ')}
       >
         <div className={s.container}>

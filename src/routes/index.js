@@ -11,13 +11,17 @@
 
 // The top-level (parent) route
 const routes = {
-  path: '/',
+  path: '',
 
   // Keep in mind, routes are evaluated in order
   children: [
     {
-      path: '/',
+      path: '',
       load: () => import(/* webpackChunkName: 'itineraries' */ './itineraries'),
+    },
+    {
+      path: '/about',
+      load: () => import(/* webpackChunkName: 'about' */ './about'),
     },
     {
       path: '/itinerary/:itinerary_id',
@@ -28,9 +32,9 @@ const routes = {
       load: () => import(/* webpackChunkName: 'stop' */ './stop'),
     },
 
-    // Wildcard routes, e.g. { path: '*', ... } (must go last)
+    // Wildcard routes, e.g. { path: '(.*)', ... } (must go last)
     {
-      path: '*',
+      path: '(.*)',
       load: () => import(/* webpackChunkName: 'not-found' */ './not-found'),
     },
   ],
@@ -40,7 +44,7 @@ const routes = {
     const route = await next();
 
     // Provide default values for title, description etc.
-    route.title = `${route.title || 'Untitled Page'} | BELvue museum`;
+    route.title = `${route.title || 'Untitled Page'} - BELvue`;
     route.description = route.description || '';
 
     return route;

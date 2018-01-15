@@ -39,9 +39,7 @@ class AudioAnswer extends React.Component {
           onClick={e => this.handleClick(e)}
           className={s.answerTitle}
         >
-          <h3>
-            {answer.title}
-          </h3>
+          <h3>{answer.title}</h3>
         </a>
         <Collapsible open={this.state.selected}>
           <div className={s.collapsedContent}>

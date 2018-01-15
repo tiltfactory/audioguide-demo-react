@@ -75,18 +75,18 @@ class StopHeader extends React.Component {
                 fontSize="22px"
                 color="#BE9F8A"
               />
-              {itinerary.iconImageUrl !== null
-                ? <img src={itinerary.iconImageUrl} alt={itinerary.title} />
-                : <span />}
+              {itinerary.iconImageUrl !== null ? (
+                <img src={itinerary.iconImageUrl} alt={itinerary.title} />
+              ) : (
+                <span />
+              )}
             </Link>
             <div className={s.stopLocation}>
               {itinerary.attributes.name}{' '}
               <span>{stop.data.attributes.field_id}</span>
             </div>
           </div>
-          <h1 className={s.title}>
-            {stop.data.attributes.title}
-          </h1>
+          <h1 className={s.title}>{stop.data.attributes.title}</h1>
         </div>
         <div className={s.background} style={backgroundImage} />
       </header>

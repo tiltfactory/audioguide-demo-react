@@ -24,13 +24,6 @@ class ItineraryHeader extends React.Component {
         name: PropTypes.string.isRequired,
         description: PropTypes.object,
       }).isRequired,
-      // relationships: PropTypes.shape({
-      //   field_image: PropTypes.shape({
-      //     data: PropTypes.shape({
-      //       id: PropTypes.string.isRequired,
-      //     }).isRequired,
-      //   }).isRequired,
-      // }).isRequired,
     }).isRequired,
   };
 
@@ -45,9 +38,8 @@ class ItineraryHeader extends React.Component {
   };
 
   render() {
-    const itinerary = this.props.itinerary;
     const inlineStyle = {
-      backgroundImage: `url(${itinerary.backgroundImageUrl})`,
+      backgroundImage: `url(${this.props.itinerary.backgroundImageUrl})`,
     };
 
     return (
@@ -62,25 +54,27 @@ class ItineraryHeader extends React.Component {
               />{' '}
               <FormattedMessage {...messages.home} />
             </Link>
-            {itinerary.iconImageUrl !== null
-              ? <img
-                  src={itinerary.iconImageUrl}
-                  alt={itinerary.attributes.title}
-                />
-              : <span />}
-          </div>
-          <h1 className={s.title}>
-            {itinerary.attributes.name}
-          </h1>
-          {itinerary.attributes.description !== null
-            ? <div
-                className={s.subtitle}
-                // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{
-                  __html: itinerary.attributes.description.value,
-                }}
+            {this.props.itinerary.iconImageUrl !== null ? (
+              <img
+                src={this.props.itinerary.iconImageUrl}
+                alt={this.props.itinerary.attributes.name}
               />
-            : <span />}
+            ) : (
+              <span />
+            )}
+          </div>
+          <h1 className={s.title}>{this.props.itinerary.attributes.name}</h1>
+          {this.props.itinerary.attributes.description !== null ? (
+            <div
+              className={s.subtitle}
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{
+                __html: this.props.itinerary.attributes.description.value,
+              }}
+            />
+          ) : (
+            <span />
+          )}
         </div>
       </header>
     );

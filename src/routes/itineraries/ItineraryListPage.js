@@ -109,14 +109,14 @@ class ItineraryListPage extends React.Component {
         <div className={s.container}>
           <ItineraryListHeader onClick={e => this.toggle(e)} />
           <ul className={s.gridPage}>
-            {this.itinerariesWithIncludedUrl().map(itinerary =>
+            {this.itinerariesWithIncludedUrl().map(itinerary => (
               <li key={itinerary.id}>
                 <ItineraryTeaser
                   destination={`/itinerary/${itinerary.id}`}
                   itinerary={itinerary}
                 />
-              </li>,
-            )}
+              </li>
+            ))}
           </ul>
         </div>
       </div>

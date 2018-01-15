@@ -7,6 +7,15 @@ import { connect } from 'react-redux';
 import { setLocale } from '../../actions/intl';
 import s from './LanguageSwitcher.css';
 
+const localeDict = {
+  /* @intl-code-template '${lang}-${COUNTRY}': '${Name}', */
+  'nl-BE': 'NL',
+  'fr-BE': 'FR',
+  'de-BE': 'DE',
+  'en-US': 'EN',
+  /* @intl-code-template-end */
+};
+
 class LanguageSwitcher extends React.Component {
   static propTypes = {
     currentLocale: PropTypes.string.isRequired,
@@ -39,15 +48,6 @@ class LanguageSwitcher extends React.Component {
   render() {
     const { currentLocale, availableLocales, setLocale } = this.props;
     const isSelected = locale => locale === currentLocale;
-    const localeDict = {
-      // @todo check if this should be moved outside of the component
-      /* @intl-code-template '${lang}-${COUNTRY}': '${Name}', */
-      'nl-BE': 'NL',
-      'fr-BE': 'FR',
-      'de-BE': 'DE',
-      'en-US': 'EN',
-      /* @intl-code-template-end */
-    };
     const localeName = locale => localeDict[locale] || locale;
 
     return (
@@ -60,26 +60,26 @@ class LanguageSwitcher extends React.Component {
           {localeDict[currentLocale]}
         </button>
         <ul className={s.languageSelector}>
-          {availableLocales.map(locale =>
+          {availableLocales.map(locale => (
             <li key={locale}>
-              {isSelected(locale)
-                ? <span>
-                    {localeName(locale)}
-                  </span>
-                : // github.com/yannickcr/eslint-plugin-react/issues/945
-                  // eslint-disable-next-line react/jsx-indent
-                  <a
-                    href={`?lang=${locale}`}
-                    onClick={e => {
-                      setLocale({ locale });
-                      this.handleClick();
-                      e.preventDefault();
-                    }}
-                  >
-                    {localeName(locale)}
-                  </a>}{' '}
-            </li>,
-          )}
+              {isSelected(locale) ? (
+                <span>{localeName(locale)}</span>
+              ) : (
+                // github.com/yannickcr/eslint-plugin-react/issues/945
+                // eslint-disable-next-line react/jsx-indent
+                <a
+                  href={`?lang=${locale}`}
+                  onClick={e => {
+                    setLocale({ locale });
+                    this.handleClick();
+                    e.preventDefault();
+                  }}
+                >
+                  {localeName(locale)}
+                </a>
+              )}{' '}
+            </li>
+          ))}
         </ul>
       </div>
     );

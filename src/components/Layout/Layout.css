@@ -6,7 +6,8 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
-@import url(../variables.css);
+
+@import '../variables.css';
 
 /*
  * normalize.css is imported in JS file.
@@ -17,21 +18,17 @@
 /*
  * Base styles
  * ========================================================================== */
+
 html {
   color: #222;
   font-weight: 100;
-  font-size: 1em;
+  font-size: 1em; /* ~16px; */
   font-family: var(--font-family-base);
-  line-height: 1.375;
+  line-height: 1.375; /* ~22px */
 }
 
 body {
   margin: 0;
-  background-color: #fff;
-}
-
-.headerBlock {
-  background-color: red;
 }
 
 ul {
@@ -55,6 +52,7 @@ a {
  * These selection rule sets have to be separate.
  * Customize the background color to match your design.
  */
+
 ::-moz-selection {
   background: #b3d4fc;
   text-shadow: none;
@@ -68,6 +66,7 @@ a {
 /*
  * A better looking default horizontal rule
  */
+
 hr {
   display: block;
   height: 1px;
@@ -82,6 +81,7 @@ hr {
  * images, videos and the bottom of their containers:
  * https://github.com/h5bp/html5-boilerplate/issues/440
  */
+
 audio,
 canvas,
 iframe,
@@ -94,6 +94,7 @@ video {
 /*
  * Remove default fieldset styles.
  */
+
 fieldset {
   border: 0;
   margin: 0;
@@ -103,6 +104,7 @@ fieldset {
 /*
  * Allow only vertical resizing of textareas.
  */
+
 textarea {
   resize: vertical;
 }
@@ -110,6 +112,7 @@ textarea {
 /*
  * Browser upgrade prompt
  * ========================================================================== */
+
 :global(.browserupgrade) {
   margin: 0.2em 0;
   background: #ccc;
@@ -126,14 +129,13 @@ img {
  * Inlined to avoid the additional HTTP request:
  * http://www.phpied.com/delay-loading-your-print-css/
  * ========================================================================== */
+
 @media print {
   *,
   *::before,
   *::after {
     background: transparent !important;
-    color: #000 !important;
-
-    /* Black prints faster: http://www.sanbeiji.com/archives/953 */
+    color: #000 !important; /* Black prints faster: http://www.sanbeiji.com/archives/953 */
     box-shadow: none !important;
     text-shadow: none !important;
   }
@@ -155,6 +157,7 @@ img {
    * Don't show links that are fragment identifiers,
    * or use the `javascript:` pseudo protocol
    */
+
   a[href^='#']::after,
   a[href^='javascript:']::after {
     content: '';
@@ -170,6 +173,7 @@ img {
    * Printing Tables:
    * http://css-discuss.incutio.com/wiki/Printing_Tables
    */
+
   thead {
     display: table-header-group;
   }
@@ -188,5 +192,10 @@ img {
   h3 {
     orphans: 3;
     widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
   }
 }

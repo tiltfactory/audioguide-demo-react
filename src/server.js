@@ -121,6 +121,7 @@ app.get(
 //
 // Register API middleware
 // -----------------------------------------------------------------------------
+// https://github.com/graphql/express-graphql#options
 const graphqlMiddleware = expressGraphQL(req => ({
   schema,
   graphiql: __DEV__,
@@ -203,7 +204,7 @@ app.get('*', async (req, res, next) => {
 
     const route = await router.resolve({
       ...context,
-      path: req.path,
+      pathname: req.path,
       query: req.query,
       locale,
     });
@@ -214,12 +215,7 @@ app.get('*', async (req, res, next) => {
     }
 
     const data = { ...route };
-
-    const rootComponent = (
-      <App context={context} store={store}>
-        {route.component}
-      </App>
-    );
+    const rootComponent = <App context={context}>{route.component}</App>;
     await getDataFromTree(rootComponent);
     // this is here because of Apollo redux APOLLO_QUERY_STOP action
     await Promise.delay(0);
@@ -241,6 +237,7 @@ app.get('*', async (req, res, next) => {
       apiUrl: config.api.clientUrl,
       state: context.store.getState(),
       lang: locale,
+      apolloState: context.client.extract(),
     };
 
     const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);

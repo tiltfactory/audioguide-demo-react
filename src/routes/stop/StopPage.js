@@ -165,23 +165,25 @@ class StopPage extends React.Component {
         />
         <div className={s.playerWrapper}>
           <div className={[s.btn, s.btnPrev].join(' ')}>
-            {this.props.previousStopId !== null
-              ? <Link to={`/stop/${itinerary.data.id}/${previousStopId}`}>
-                  <span>
-                    <Ionicon
-                      icon="md-arrow-round-back"
-                      color="white"
-                      fontSize="36px"
-                    />
-                  </span>
-                </Link>
-              : <span className={s.trackDisabled}>
+            {this.props.previousStopId !== null ? (
+              <Link to={`/stop/${itinerary.data.id}/${previousStopId}`}>
+                <span>
                   <Ionicon
                     icon="md-arrow-round-back"
                     color="white"
                     fontSize="36px"
                   />
-                </span>}
+                </span>
+              </Link>
+            ) : (
+              <span className={s.trackDisabled}>
+                <Ionicon
+                  icon="md-arrow-round-back"
+                  color="white"
+                  fontSize="36px"
+                />
+              </span>
+            )}
           </div>
           <div
             className={[s.btn, s.btnPlay].join(' ')}
@@ -190,9 +192,11 @@ class StopPage extends React.Component {
             role="button"
             tabIndex="0"
           >
-            {this.imageUrl() !== null
-              ? <img src={this.imageUrl()} alt={stop.title} />
-              : <span />}
+            {this.imageUrl() !== null ? (
+              <img src={this.imageUrl()} alt={stop.title} />
+            ) : (
+              <span />
+            )}
             <div
               className={s.progressBtn}
               style={{
@@ -219,29 +223,33 @@ class StopPage extends React.Component {
               </svg>
             </div>
             <div className={s.innerBtn}>
-              {this.state.isPlaying
-                ? <img src="/icon-pause.svg" alt="pause" />
-                : <img src="/icon-play.svg" alt="play" />}
+              {this.state.isPlaying ? (
+                <img src="/icon-pause.svg" alt="pause" />
+              ) : (
+                <img src="/icon-play.svg" alt="play" />
+              )}
             </div>
           </div>
           <div className={[s.btn, s.btnNext].join(' ')}>
-            {this.props.nextStopId !== null
-              ? <Link to={`/stop/${itinerary.data.id}/${nextStopId}`}>
-                  <span>
-                    <Ionicon
-                      icon="md-arrow-round-forward"
-                      color="white"
-                      fontSize="36px"
-                    />
-                  </span>
-                </Link>
-              : <span className={s.trackDisabled}>
+            {this.props.nextStopId !== null ? (
+              <Link to={`/stop/${itinerary.data.id}/${nextStopId}`}>
+                <span>
                   <Ionicon
                     icon="md-arrow-round-forward"
                     color="white"
                     fontSize="36px"
                   />
-                </span>}
+                </span>
+              </Link>
+            ) : (
+              <span className={s.trackDisabled}>
+                <Ionicon
+                  icon="md-arrow-round-forward"
+                  color="white"
+                  fontSize="36px"
+                />
+              </span>
+            )}
           </div>
         </div>
         <div className={s.toggleText}>

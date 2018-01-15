@@ -52,9 +52,8 @@ class StopTeaser extends React.Component {
   };
 
   render() {
-    const stop = this.props.stop;
     const inlineStyle = {
-      backgroundImage: `url(${stop.imageUrl})`,
+      backgroundImage: `url(${this.props.stop.imageUrl})`,
     };
 
     return (
@@ -65,17 +64,20 @@ class StopTeaser extends React.Component {
       >
         <div className={s.container}>
           <figure style={inlineStyle}>
-            {stop.imageUrl !== null
-              ? <img src={stop.imageUrl} alt={stop.attributes.title} />
-              : <span />}
+            {this.props.stop.imageUrl !== null ? (
+              <img
+                src={this.props.stop.imageUrl}
+                alt={this.props.stop.attributes.title}
+              />
+            ) : (
+              <span />
+            )}
             <span className={s.itemId}>
-              {stop.attributes.field_id}
+              {this.props.stop.attributes.field_id}
             </span>
           </figure>
           <div className={s.infos}>
-            <h2>
-              {stop.attributes.title}
-            </h2>
+            <h2>{this.props.stop.attributes.title}</h2>
           </div>
         </div>
       </Link>
