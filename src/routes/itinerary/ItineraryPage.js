@@ -307,6 +307,12 @@ class ItineraryPage extends React.Component {
       <div className={s.wrapper}>
         <div className={s.container}>
           <ItineraryHeader itinerary={this.state.itineraryWithIncluded} />
+          <FilterableStopList
+            itinerary_id={this.props.itineraryId}
+            childItineraries={this.state.childItineraries}
+            itineraryStops={this.state.itineraryStopsWithIncluded}
+            externalStops={this.state.externalStopsWithIncluded}
+          />
         </div>
       </div>
     );
