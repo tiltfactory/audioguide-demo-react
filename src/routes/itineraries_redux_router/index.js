@@ -51,14 +51,11 @@ async function action({ locale, fetch, store }) {
     console.log('-- STORE --');
     console.log(store.getState()); // itineraries = {}
     itineraries = store.getState().itineraries;
-    console.log('-- ROUTE A --');
+    console.log('-- ROUTE --');
     console.log(itineraries);
   } else {
     console.log('Already got the data. Do not fetch.');
   }
-
-  console.log('-- ROUTE B --');
-  console.log(itineraries);
 
   return {
     chunks: ['itineraries_redux_router'],

@@ -27,7 +27,7 @@ class ItineraryListPage extends React.Component {
   };
 
   /**
-   * Returns the JSON API endpoint.
+   * Returns the JSON API endpoint for the terms.
    *
    * @returns {string}
    */
@@ -127,15 +127,15 @@ class ItineraryListPage extends React.Component {
         if (!response.ok) {
           throw Error(response.statusText);
         }
-        this.setState({ isLoading: false });
         return response;
       })
       .then(response => response.json())
       // ES6 property value shorthand for { itineraries: itineraries }
       // and use the second parameter as a callback
-      .then(itineraries =>
-        this.setState({ itineraries }, this.setItinerariesWithIncludedUrl),
-      )
+      .then(itineraries => {
+        this.setState({ itineraries }, this.setItinerariesWithIncludedUrl);
+        this.setState({ isLoading: false });
+      })
       .catch(() => this.setState({ hasError: true }));
   }
 
