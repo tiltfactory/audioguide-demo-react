@@ -17,7 +17,9 @@ import { addLocaleData } from 'react-intl';
 // This is so bad: requiring all locale if they are not needed?
 /* @intl-code-template import ${lang} from 'react-intl/locale-data/${lang}'; */
 import en from 'react-intl/locale-data/en';
-import cs from 'react-intl/locale-data/cs';
+import fr from 'react-intl/locale-data/fr';
+import nl from 'react-intl/locale-data/nl';
+import de from 'react-intl/locale-data/de';
 /* @intl-code-template-end */
 import App from './components/App';
 import createFetch from './createFetch';
@@ -30,7 +32,9 @@ import { getIntl } from './actions/intl';
 
 /* @intl-code-template addLocaleData(${lang}); */
 addLocaleData(en);
-addLocaleData(cs);
+addLocaleData(fr);
+addLocaleData(nl);
+addLocaleData(de);
 /* @intl-code-template-end */
 
 // Universal HTTP client

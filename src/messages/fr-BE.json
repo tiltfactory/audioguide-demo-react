@@ -4,18 +4,14 @@
     "description": "Audio quiz title",
     "defaultMessage": "Waiting for your choice",
     "message": "Fais ton choix en fin d’écoute",
-    "files": [
-      "src/components/AudioQuiz/AudioQuiz.js"
-    ]
+    "files": ["src/components/AudioQuiz/AudioQuiz.js"]
   },
   {
     "id": "navigation.home",
     "description": "Home link in header",
     "defaultMessage": "Home",
     "message": "Accueil",
-    "files": [
-      "src/components/ItineraryHeader/ItineraryHeader.js"
-    ]
+    "files": ["src/components/ItineraryHeader/ItineraryHeader.js"]
   },
   {
     "id": "navigation.about",
@@ -28,69 +24,55 @@
     "description": "Search placeholder",
     "defaultMessage": "Search...",
     "message": "Rechercher...",
-    "files": [
-      "src/components/SearchBar/SearchBar.js"
-    ]
+    "files": ["src/components/SearchBar/SearchBar.js"]
   },
   {
     "id": "search.in_other_itinerary",
     "description": "Stops available in another itinerary.",
     "defaultMessage": "Available in other itineraries",
     "message": "Disponible dans d’autres parcours",
-    "files": [
-      "src/components/StopList/StopList.js"
-    ]
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "search.itinerary_change_confirmation",
     "description": "Label for the itinerary change button.",
     "defaultMessage": "Change itinerary?",
-    "message": "",
-    "files": [
-      "src/components/StopList/StopList.js"
-    ]
+    "message": "Je change de parcours",
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "search.itinerary_change_warning_description",
     "description": "Warns user of itinerary change.",
     "defaultMessage": "You are about to change your itinerary, are you sure?",
-    "message": "",
-    "files": [
-      "src/components/StopList/StopList.js"
-    ]
+    "message": "Tu t’apprêtes à changer de parcours, en es-tu bien sûr ?",
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "search.itinerary_change_warning_title",
     "description": "Warns user of itinerary change.",
     "defaultMessage": "Itinerary change",
-    "message": "",
-    "files": [
-      "src/components/StopList/StopList.js"
-    ]
+    "message": "Attention, dis !",
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "search.reset_search",
     "description": "Label for the reset search button.",
     "defaultMessage": "Reset search",
-    "message": "",
-    "files": [
-      "src/components/StopList/StopList.js"
-    ]
+    "message": "Réinitialiser la recherche",
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "search.stop_not_found",
     "description": "Empty state for not found stops.",
     "defaultMessage": "Stop not found",
-    "message": "",
-    "files": [
-      "src/components/StopList/StopList.js"
-    ]
+    "message": "Stop non trouvé…",
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "about.description",
     "description": "About description",
     "defaultMessage": "Description",
-    "message": "",
+    "message": "Description",
     "files": [
       "src/routes/itineraries/ItineraryListPage.js",
       "src/routes/itineraries_redux_router/ItineraryListPage.js"
@@ -100,7 +82,7 @@
     "id": "about.title",
     "description": "About title",
     "defaultMessage": "About",
-    "message": "",
+    "message": "À propos",
     "files": [
       "src/routes/itineraries/ItineraryListPage.js",
       "src/routes/itineraries_redux_router/ItineraryListPage.js"

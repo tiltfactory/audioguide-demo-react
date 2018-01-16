@@ -3,82 +3,64 @@
     "id": "audio_quiz.title",
     "description": "Audio quiz title",
     "defaultMessage": "Waiting for your choice",
-    "message": "",
-    "files": [
-      "src/components/AudioQuiz/AudioQuiz.js"
-    ]
+    "message": "Na het beluisteren, maak uw keuze",
+    "files": ["src/components/AudioQuiz/AudioQuiz.js"]
   },
   {
     "id": "navigation.home",
     "description": "Home link in header",
     "defaultMessage": "Home",
     "message": "",
-    "files": [
-      "src/components/ItineraryHeader/ItineraryHeader.js"
-    ]
+    "files": ["src/components/ItineraryHeader/ItineraryHeader.js"]
   },
   {
     "id": "search.placeholder",
     "description": "Search placeholder",
     "defaultMessage": "Search...",
-    "message": "",
-    "files": [
-      "src/components/SearchBar/SearchBar.js"
-    ]
+    "message": "Zoeken...",
+    "files": ["src/components/SearchBar/SearchBar.js"]
   },
   {
     "id": "search.in_other_itinerary",
     "description": "Stops available in another itinerary.",
     "defaultMessage": "Available in other itineraries",
     "message": "",
-    "files": [
-      "src/components/StopList/StopList.js"
-    ]
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "search.itinerary_change_confirmation",
     "description": "Label for the itinerary change button.",
     "defaultMessage": "Change itinerary?",
     "message": "",
-    "files": [
-      "src/components/StopList/StopList.js"
-    ]
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "search.itinerary_change_warning_description",
     "description": "Warns user of itinerary change.",
     "defaultMessage": "You are about to change your itinerary, are you sure?",
     "message": "",
-    "files": [
-      "src/components/StopList/StopList.js"
-    ]
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "search.itinerary_change_warning_title",
     "description": "Warns user of itinerary change.",
     "defaultMessage": "Itinerary change",
     "message": "",
-    "files": [
-      "src/components/StopList/StopList.js"
-    ]
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "search.reset_search",
     "description": "Label for the reset search button.",
     "defaultMessage": "Reset search",
     "message": "",
-    "files": [
-      "src/components/StopList/StopList.js"
-    ]
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "search.stop_not_found",
     "description": "Empty state for not found stops.",
     "defaultMessage": "Stop not found",
     "message": "",
-    "files": [
-      "src/components/StopList/StopList.js"
-    ]
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "about.description",
