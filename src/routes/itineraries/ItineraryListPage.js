@@ -55,10 +55,12 @@ class ItineraryListPage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const endpoint = ItineraryListPage.getItinerariesEndpoint(
-      nextProps.languageId,
-    );
-    this.fetchItineraries(endpoint);
+    if (nextProps.languageId !== this.props.languageId) {
+      const endpoint = ItineraryListPage.getItinerariesEndpoint(
+        nextProps.languageId,
+      );
+      this.fetchItineraries(endpoint);
+    }
   }
 
   /**
