@@ -38,9 +38,7 @@ class ItineraryPage extends React.Component {
    * @returns {string}
    */
   static getItineraryStopNodesEndpoint(languageId, itineraryId) {
-    return `${JSON_API_URL}/${languageId}/jsonapi/node/audio?_consumer_id=${CONSUMER_ID}&sort=field_weight&filter[field_audio_itinerary.uuid][value]=${
-      this.props.itineraryId
-    }&include=field_image`;
+    return `${JSON_API_URL}/${languageId}/jsonapi/node/audio?_consumer_id=${CONSUMER_ID}&sort=field_weight&filter[field_audio_itinerary.uuid][value]=${itineraryId}&include=field_image`;
   }
 
   /**
@@ -49,33 +47,7 @@ class ItineraryPage extends React.Component {
    * @returns {string}
    */
   static getExternalStopNodesEndpoint(languageId, itineraryId) {
-    return `${JSON_API_URL}/${languageId}/jsonapi/node/audio?_consumer_id=${CONSUMER_ID}&sort=field_weight&include=field_image&filter[not-current-itinerary][condition][path]=field_audio_itinerary.uuid&filter[not-current-itinerary][condition][operator]=NOT%20IN&filter[not-current-itinerary][condition][value][]=${
-      this.props.itineraryId
-    }`;
-  }
-
-  /**
-   * Attaches the includes Url to the stops data.
-   *
-   * @returns {Array}
-   */
-  static stopsWithIncludedUrl(stops) {
-    const stopsWithIncluded = [];
-    const isEmptyStops =
-      Object.keys(stops).length === 0 && stops.constructor === Object;
-    if (!isEmptyStops) {
-      stops.data.forEach(stop => {
-        const tmpStop = stop;
-        // @todo refactor getImageFromItineraryIncluded
-        if (stop.relationships.field_image.data !== null) {
-          const imageId = stop.relationships.field_image.data.id;
-          const image = stops.included.filter(obj => obj.id === imageId);
-          tmpStop.imageUrl = image[0].meta.derivatives.thumbnail;
-        }
-        stopsWithIncluded.push(tmpStop);
-      });
-    }
-    return stopsWithIncluded;
+    return `${JSON_API_URL}/${languageId}/jsonapi/node/audio?_consumer_id=${CONSUMER_ID}&sort=field_weight&include=field_image&filter[not-current-itinerary][condition][path]=field_audio_itinerary.uuid&filter[not-current-itinerary][condition][operator]=NOT%20IN&filter[not-current-itinerary][condition][value][]=${itineraryId}`;
   }
 
   constructor(props) {
@@ -85,16 +57,44 @@ class ItineraryPage extends React.Component {
       itineraryWithIncluded: [],
       itineraryHasError: false,
       itineraryIsLoading: true,
-      childItinerary: [],
+      childItineraries: [],
+      childItinerariesHasError: false,
+      childItinerariesIsLoading: true,
+      itineraryStops: [],
+      itineraryStopsWithIncluded: [],
+      itineraryStopsHasError: false,
+      itineraryStopsIsLoading: true,
+      externalStops: [],
+      externalStopsWithIncluded: [],
+      externalStopsHasError: false,
+      externalStopsIsLoading: true,
     };
   }
 
   componentDidMount() {
-    const endpoint = ItineraryPage.getItineraryTermEndpoint(
+    let endpoint = ItineraryPage.getItineraryTermEndpoint(
       this.props.languageId,
       this.props.itineraryId,
     );
     this.fetchItinerary(endpoint);
+
+    // @todo when JSON API returns parent, pass the itinerary id
+    endpoint = ItineraryPage.getChildItineraryTermsEndpoint(
+      this.props.languageId,
+    );
+    this.fetchChildItineraries(endpoint);
+
+    endpoint = ItineraryPage.getItineraryStopNodesEndpoint(
+      this.props.languageId,
+      this.props.itineraryId,
+    );
+    this.fetchItineraryStops(endpoint);
+
+    endpoint = ItineraryPage.getExternalStopNodesEndpoint(
+      this.props.languageId,
+      this.props.itineraryId,
+    );
+    this.fetchExternalStops(endpoint);
   }
 
   getImageFromItineraryIncluded(imageId) {
@@ -110,8 +110,6 @@ class ItineraryPage extends React.Component {
 
   /**
    * Attaches the includes Url to the itinerary data.
-   *
-   * @returns {Array}
    */
   setItineraryWithIncludedUrl() {
     const tmpItinerary = this.state.itinerary.data;
@@ -133,6 +131,56 @@ class ItineraryPage extends React.Component {
       );
     }
     this.setState({ itineraryWithIncluded: tmpItinerary });
+  }
+
+  /**
+   * Attaches the includes Url to the itinerary stops data.
+   */
+  setItineraryStopsWithIncludedUrl() {
+    const stopsWithIncluded = [];
+    const isEmptyStops =
+      Object.keys(this.state.itineraryStops).length === 0 &&
+      this.state.itineraryStops.constructor === Object;
+    if (!isEmptyStops) {
+      this.state.itineraryStops.data.forEach(stop => {
+        const tmpStop = stop;
+        // @todo refactor getImageFromItineraryIncluded
+        if (stop.relationships.field_image.data !== null) {
+          const imageId = stop.relationships.field_image.data.id;
+          const image = this.state.itineraryStops.included.filter(
+            obj => obj.id === imageId,
+          );
+          tmpStop.imageUrl = image[0].meta.derivatives.thumbnail;
+        }
+        stopsWithIncluded.push(tmpStop);
+      });
+    }
+    this.setState({ itineraryStopsWithIncluded: stopsWithIncluded });
+  }
+
+  /**
+   * Attaches the includes Url to the external stops data.
+   */
+  setExternalStopsWithIncludedUrl() {
+    const stopsWithIncluded = [];
+    const isEmptyStops =
+      Object.keys(this.state.externalStops).length === 0 &&
+      this.state.externalStops.constructor === Object;
+    if (!isEmptyStops) {
+      this.state.externalStops.data.forEach(stop => {
+        const tmpStop = stop;
+        // @todo refactor getImageFromItineraryIncluded
+        if (stop.relationships.field_image.data !== null) {
+          const imageId = stop.relationships.field_image.data.id;
+          const image = this.state.externalStops.included.filter(
+            obj => obj.id === imageId,
+          );
+          tmpStop.imageUrl = image[0].meta.derivatives.thumbnail;
+        }
+        stopsWithIncluded.push(tmpStop);
+      });
+    }
+    this.setState({ externalStopsWithIncluded: stopsWithIncluded });
   }
 
   /**
@@ -159,22 +207,100 @@ class ItineraryPage extends React.Component {
       .catch(() => this.setState({ itineraryHasError: true }));
   }
 
-  render() {
-    /*
-    const itineraryStops = ItineraryPage.stopsWithIncludedUrl(
-      this.props.itineraryStops,
-    );
-    const externalStops = ItineraryPage.stopsWithIncludedUrl(
-      this.props.externalStops,
-    );
-    */
+  fetchChildItineraries(endpoint) {
+    this.setState({ childItinerariesIsLoading: true });
+    fetch(endpoint)
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
+      .then(response => response.json())
+      // ES6 property value shorthand for { itineraries: itineraries }
+      // and use the second parameter as a callback.
+      .then(childItineraries => {
+        this.setState({ childItineraries });
+        this.setState({ childItinerariesIsLoading: false });
+      })
+      .catch(() => this.setState({ childItinerariesHasError: true }));
+  }
 
+  fetchItineraryStops(endpoint) {
+    this.setState({ itineraryStopsIsLoading: true });
+    fetch(endpoint)
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
+      .then(response => response.json())
+      // ES6 property value shorthand for { itineraries: itineraries }
+      // and use the second parameter as a callback.
+      .then(itineraryStops => {
+        this.setState(
+          { itineraryStops },
+          this.setItineraryStopsWithIncludedUrl,
+        );
+        this.setState({ itineraryStopsIsLoading: false });
+      })
+      .catch(() => this.setState({ itineraryStopsHasError: true }));
+  }
+
+  fetchExternalStops(endpoint) {
+    this.setState({ externalStopsIsLoading: true });
+    fetch(endpoint)
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
+      .then(response => response.json())
+      // ES6 property value shorthand for { itineraries: itineraries }
+      // and use the second parameter as a callback.
+      .then(externalStops => {
+        this.setState({ externalStops });
+        this.setState(
+          { externalStopsIsLoading: false },
+          this.setExternalStopsWithIncludedUrl,
+        );
+      })
+      .catch(() => this.setState({ externalStopsHasError: true }));
+  }
+
+  render() {
     if (this.state.itineraryHasError) {
       return <p>Error while loading itinerary.</p>;
     }
 
     if (this.state.itineraryIsLoading) {
       return <p>Loading itinerary...</p>;
+    }
+
+    if (this.state.childItinerariesHasError) {
+      return <p>Error while loading sub itineraries.</p>;
+    }
+
+    if (this.state.childItinerariesIsLoading) {
+      return <p>Loading sub itineraries...</p>;
+    }
+
+    if (this.state.itineraryStopsHasError) {
+      return <p>Error while loading stops for this itinerary.</p>;
+    }
+
+    if (this.state.itineraryStopsIsLoading) {
+      return <p>Loading stops for this itinerary...</p>;
+    }
+
+    if (this.state.externalStopsHasError) {
+      return <p>Error while loading stops.</p>;
+    }
+
+    if (this.state.externalStopsIsLoading) {
+      return <p>Loading stops...</p>;
     }
 
     return (
