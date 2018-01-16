@@ -6,6 +6,9 @@ import { CONSUMER_ID, JSON_API_URL } from '../../constants/env';
 async function action({ locale, params }) {
   const drupalLocale = locale.substring(0, 2); // @todo improve
 
+  console.log(locale);
+  console.log(params);
+
   // Fetch the localized itinerary term.
   const itineraryTermEndpoint = `${JSON_API_URL}/${drupalLocale}/jsonapi/taxonomy_term/audio_itinerary/${
     params.itinerary_id

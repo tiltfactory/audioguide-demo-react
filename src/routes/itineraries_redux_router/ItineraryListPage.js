@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
 import { defineMessages, FormattedMessage } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './ItineraryListPage.css';
@@ -23,65 +24,32 @@ const messages = defineMessages({
 
 class ItineraryListPage extends React.Component {
   static propTypes = {
-    languageId: PropTypes.string.isRequired,
+    itineraries: PropTypes.shape({
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+      included: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+    }).isRequired,
   };
-
-  /**
-   * Returns the JSON API endpoint.
-   *
-   * @returns {string}
-   */
-  static getItinerariesEndpoint(languageId) {
-    return `${JSON_API_URL}/${languageId}/jsonapi/taxonomy_term/audio_itinerary?filter[field_is_parent][value]=1&filter[langcode][value]=${languageId}&sort=weight&include=field_image,field_background_image`;
-  }
 
   constructor(props) {
     super(props);
     this.state = {
-      itineraries: [],
-      itinerariesWithIncluded: [],
-      hasError: false,
-      isLoading: true,
-      isModalOpen: false,
+      isAboutOpen: false,
+      // itineraries: {},
     };
-    this.modalToggle = this.modalToggle.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
-  componentDidMount() {
-    const endpoint = ItineraryListPage.getItinerariesEndpoint(
-      this.props.languageId,
-    );
-    this.fetchItineraries(endpoint);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const endpoint = ItineraryListPage.getItinerariesEndpoint(
-      nextProps.languageId,
-    );
-    this.fetchItineraries(endpoint);
-  }
-
-  /**
-   * Modal toggle.
-   *
-   * @param e
-   */
-  modalToggle(e) {
-    e.preventDefault();
-    this.setState({
-      isModalOpen: !this.state.isModalOpen,
-    });
-  }
-
-  /**
-   * Helper that gets the first image from an included field.
-   *
-   * @param imageId
-   * @returns {*}
-   */
   getImageFromIncluded(imageId) {
     let result = null;
-    const image = this.state.itineraries.included.filter(
+    const image = this.props.itineraries.included.filter(
       obj => obj.id === imageId,
     );
     if (image[0]) {
@@ -90,15 +58,25 @@ class ItineraryListPage extends React.Component {
     return result;
   }
 
+  toggle(e) {
+    e.preventDefault();
+    this.setState({
+      isAboutOpen: !this.state.isAboutOpen,
+    });
+  }
+
   /**
    * Attaches the includes Url to the itineraries data.
    *
    * @returns {Array}
    */
-  setItinerariesWithIncludedUrl() {
+  itinerariesWithIncludedUrl() {
     const itinerariesWithIncluded = [];
-    this.state.itineraries.data.forEach(itinerary => {
+    console.log('-- PROPS --')
+    console.log(this.props);
+    this.props.itineraries.data.forEach(itinerary => {
       const tmpItinerary = itinerary;
+      /*
       if (itinerary.relationships.field_image.data !== null) {
         const iconImageId = itinerary.relationships.field_image.data.id;
         tmpItinerary.iconImageUrl = this.getImageFromIncluded(iconImageId);
@@ -110,49 +88,18 @@ class ItineraryListPage extends React.Component {
           backgroundImageId,
         );
       }
+      */
       itinerariesWithIncluded.push(tmpItinerary);
     });
-    this.setState({ itinerariesWithIncluded });
-  }
-
-  /**
-   * Fetches itineraries data.
-   *
-   * @param endpoint
-   */
-  fetchItineraries(endpoint) {
-    this.setState({ isLoading: true });
-    fetch(endpoint)
-      .then(response => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        this.setState({ isLoading: false });
-        return response;
-      })
-      .then(response => response.json())
-      // ES6 property value shorthand for { itineraries: itineraries }
-      // and use the second parameter as a callback
-      .then(itineraries =>
-        this.setState({ itineraries }, this.setItinerariesWithIncludedUrl),
-      )
-      .catch(() => this.setState({ hasError: true }));
+    return itinerariesWithIncluded;
   }
 
   render() {
-    if (this.state.hasError) {
-      return <p>Error while loading itineraries.</p>;
-    }
-
-    if (this.state.isLoading) {
-      return <p>Loading...</p>;
-    }
-
     return (
       <div>
         <Modal
-          onClick={e => this.modalToggle(e)}
-          openModal={this.state.isModalOpen}
+          onClick={e => this.toggle(e)}
+          openModal={this.state.isAboutOpen}
           fullscreen
         >
           <div>
@@ -165,10 +112,10 @@ class ItineraryListPage extends React.Component {
           </div>
         </Modal>
         <div className={s.container}>
-          <ItineraryListHeader onClick={e => this.modalToggle(e)} />
+          <ItineraryListHeader onClick={e => this.toggle(e)} />
           <ul className={s.gridPage}>
-            {this.state.itinerariesWithIncluded.map(itinerary => (
-              <li key={`${itinerary.id}-${this.props.languageId}`}>
+            {this.itinerariesWithIncludedUrl().map(itinerary => (
+              <li key={itinerary.id}>
                 <ItineraryTeaser
                   destination={`/itinerary/${itinerary.id}`}
                   itinerary={itinerary}
@@ -182,4 +129,11 @@ class ItineraryListPage extends React.Component {
   }
 }
 
+// const mapState = state => ({
+//  itineraries: state.itineraries,
+// });
+
+// const mapDispatch = {};
+
+// export default connect(mapState, mapDispatch)(withStyles(s)(ItineraryListPage));
 export default withStyles(s)(ItineraryListPage);

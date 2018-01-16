@@ -69,16 +69,22 @@ class ItineraryPage extends React.Component {
    */
   static stopsWithIncludedUrl(stops) {
     const stopsWithIncluded = [];
-    stops.data.forEach(stop => {
-      const tmpStop = stop;
-      // @todo refactor getImageFromItineraryIncluded
-      if (stop.relationships.field_image.data !== null) {
-        const imageId = stop.relationships.field_image.data.id;
-        const image = stops.included.filter(obj => obj.id === imageId);
-        tmpStop.imageUrl = image[0].meta.derivatives.thumbnail;
-      }
-      stopsWithIncluded.push(tmpStop);
-    });
+    console.log('--- stopsWithIncludedUrl');
+    console.log(stops);
+    const isEmptyStops =
+      Object.keys(stops).length === 0 && stops.constructor === Object;
+    if (!isEmptyStops) {
+      stops.data.forEach(stop => {
+        const tmpStop = stop;
+        // @todo refactor getImageFromItineraryIncluded
+        if (stop.relationships.field_image.data !== null) {
+          const imageId = stop.relationships.field_image.data.id;
+          const image = stops.included.filter(obj => obj.id === imageId);
+          tmpStop.imageUrl = image[0].meta.derivatives.thumbnail;
+        }
+        stopsWithIncluded.push(tmpStop);
+      });
+    }
     return stopsWithIncluded;
   }
 
