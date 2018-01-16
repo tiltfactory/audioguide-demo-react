@@ -8,7 +8,7 @@ async function action({ locale, params }) {
 
   return {
     chunks: ['itinerary'],
-    title: 'Itinerary', // @todo get itinerary title
+    title: 'Audioguide', // @todo get itinerary title
     component: (
       <Layout>
         <ItineraryPage
