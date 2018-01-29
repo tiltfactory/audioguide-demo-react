@@ -102,7 +102,7 @@ class ItineraryPage extends React.Component {
     const image = this.state.itinerary.included.filter(
       obj => obj.id === imageId,
     );
-    if (image[0]) {
+    if (image[0].meta !== undefined) {
       result = image[0].meta.derivatives.thumbnail;
     }
     return result;
@@ -150,7 +150,7 @@ class ItineraryPage extends React.Component {
           const image = this.state.itineraryStops.included.filter(
             obj => obj.id === imageId,
           );
-          if (image[0].meta !== null) {
+          if (image[0].meta !== undefined) {
             tmpStop.imageUrl = image[0].meta.derivatives.thumbnail;
           }
         }
@@ -177,7 +177,7 @@ class ItineraryPage extends React.Component {
           const image = this.state.externalStops.included.filter(
             obj => obj.id === imageId,
           );
-          if (image[0].meta !== null) {
+          if (image[0].meta !== undefined) {
             tmpStop.imageUrl = image[0].meta.derivatives.thumbnail;
           }
         }
