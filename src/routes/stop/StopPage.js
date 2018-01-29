@@ -252,24 +252,28 @@ class StopPage extends React.Component {
             )}
           </div>
         </div>
-        <div className={s.toggleText}>
-          <a
-            href="#"
-            onClick={e => this.handleClick(e)}
-            className={s.toggleTextBtn}
-          >
-            Lire la retranscription
-          </a>
-          <Collapsible open={this.state.displayText}>
-            <div
-              className={s.content}
-              // eslint-disable-next-line react/no-danger
-              dangerouslySetInnerHTML={{
-                __html: stop.data.attributes.body.value,
-              }}
-            />
-          </Collapsible>
-        </div>
+        {stop.data.attributes.body !== null ? (
+          <div className={s.toggleText}>
+            <a
+              href="#"
+              onClick={e => this.handleClick(e)}
+              className={s.toggleTextBtn}
+            >
+              Lire la retranscription
+            </a>
+            <Collapsible open={this.state.displayText}>
+              <div
+                className={s.content}
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{
+                  __html: stop.data.attributes.body.value,
+                }}
+              />
+            </Collapsible>
+          </div>
+        ) : (
+          <div className={s.toggleText} />
+        )}
         {answersList.length > 0 ? <AudioQuiz answersList={answersList} /> : ''}
       </div>
     );
