@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { defineMessages, FormattedMessage } from 'react-intl';
 import ReactAudioPlayer from 'react-audio-player';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Ionicon from 'react-ionicons';
@@ -9,6 +10,14 @@ import StopHeader from '../../components/StopHeader';
 import AudioQuiz from '../../components/AudioQuiz';
 import { JSON_API_URL } from '../../constants/env';
 import Link from '../../components/Link/Link';
+
+const messages = defineMessages({
+  collapsible_read_text: {
+    id: 'collapsible.read_text',
+    defaultMessage: 'Read the text',
+    description: 'Collapsible header call to action.',
+  },
+});
 
 class StopPage extends React.Component {
   static propTypes = {
@@ -259,7 +268,7 @@ class StopPage extends React.Component {
               onClick={e => this.handleClick(e)}
               className={s.toggleTextBtn}
             >
-              Lire la retranscription
+              <FormattedMessage {...messages.collapsible_read_text} />
             </a>
             <Collapsible open={this.state.displayText}>
               <div

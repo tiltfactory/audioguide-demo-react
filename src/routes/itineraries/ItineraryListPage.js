@@ -11,19 +11,17 @@ import { JSON_API_URL } from '../../constants/env';
 const messages = defineMessages({
   about_title: {
     id: 'about.title',
-    defaultMessage: 'About',
+    defaultMessage:
+      'BELvue: more than a museum, a living space for history and democracy',
     description: 'About title',
-  },
-  about_description: {
-    id: 'about.description',
-    defaultMessage: 'Description',
-    description: 'About description',
   },
 });
 
 class ItineraryListPage extends React.Component {
   static propTypes = {
     languageId: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    html: PropTypes.string.isRequired,
   };
 
   /**
@@ -61,18 +59,6 @@ class ItineraryListPage extends React.Component {
       );
       this.fetchItineraries(endpoint);
     }
-  }
-
-  /**
-   * Modal toggle.
-   *
-   * @param e
-   */
-  modalToggle(e) {
-    e.preventDefault();
-    this.setState({
-      isModalOpen: !this.state.isModalOpen,
-    });
   }
 
   /**
@@ -115,6 +101,18 @@ class ItineraryListPage extends React.Component {
       itinerariesWithIncluded.push(tmpItinerary);
     });
     this.setState({ itinerariesWithIncluded });
+  }
+
+  /**
+   * Modal toggle.
+   *
+   * @param e
+   */
+  modalToggle(e) {
+    e.preventDefault();
+    this.setState({
+      isModalOpen: !this.state.isModalOpen,
+    });
   }
 
   /**
@@ -161,9 +159,10 @@ class ItineraryListPage extends React.Component {
             <h1>
               <FormattedMessage {...messages.about_title} />
             </h1>
-            <div>
-              <FormattedMessage {...messages.about_description} />
-            </div>
+            <div
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: this.props.html }}
+            />
           </div>
         </Modal>
         <div className={s.container}>

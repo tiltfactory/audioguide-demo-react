@@ -82,10 +82,18 @@
     "id": "about.title",
     "description": "About title",
     "defaultMessage": "About",
-    "message": "À propos",
+    "message":
+      "BELvue : plus qu’un musée, un lieu pour vivre l’histoire et la démocratie",
     "files": [
       "src/routes/itineraries/ItineraryListPage.js",
       "src/routes/itineraries_redux_router/ItineraryListPage.js"
     ]
+  },
+  {
+    "id": "collapsible.read_text",
+    "description": "Collapsible header call to action.",
+    "defaultMessage": "Read the text",
+    "message": "Lire la retranscription",
+    "files": ["src/routes/stop/StopPage.js"]
   }
 ]

@@ -59,7 +59,7 @@
     "id": "search.stop_not_found",
     "description": "Empty state for not found stops.",
     "defaultMessage": "Stop not found",
-    "message": "",
+    "message": "Nummer nicht gefunden",
     "files": ["src/components/StopList/StopList.js"]
   },
   {
@@ -76,10 +76,18 @@
     "id": "about.title",
     "description": "About title",
     "defaultMessage": "About",
-    "message": "",
+    "message":
+      "BELvue : Mehr als ein Museum, ein Ort zum (Er-)leben von Geschichte und Demokratie",
     "files": [
       "src/routes/itineraries/ItineraryListPage.js",
       "src/routes/itineraries_redux_router/ItineraryListPage.js"
     ]
+  },
+  {
+    "id": "collapsible.read_text",
+    "description": "Collapsible header call to action.",
+    "defaultMessage": "Read the text",
+    "message": "Die Abschrift lesen",
+    "files": ["src/routes/stop/StopPage.js"]
   }
 ]
