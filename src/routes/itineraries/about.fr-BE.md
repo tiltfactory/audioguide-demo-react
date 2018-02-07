@@ -13,7 +13,7 @@ Les expositions temporaires organisées au BELvue sont également l’occasion p
 
 Au-delà des activités muséales, le BELvue se définit comme un centre pour la démocratie. Il souhaite contribuer à améliorer la confiance dans les valeurs démocratiques, en développant une conscience historique et en stimulant la réflexion critique sur les enjeux démocratiques majeurs.
 
-e BELvue accueille des visiteurs très divers : écoles, (futurs) enseignants, associations de jeunes, familles, seniors, publics fragilisés, avec un handicap, … Ils peuvent profiter d’une offre large et adaptée, qui peut prendre la forme de workshops, d’expositions, d’ateliers, de visites guidées, de conférences ou d’activités autour de la démocratie, de l’histoire et de la justice.
+Le BELvue accueille des visiteurs très divers : écoles, (futurs) enseignants, associations de jeunes, familles, seniors, publics fragilisés, avec un handicap, … Ils peuvent profiter d’une offre large et adaptée, qui peut prendre la forme de workshops, d’expositions, d’ateliers, de visites guidées, de conférences ou d’activités autour de la démocratie, de l’histoire et de la justice.
 
 Complétant cette démarche d’ouverture à tous, la majorité des activités sont gratuites, ou à des tarifs démocratiques.
 
