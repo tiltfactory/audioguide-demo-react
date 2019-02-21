@@ -3,13 +3,15 @@
     "id": "audio_quiz.title",
     "description": "Audio quiz title",
     "defaultMessage": "Waiting for your choice",
-    "message": "Fais ton choix en fin d’écoute"
+    "message": "Fais ton choix en fin d’écoute",
+    "files": ["src/components/AudioQuiz/AudioQuiz.js"]
   },
   {
     "id": "navigation.home",
     "description": "Home link in header",
     "defaultMessage": "Home",
-    "message": "Accueil"
+    "message": "Accueil",
+    "files": ["src/components/ItineraryHeader/ItineraryHeader.js"]
   },
   {
     "id": "navigation.about",
@@ -21,60 +23,76 @@
     "id": "search.placeholder",
     "description": "Search placeholder",
     "defaultMessage": "Search...",
-    "message": "Rechercher..."
+    "message": "Rechercher...",
+    "files": ["src/components/SearchBar/SearchBar.js"]
   },
   {
     "id": "search.in_other_itinerary",
     "description": "Stops available in another itinerary.",
     "defaultMessage": "Available in other itineraries",
-    "message": "Disponible dans d’autres parcours"
+    "message": "Disponible dans d’autres parcours",
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "search.itinerary_change_confirmation",
     "description": "Label for the itinerary change button.",
     "defaultMessage": "Change itinerary?",
-    "message": "Je change de parcours"
+    "message": "Je change de parcours",
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "search.itinerary_change_warning_description",
     "description": "Warns user of itinerary change.",
     "defaultMessage": "You are about to change your itinerary, are you sure?",
-    "message": "Tu t’apprêtes à changer de parcours, en es-tu bien sûr ?"
+    "message": "Tu t’apprêtes à changer de parcours, en es-tu bien sûr ?",
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "search.itinerary_change_warning_title",
     "description": "Warns user of itinerary change.",
     "defaultMessage": "Itinerary change",
-    "message": "Attention, dis !"
+    "message": "Attention, dis !",
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "search.reset_search",
     "description": "Label for the reset search button.",
     "defaultMessage": "Reset search",
-    "message": "Réinitialiser la recherche"
+    "message": "Réinitialiser la recherche",
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "search.stop_not_found",
     "description": "Empty state for not found stops.",
     "defaultMessage": "Stop not found",
-    "message": "Stop non trouvé…"
+    "message": "Stop non trouvé…",
+    "files": ["src/components/StopList/StopList.js"]
   },
   {
     "id": "about.description",
     "description": "About description",
     "defaultMessage": "Description",
-    "message": "Description"
+    "message": "Description",
+    "files": [
+      "src/routes/itineraries/ItineraryListPage.js",
+      "src/routes/itineraries_redux_router/ItineraryListPage.js"
+    ]
   },
   {
     "id": "about.title",
     "description": "About title",
     "defaultMessage": "About",
-    "message": "BELvue : plus qu’un musée, un lieu pour vivre l’histoire et la démocratie"
+    "message": "BELvue : plus qu’un musée, un lieu pour vivre l’histoire et la démocratie",
+    "files": [
+      "src/routes/itineraries/ItineraryListPage.js",
+      "src/routes/itineraries_redux_router/ItineraryListPage.js"
+    ]
   },
   {
     "id": "collapsible.read_text",
     "description": "Collapsible header call to action.",
     "defaultMessage": "Read the text",
-    "message": "Lire la retranscription"
+    "message": "Lire la retranscription",
+    "files": ["src/routes/stop/StopPage.js"]
   }
 ]
