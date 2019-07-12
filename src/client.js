@@ -20,6 +20,7 @@ import en from 'react-intl/locale-data/en';
 import fr from 'react-intl/locale-data/fr';
 import nl from 'react-intl/locale-data/nl';
 import de from 'react-intl/locale-data/de';
+import it from 'react-intl/locale-data/it';
 /* @intl-code-template-end */
 import App from './components/App';
 import createFetch from './createFetch';
@@ -35,6 +36,7 @@ addLocaleData(en);
 addLocaleData(fr);
 addLocaleData(nl);
 addLocaleData(de);
+addLocaleData(it);
 /* @intl-code-template-end */
 
 // Universal HTTP client

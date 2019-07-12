@@ -1,0 +1,98 @@
+[
+  {
+    "id": "audio_quiz.title",
+    "description": "Audio quiz title",
+    "defaultMessage": "Waiting for your choice",
+    "message": "",
+    "files": ["src/components/AudioQuiz/AudioQuiz.js"]
+  },
+  {
+    "id": "navigation.home",
+    "description": "Home link in header",
+    "defaultMessage": "Home",
+    "message": "Home",
+    "files": ["src/components/ItineraryHeader/ItineraryHeader.js"]
+  },
+  {
+    "id": "navigation.about",
+    "description": "About link in header",
+    "defaultMessage": "A proposito",
+    "message": "À propos"
+  },
+  {
+    "id": "search.placeholder",
+    "description": "Search placeholder",
+    "defaultMessage": "Search...",
+    "message": "Cerca",
+    "files": ["src/components/SearchBar/SearchBar.js"]
+  },
+  {
+    "id": "search.in_other_itinerary",
+    "description": "Stops available in another itinerary.",
+    "defaultMessage": "Available in other itineraries",
+    "message": "Disponibile in altri percorsi",
+    "files": ["src/components/StopList/StopList.js"]
+  },
+  {
+    "id": "search.itinerary_change_confirmation",
+    "description": "Label for the itinerary change button.",
+    "defaultMessage": "Change itinerary?",
+    "message": "Cambio percorso",
+    "files": ["src/components/StopList/StopList.js"]
+  },
+  {
+    "id": "search.itinerary_change_warning_description",
+    "description": "Warns user of itinerary change.",
+    "defaultMessage": "You are about to change your itinerary, are you sure?",
+    "message": "Stai per cambiare il percorso selezionato, ne sei sicuro ?",
+    "files": ["src/components/StopList/StopList.js"]
+  },
+  {
+    "id": "search.itinerary_change_warning_title",
+    "description": "Warns user of itinerary change.",
+    "defaultMessage": "Itinerary change",
+    "message": "Attenzione !",
+    "files": ["src/components/StopList/StopList.js"]
+  },
+  {
+    "id": "search.reset_search",
+    "description": "Label for the reset search button.",
+    "defaultMessage": "Reset search",
+    "message": "Reimpostare la ricerca",
+    "files": ["src/components/StopList/StopList.js"]
+  },
+  {
+    "id": "search.stop_not_found",
+    "description": "Empty state for not found stops.",
+    "defaultMessage": "Stop not found",
+    "message": "Stop non trovato",
+    "files": ["src/components/StopList/StopList.js"]
+  },
+  {
+    "id": "about.description",
+    "description": "About description",
+    "defaultMessage": "Description",
+    "message": "Descrizione",
+    "files": [
+      "src/routes/itineraries/ItineraryListPage.js",
+      "src/routes/itineraries_redux_router/ItineraryListPage.js"
+    ]
+  },
+  {
+    "id": "about.title",
+    "description": "About title",
+    "defaultMessage": "About",
+    "message": "BELvue : più che un museo, un luogo per vivere la storia e la democrazia",
+    "files": [
+      "src/routes/itineraries/ItineraryListPage.js",
+      "src/routes/itineraries_redux_router/ItineraryListPage.js"
+    ]
+  },
+  {
+    "id": "collapsible.read_text",
+    "description": "Collapsible header call to action.",
+    "defaultMessage": "Read the text",
+    "message": "Leggere la trascrizione",
+    "files": ["src/routes/stop/StopPage.js"]
+  }
+]

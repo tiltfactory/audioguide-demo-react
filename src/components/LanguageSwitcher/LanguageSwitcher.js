@@ -13,6 +13,7 @@ const localeDict = {
   'fr-BE': 'FR',
   'de-BE': 'DE',
   'en-US': 'EN',
+  'it-IT': 'IT',
   /* @intl-code-template-end */
 };
 
@@ -95,4 +96,7 @@ const mapDispatch = {
   setLocale,
 };
 
-export default connect(mapState, mapDispatch)(withStyles(s)(LanguageSwitcher));
+export default connect(
+  mapState,
+  mapDispatch,
+)(withStyles(s)(LanguageSwitcher));

@@ -23,6 +23,7 @@ module.exports = {
     'fr-BE',
     'de-BE',
     'en-US',
+    'it-IT',
     /* @intl-code-template-end */
   ],
 
