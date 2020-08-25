@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { defineMessages, FormattedMessage } from 'react-intl';
 import ReactAudioPlayer from 'react-audio-player';
+import { Player } from 'video-react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Ionicon from 'react-ionicons';
 import Collapsible from 'react-collapsible';
@@ -10,6 +11,8 @@ import StopHeader from '../../components/StopHeader';
 import AudioQuiz from '../../components/AudioQuiz';
 import { JSON_API_URL } from '../../constants/env';
 import Link from '../../components/Link/Link';
+// eslint-disable-next-line css-modules/no-unused-class
+import vs from '../../../node_modules/video-react/dist/video-react.css';
 
 const messages = defineMessages({
   collapsible_read_text: {
@@ -61,6 +64,27 @@ class StopPage extends React.Component {
     this.handlePlay = this.handlePlay.bind(this);
   }
 
+  componentDidMount() {
+    // subscribe state change
+    if (this.isMp4()) {
+      this.rap.subscribeToStateChange(state => {
+        if (state.paused && this.state.isPlaying) {
+          this.setState({
+            isPlaying: !this.state.isPlaying,
+          });
+          if (state.isFullscreen) {
+            this.rap.toggleFullscreen();
+          }
+        }
+        if (!state.paused && !this.state.isPlaying) {
+          this.setState({
+            isPlaying: !this.state.isPlaying,
+          });
+        }
+      });
+    }
+  }
+
   componentWillReceiveProps() {
     this.reset();
   }
@@ -92,18 +116,31 @@ class StopPage extends React.Component {
 
   handlePlay() {
     if (this.state.isPlaying) {
-      this.rap.audioEl.pause();
-      clearInterval(this.interval);
-    } else {
+      if (this.rap.audioEl) {
+        this.rap.audioEl.pause();
+        clearInterval(this.interval);
+      } else {
+        this.rap.pause();
+      }
+    } else if (this.rap.audioEl) {
       this.rap.audioEl.play();
       this.interval = setInterval(() => this.tick(), 100);
+    } else {
+      this.rap.play();
+      this.rap.toggleFullscreen();
     }
     this.setState({
       isPlaying: !this.state.isPlaying,
     });
   }
 
+  isMp4() {
+    const name = this.mp3Url();
+    return name.endsWith('.mp4');
+  }
+
   mp3Url() {
+    // eslint-disable-next-line prefer-destructuring
     const stop = this.props.stop;
     // Get the (single) mp3 file Url from the stop.
     const mp3Id = stop.data.relationships.field_mp3.data.id;
@@ -112,6 +149,7 @@ class StopPage extends React.Component {
   }
 
   imageUrl() {
+    // eslint-disable-next-line prefer-destructuring
     const stop = this.props.stop;
     let result = null;
     if (stop.data.relationships.field_image.data !== null) {
@@ -124,6 +162,7 @@ class StopPage extends React.Component {
   }
 
   answersList() {
+    // eslint-disable-next-line prefer-destructuring
     const stop = this.props.stop;
     // Get the answers (field_audio_answer Paragraphs).
     // Prepare the data model to be used by the AudioAnswer component.
@@ -164,14 +203,33 @@ class StopPage extends React.Component {
     return (
       <div>
         <StopHeader itinerary={itinerary} stop={stop} bg={inlineStyle} />
-        <ReactAudioPlayer
-          autoPlay={this.state.isPlaying}
-          src={this.mp3Url()}
-          ref={element => {
-            this.rap = element;
-          }}
-          onEnded={() => this.reset()}
-        />
+        {!this.isMp4() ? (
+          <ReactAudioPlayer
+            autoPlay={this.state.isPlaying}
+            src={this.mp3Url()}
+            ref={element => {
+              this.rap = element;
+            }}
+            onEnded={() => this.reset()}
+          />
+        ) : (
+          <div
+            style={
+              this.state.isPlaying
+                ? { display: 'inherit' }
+                : { display: 'none' }
+            }
+          >
+            <Player
+              playsInline
+              src={this.mp3Url()}
+              ref={element => {
+                this.rap = element;
+              }}
+            />
+          </div>
+        )}
+
         <div className={s.playerWrapper}>
           <div className={[s.btn, s.btnPrev].join(' ')}>
             {this.props.previousStopId !== null ? (
@@ -194,6 +252,7 @@ class StopPage extends React.Component {
               </span>
             )}
           </div>
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
           <div
             className={[s.btn, s.btnPlay].join(' ')}
             style={inlineStyle}
@@ -263,6 +322,7 @@ class StopPage extends React.Component {
         </div>
         {stop.data.attributes.body !== null ? (
           <div className={s.toggleText}>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a
               href="#"
               onClick={e => this.handleClick(e)}
@@ -289,4 +349,4 @@ class StopPage extends React.Component {
   }
 }
 
-export default withStyles(s)(StopPage);
+export default withStyles(vs, s)(StopPage);
