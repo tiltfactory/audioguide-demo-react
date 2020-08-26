@@ -81,6 +81,14 @@ class StopPage extends React.Component {
             isPlaying: !this.state.isPlaying,
           });
         }
+        if (
+          !state.isFullscreen &&
+          state.isActive &&
+          !state.paused &&
+          this.state.isPlaying
+        ) {
+          this.handlePlay(); // will stop the video
+        }
       });
     }
   }
@@ -126,8 +134,12 @@ class StopPage extends React.Component {
       this.rap.audioEl.play();
       this.interval = setInterval(() => this.tick(), 100);
     } else {
-      this.rap.play();
       this.rap.toggleFullscreen();
+
+      this.rap.play();
+      // setTimeout(() => {
+      //   this.rap.play();
+      // }, 500);
     }
     this.setState({
       isPlaying: !this.state.isPlaying,
