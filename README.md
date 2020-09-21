@@ -4,14 +4,14 @@
 
 ### Local Drupal configuration
 
-Get a copy of the production Drupal 8 website and define the CORS configuration in /admin/config/services/cors to 
+Get a copy of the production Drupal 8 website and define the CORS configuration in /admin/config/services/cors to
 `*|http://localhost:3000`
 
 ### JSON API configuration
 
 1. Copy the src/constants/env.example.js into src/constants/env.js
 2. Set the JSON_API_URL with your API url.
-3. Optionally set the CONSUMER_ID with the one obtained by the [Consumers](https://www.drupal.org/project/consumers) Drupal module.   
+3. Optionally set the CONSUMER_ID with the one obtained by the [Consumers](https://www.drupal.org/project/consumers) Drupal module.
 
 On your local/dev environment, it will be the Url defined for your vhost, with the protocol.
 _Example: http://mysite.dev_
@@ -40,6 +40,13 @@ Exports a production build (in the build directory).
 2. Install new dependencies if any `yarn install`
 3. Production build `yarn run build --release`
 4. Start or restart PM2 `pm2 start build/server.js` `pm2 restart build/server.js`
+
+##### If build on server is not working:
+
+1. change env var `JSON_API_URL` for the prod url in `src/constants/env.js`
+2. Production build `yarn run build --release`
+3. Upload build on server `scp -r build/ belvue:/home/belvue/domains/app.belvue.be/belvue-audioguide/`
+4. Start or restart PM2 on server `pm2 start build/server.js` `pm2 restart build/server.js`
 
 ### Storybook setup
 
@@ -82,8 +89,8 @@ Content type, machine name: **audio**
 - Image (1)
 - MP3 (1)
 - Formatted long text (0..1)
-- Itinerary (1..*)
-- Answer (0..*)
+- Itinerary (1..\*)
+- Answer (0..\*)
 
 ### Answer
 
@@ -132,7 +139,7 @@ React components that will be available from routes.
 - FilterableStopList
   - SearchBar
   - StopList
-    - StopTeaser: thumbnail image, id, title, mp3 length 
+    - StopTeaser: thumbnail image, id, title, mp3 length
 
 #### StopPage
 
